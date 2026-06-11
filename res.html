@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Réseau Cisco & pfSense</title>
+    <link rel="stylesheet" href="res.css">
+</head>
+
+<body>
+
+<header class="header-page">
+    <a href="site html.html" class="back-btn">⬅ Retour</a>
+    <h1>Infrastructure Réseau Cisco & pfSense</h1>
+    <a href="res2.html" class="next-btn">Suiv ➡</a>
+</header>
+
+<section class="wrapper">
+
+    <!-- Étape 1 -->
+    <div class="card">
+        <img class="card__img" src="IMG_9097.jpg" alt="Vue générale du projet">
+        <div class="card__contenu">
+            <h2>1. Mise en place de l'infrastructure</h2>
+            <p>
+                Cette première étape consiste à installer et raccorder les
+                équipements nécessaires au projet réseau.
+            </p>
+
+            <p>
+                L'architecture est composée d'un switch Cisco Catalyst 9300,
+                d'un pare-feu pfSense hébergé sur un mini-PC ainsi que de
+                plusieurs ordinateurs utilisés pour l'administration et les tests.
+            </p>
+
+            <p>
+                L'objectif principal est de créer une infrastructure réseau
+                segmentée à l'aide de VLAN afin d'améliorer la sécurité et le
+                contrôle des communications.
+            </p>
+        </div>
+    </div>
+
+    <!-- Étape 2 -->
+    <div class="card">
+        <img class="card__img" src="IMG_9098.jpg" alt="Brassage réseau">
+        <div class="card__contenu">
+            <h2>2. Raccordement des équipements</h2>
+            <p>
+                Après l'installation du matériel, les prises réseau sont
+                raccordées aux équipements actifs.
+            </p>
+
+            <p>
+                Chaque liaison Ethernet permet de relier les postes utilisateurs,
+                le pare-feu et le switch afin d'assurer la circulation des données.
+            </p>
+
+            <p>
+                Cette étape garantit une base physique stable avant la
+                configuration logique du réseau.
+            </p>
+        </div>
+    </div>
+
+    <!-- Étape 3 -->
+    <div class="card">
+        <img class="card__img" src="IMG_9099.jpg" alt="Switch Cisco Catalyst 9300">
+        <div class="card__contenu">
+            <h2>3. Configuration du switch Cisco</h2>
+
+            <p>
+                Le switch Cisco Catalyst 9300 constitue le cœur de
+                l'infrastructure réseau.
+            </p>
+
+            <ul>
+                <li>Création des VLAN</li>
+                <li>Attribution des ports aux VLAN</li>
+                <li>Configuration des liaisons trunk</li>
+                <li>Gestion de la segmentation réseau</li>
+            </ul>
+
+            <p>
+                Cette configuration permet d'isoler les différents sous-réseaux
+                tout en maintenant une administration centralisée.
+            </p>
+        </div>
+    </div>
+
+    <!-- Étape 4 -->
+    <div class="card">
+        <img class="card__img" src="IMG_9101.jpg" alt="Pare-feu pfSense">
+        <div class="card__contenu">
+            <h2>4. Déploiement du pare-feu pfSense</h2>
+
+            <p>
+                Un mini-PC a été utilisé pour héberger pfSense, une solution
+                open source spécialisée dans la sécurité réseau.
+            </p>
+
+            <ul>
+                <li>Routage inter-VLAN</li>
+                <li>Filtrage des paquets</li>
+                <li>Gestion des interfaces réseau</li>
+                <li>Protection du réseau local</li>
+            </ul>
+
+            <p>
+                pfSense agit comme passerelle entre les différents VLAN et les
+                réseaux externes.
+            </p>
+        </div>
+    </div>
+
+    <!-- Étape 5 -->
+    <div class="card">
+        <img class="card__img" src="IMG_9103.jpg" alt="Configuration des règles firewall">
+        <div class="card__contenu">
+            <h2>5. Configuration des règles Firewall</h2>
+
+            <p>
+                Une fois les interfaces configurées, des règles de sécurité
+                ont été créées dans pfSense.
+            </p>
+
+            <p>
+                Ces règles permettent de contrôler précisément les échanges
+                entre les différents VLAN et d'autoriser uniquement les
+                communications nécessaires.
+            </p>
+
+            <ul>
+                <li>Contrôle des accès</li>
+                <li>Restriction des communications</li>
+                <li>Sécurisation du trafic</li>
+                <li>Gestion des flux réseau</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Étape 6 -->
+    <div class="card">
+        <img class="card__img" src="IMG_9104.jpg" alt="Configuration NAT">
+        <div class="card__contenu">
+            <h2>6. Configuration du NAT</h2>
+
+            <p>
+                La dernière étape consiste à configurer le NAT
+                (Network Address Translation) dans pfSense.
+            </p>
+
+            <p>
+                Cette fonctionnalité permet aux différents VLAN d'accéder
+                au réseau externe tout en masquant leurs adresses IP privées.
+            </p>
+
+            <ul>
+                <li>Traduction des adresses IP</li>
+                <li>Accès Internet des VLAN</li>
+                <li>Contrôle des connexions sortantes</li>
+                <li>Renforcement de la sécurité</li>
+            </ul>
+
+            <p>
+                Après validation des configurations, les tests de connectivité
+                permettent de confirmer le bon fonctionnement de l'ensemble
+                de l'infrastructure.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

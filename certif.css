@@ -1,0 +1,179 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* FOND IDENTIQUE */
+body {
+    background: url("bur.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #c6cabb;
+    padding: 40px;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 10, 25, 0.7);
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* -------------------- BOUTON RETOUR (GLOW) -------------------- */
+.back-btn {
+    position: relative;
+    display: inline-block;
+
+    color: #dfe3d6;
+    text-decoration: none;
+    font-size: 18px;
+
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Fond du bouton */
+.back-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 25, 45, 0.85);
+    border-radius: 8px;
+    z-index: -1;
+    backdrop-filter: blur(4px);
+}
+
+/* Glow animé */
+.back-btn::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #ff00c8,
+        #ff0000
+    );
+    background-size: 600%;
+    filter: blur(8px);
+    border-radius: 10px;
+    z-index: -2;
+    opacity: 0;
+    animation: glowing 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hover */
+.back-btn:hover {
+    color: white;
+}
+
+.back-btn:hover::before {
+    opacity: 1;
+}
+
+/* Click */
+.back-btn:active {
+    color: #000;
+    font-weight: 600;
+}
+
+.back-btn:active::after {
+    background: transparent;
+}
+
+/* -------------------- CONTENU -------------------- */
+.content {
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+    background: rgba(5, 10, 25, 0.45);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+}
+
+/* TITRE PRINCIPAL */
+.content h1 {
+    font-size: 2.6em;
+    margin-bottom: 30px;
+    color: #e4d8d8;
+
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+/* TEXTE DU PARAGRAPHE */
+.content p {
+    font-size: 1.3em;
+    line-height: 1.6em;
+    margin-bottom: 20px;
+    color: #f0ffce;
+
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+/* ZONE CERTIFICATION */
+.certif-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.certif-box img {
+    width: 200px;
+    border-radius: 12px;
+
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.certif-box p {
+    font-size: 1.3em;
+    margin-top: 15px;
+    color: #c8cabd;
+
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.8s forwards;
+}
+
+/* -------------------- ANIMATIONS -------------------- */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation glow */
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
