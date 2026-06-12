@@ -1,159 +1,337 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chronologie - Infrastructure Virtualisée Proxmox</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial, Helvetica, sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronologie - Infrastructure Virtualisée Proxmox</title>
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    min-height:100vh;
-    background:url("pp.jpg") no-repeat center center fixed;
-    background-size:cover;
-    color:white;
+body {
+    min-height: 100vh;
+    background: url("pp.jpg") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.4);
-    z-index:-1;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
 }
 
-.header-page{
-    background:#223447;
-    padding:15px 30px;
-    position:sticky;
-    top:0;
-    z-index:10;
-    text-align:center;
-    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+.header-page {
+    background: #223447;
+    padding: 18px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.header-page h1{
-    color:white;
+.header-page h1 {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
-.back-btn{
-    position:absolute;
-    left:30px;
-    top:50%;
-    transform:translateY(-50%);
-    text-decoration:none;
-    color:#d7d9d0;
-    border:1px solid #e0e1db;
-    padding:8px 14px;
-    border-radius:8px;
-    transition:0.3s;
+.back-btn {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #e5e7eb;
+    border: 1px solid #e5e7eb;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s;
 }
 
-.back-btn:hover{
-    color:white;
-    border-color:white;
-    background:rgba(255,255,255,0.15);
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
 }
 
-.wrapper{
-    width:100%;
-    min-height:100vh;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-    padding:40px;
+.wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+    gap: 24px;
 }
 
-.card{
-    width:80px;
-    height:400px;
-    border-radius:2rem;
-    overflow:hidden;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    transition:.6s cubic-bezier(.28,-0.03,0,.99);
-    box-shadow:0px 10px 30px -5px rgba(0,0,0,0.8);
-    position:relative;
-    background:#000;
+.carousel-outer {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.card:hover{
-    width:600px;
+.carousel-viewport {
+    flex: 1;
+    overflow: hidden;
 }
 
-.card__img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    opacity:0.6;
-    transition:.6s;
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
 }
 
-.card:hover .card__img{
-    opacity:0.8;
+.card-slide {
+    flex: 0 0 calc(33.333% - 14px);
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card__contenu{
-    position:relative;
-    z-index:1;
-    margin-top:auto;
-    padding:20px;
-    background:linear-gradient(to top, rgba(0,0,0,.85), transparent);
-    opacity:0;
-    transform:translateY(30px);
-    transition:.3s ease;
+.card-slide:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
-.card:hover .card__contenu{
-    opacity:1;
-    transform:none;
+.card-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background: #1f2937;
 }
 
-.card__contenu h2{
-    font-size:1.1rem;
-    margin-bottom:8px;
-    text-transform:uppercase;
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
 }
 
-.card__contenu p{
-    font-size:0.9rem;
-    color:#d0d0d0;
+.card-slide:hover .card-img {
+    transform: scale(1.05);
 }
 
-.astuce{
-    margin-top:10px;
+.card-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #1e3a5f;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
 }
 
-@media(max-width:768px){
-
-.wrapper{
-    flex-direction:column;
-    align-items:center;
+.card-body {
+    padding: 18px 18px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.card,
-.card:hover{
-    width:100%;
-    height:250px;
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 10px;
+    line-height: 1.4;
 }
 
-.card__contenu{
-    opacity:1;
-    transform:none;
+.card-desc {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 10px;
 }
 
+.card-astuce {
+    background: #f0f9ff;
+    border-left: 3px solid #0ea5e9;
+    border-radius: 0 8px 8px 0;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    color: #0369a1;
+    line-height: 1.5;
+    margin-bottom: 14px;
 }
-</style>
+
+.astuce-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.8rem;
+}
+
+.card-astuce code {
+    background: #e0f2fe;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.8rem;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 14px;
+}
+
+.card-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.author-role {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 1px;
+}
+
+.read-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.read-btn:hover {
+    background: #4f46e5;
+    transform: scale(1.03);
+}
+
+.nav-btn {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 22px;
+    color: #374151;
+    flex-shrink: 0;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover {
+    background: #f9fafb;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, width 0.3s, border-radius 0.3s;
+    padding: 0;
+}
+
+.dot.active {
+    background: white;
+    width: 22px;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+
+@media (max-width: 1100px) {
+    .card-slide {
+        flex: 0 0 calc(50% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .header-page {
+        padding: 20px 10px 60px;
+    }
+    .back-btn {
+        left: 10px;
+        top: 70px;
+        transform: none;
+    }
+    .header-page h1 {
+        font-size: 1rem;
+    }
+    .wrapper {
+        padding: 30px 16px;
+    }
+    .card-slide {
+        flex: 0 0 100%;
+    }
+    .carousel-outer {
+        gap: 6px;
+    }
+    .nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+    </style>
 </head>
 
 <body>
@@ -165,88 +343,196 @@ body::before{
 
 <section class="wrapper">
 
-    <div class="card">
-        <img class="card__img" src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Architecture Globale">
-        <div class="card__contenu">
-            <h2>01. Objectif du Projet</h2>
-            <p>Déploiement d'une infrastructure virtualisée complète sous Proxmox VE intégrant OPNsense, Samba, FTP, GLPI et Windows Server 2022.</p>
-            <p class="astuce"><strong>Astuce :</strong> Préparer l'architecture réseau avant la création des machines virtuelles.</p>
+    <div class="carousel-outer">
+        <button class="nav-btn nav-prev" id="prev">&#8249;</button>
+
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="track">
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Architecture Globale" class="card-img">
+                        <span class="card-tag">Objectif</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">01. Objectif du Projet</h2>
+                        <p class="card-desc">Déploiement d'une infrastructure virtualisée complète sous Proxmox VE intégrant OPNsense, Samba, FTP, GLPI et Windows Server 2022.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Préparer l'architecture réseau avant la création des machines virtuelles.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#6366f1;">PVE</div>
+                                <div><div class="author-name">Proxmox VE</div><div class="author-role">Hyperviseur</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Mode ROMMON Cisco" class="card-img">
+                        <span class="card-tag">Cisco</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">02. Switch Cisco 2960</h2>
+                        <p class="card-desc">Remise en service du switch bloqué en mode ROMMON et démarrage manuel de l'image IOS depuis la mémoire flash.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Vérifier la présence de l'IOS avec <code>flash_init</code> puis <code>dir flash:</code>.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">IOS</div>
+                                <div><div class="author-name">Cisco IOS</div><div class="author-role">2960 ROMMON</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Console PuTTY inconnue" class="card-img">
+                        <span class="card-tag">Console</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">02b. Erreurs de Commandes Switch</h2>
+                        <p class="card-desc">Visualisation des erreurs de saisie "Unknown cmd" lors des tentatives de commandes IOS standard (en, exit, end) dans le mode boot.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> En mode d'initialisation minimale, les raccourcis de configuration classique ne sont pas encore chargés.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#4b5563;">TTY</div>
+                                <div><div class="author-name">PuTTY COM4</div><div class="author-role">Mode Console</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212326_.jpeg" alt="Bridges Proxmox Network" class="card-img">
+                        <span class="card-tag">Réseau</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">03. Bridges Réseau Proxmox</h2>
+                        <p class="card-desc">Création des bridges vmbr0 (WAN) et vmbr1 (LAN) afin de relier les VMs au réseau physique.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Séparer les réseaux WAN et LAN facilite la sécurité et le dépannage.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0ea5e9;">BR</div>
+                                <div><div class="author-name">vmbr0 / vmbr1</div><div class="author-role">Bridges réseau</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Création VM OPNsense" class="card-img">
+                        <span class="card-tag">Pare-feu</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">04. Déploiement OPNsense</h2>
+                        <p class="card-desc">Création de la VM OPNsense avec deux interfaces réseau connectées aux bridges vmbr0 et vmbr1.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Prévoir les interfaces WAN et LAN dès la création de la machine virtuelle.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#16a34a;">OPN</div>
+                                <div><div class="author-name">OPNsense</div><div class="author-role">Pare-feu VM</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Assignation Interfaces OPNsense" class="card-img">
+                        <span class="card-tag">Config</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">05. Configuration WAN / LAN</h2>
+                        <p class="card-desc">Assignation des interfaces em0 (WAN) et em1 (LAN), puis définition de la passerelle LAN à 192.168.1.254.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Vérifier la connectivité réseau avant d'installer les services.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#7c3aed;">LAN</div>
+                                <div><div class="author-name">192.168.1.254</div><div class="author-role">Passerelle LAN</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Erreur vsftpd chroot" class="card-img">
+                        <span class="card-tag">FTP</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">07. Serveur FTP (vsftpd)</h2>
+                        <p class="card-desc">Résolution du crash de connexion <code>500 OOPS: refusing to run with writable root inside chroot()</code> lors de la tentative d'accès ftpuser.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Ajoutez <code>allow_writeable_chroot=YES</code> dans <code>/etc/vsftpd.conf</code> ou supprimez les droits d'écriture du dossier racine.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0891b2;">FTP</div>
+                                <div><div class="author-name">vsftpd err</div><div class="author-role">Debian 12</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
+        <button class="nav-btn nav-next" id="next">&#8250;</button>
     </div>
 
-    <div class="card">
-        <img class="card__img" src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Mode ROMMON Cisco">
-        <div class="card__contenu">
-            <h2>02. Switch Cisco 2960</h2>
-            <p>Remise en service du switch bloqué en mode ROMMON et démarrage manuel de l'image IOS depuis la mémoire flash.</p>
-            <p class="astuce"><strong>Astuce :</strong> Vérifier la présence de l'IOS avec flash_init puis dir flash:.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="Capture d’écran_10-6-2026_212326_.jpeg" alt="Bridges Proxmox Network">
-        <div class="card__contenu">
-            <h2>03. Bridges Réseau Proxmox</h2>
-            <p>Création des bridges vmbr0 (WAN) et vmbr1 (LAN) afin de relier les VMs au réseau physique.</p>
-            <p class="astuce"><strong>Astuce :</strong> Séparer les réseaux WAN et LAN facilite la sécurité et le dépannage.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Création VM OPNsense">
-        <div class="card__contenu">
-            <h2>04. Déploiement OPNsense</h2>
-            <p>Création de la VM OPNsense avec deux interfaces réseau connectées aux bridges vmbr0 et vmbr1.</p>
-            <p class="astuce"><strong>Astuce :</strong> Prévoir les interfaces WAN et LAN dès la création de la machine virtuelle.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Assignation Interfaces OPNsense">
-        <div class="card__contenu">
-            <h2>05. Configuration WAN / LAN</h2>
-            <p>Assignation des interfaces em0 (WAN) et em1 (LAN), puis définition de la passerelle LAN à 192.168.1.254.</p>
-            <p class="astuce"><strong>Astuce :</strong> Vérifier la connectivité réseau avant d'installer les services.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="IMG_9100.jpg" alt="Serveur Samba">
-        <div class="card__contenu">
-            <h2>06. Serveur Samba</h2>
-            <p>Déploiement d'une VM Debian 12 avec partage Samba sécurisé et gestion des accès par groupe d'utilisateurs.</p>
-            <p class="astuce"><strong>Astuce :</strong> Utiliser des groupes facilite l'administration des permissions.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Erreur vsftpd chroot">
-        <div class="card__contenu">
-            <h2>07. Serveur FTP</h2>
-            <p>Installation de vsftpd sur Debian et configuration d'un accès FTP sécurisé avec utilisateur dédié.</p>
-            <p class="astuce"><strong>Astuce :</strong> Contrôler les permissions des répertoires avant les tests.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="IMG_9104.jpg" alt="Installation GLPI">
-        <div class="card__contenu">
-            <h2>08. Installation GLPI</h2>
-            <p>Mise en place de GLPI 11.0.4 sur une stack LAMP composée d'Apache, MariaDB et PHP 8.2.</p>
-            <p class="astuce"><strong>Astuce :</strong> Respecter l'organisation recommandée des fichiers GLPI.</p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img class="card__img" src="IMG_9099.jpg" alt="Validation des services">
-        <div class="card__contenu">
-            <h2>09. Validation des Services</h2>
-            <p>Tests de connectivité Samba, FTP et GLPI depuis les machines clientes du réseau virtualisé.</p>
-            <p class="astuce"><strong>Astuce :</strong> Tester chaque service individuellement avant les validations finales.</p>
-        </div>
-    </div>
+    <div class="dots" id="dots"></div>
 
 </section>
+
+<script>
+    const track = document.getElementById('track');
+    const cards = Array.from(track.querySelectorAll('.card-slide'));
+    const dotsEl = document.getElementById('dots');
+    const total = cards.length;
+    let perPage = getPerPage();
+    let pages = Math.ceil(total / perPage);
+    let current = 0;
+
+    function getPerPage() {
+        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        pages = Math.ceil(total / perPage);
+        for (let i = 0; i < pages; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Page ' + (i + 1));
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        }
+    }
+
+    function goTo(page) {
+        current = Math.max(0, Math.min(page, pages - 1));
+        const gap = 20;
+        const cardW = cards[0].offsetWidth + gap;
+        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
+        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+    buildDots();
+
+    window.addEventListener('resize', () => {
+        const newPer = getPerPage();
+        if (newPer !== perPage) {
+            perPage = newPer;
+            current = 0;
+            track.style.transform = 'translateX(0)';
+            buildDots();
+        }
+    });
+</script>
 
 </body>
 </html>
