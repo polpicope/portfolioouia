@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr"> 
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -18,160 +18,226 @@
 
 <section class="wrapper">
 
-    <!-- Étape 1 -->
-    <div class="card">
-        <img class="card__img" src="IMG_9097.jpg" alt="Vue générale du projet">
-        <div class="card__contenu">
-            <h2>1. Mise en place de l'infrastructure</h2>
-            <p>
-                Cette première étape consiste à installer et raccorder les
-                équipements nécessaires au projet réseau.
-            </p>
+    <div class="carousel-outer">
+        <button class="nav-btn nav-prev" id="prev">&#8249;</button>
 
-            <p>
-                L'architecture est composée d'un switch Cisco Catalyst 9300,
-                d'un pare-feu pfSense hébergé sur un mini-PC ainsi que de
-                plusieurs ordinateurs utilisés pour l'administration et les tests.
-            </p>
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="track">
 
-            <p>
-                L'objectif principal est de créer une infrastructure réseau
-                segmentée à l'aide de VLAN afin d'améliorer la sécurité et le
-                contrôle des communications.
-            </p>
+                <!-- Carte 1 -->
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_9097.jpg" alt="Vue générale du projet" class="card-img">
+                        <span class="card-tag">Infrastructure</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">1. Mise en place de l'infrastructure</h2>
+                        <p class="card-desc">
+                            Architecture composée d'un switch Cisco Catalyst 9300, d'un pare-feu pfSense
+                            hébergé sur mini-PC et de postes d'administration. Objectif : réseau segmenté par VLAN
+                            pour améliorer la sécurité et le contrôle des communications.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#4f46e5;">SW</div>
+                                <div>
+                                    <div class="author-name">Switch Cisco</div>
+                                    <div class="author-role">Catalyst 9300</div>
+                                </div>
+                            </div>
+                            <button class="read-btn">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_9098.jpg" alt="Brassage réseau" class="card-img">
+                        <span class="card-tag">Câblage</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">2. Raccordement des équipements</h2>
+                        <p class="card-desc">
+                            Liaison des prises réseau aux équipements actifs. Connexions Ethernet entre
+                            postes utilisateurs, pare-feu et switch pour assurer la circulation des données
+                            et garantir une base physique stable.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0ea5e9;">ETH</div>
+                                <div>
+                                    <div class="author-name">Réseau local</div>
+                                    <div class="author-role">Ethernet</div>
+                                </div>
+                            </div>
+                            <button class="read-btn">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_9099.jpg" alt="Switch Cisco Catalyst 9300" class="card-img">
+                        <span class="card-tag">VLAN</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">3. Configuration du switch Cisco</h2>
+                        <p class="card-desc">
+                            Création des VLAN, attribution des ports, configuration des liaisons trunk
+                            et gestion de la segmentation réseau. Administration centralisée permettant
+                            d'isoler les différents sous-réseaux.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">IOS</div>
+                                <div>
+                                    <div class="author-name">Cisco IOS</div>
+                                    <div class="author-role">Catalyst 9300</div>
+                                </div>
+                            </div>
+                            <button class="read-btn">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 4 -->
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_9101.jpg" alt="Pare-feu pfSense" class="card-img">
+                        <span class="card-tag">Pare-feu</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">4. Déploiement du pare-feu pfSense</h2>
+                        <p class="card-desc">
+                            Mini-PC hébergeant pfSense pour le routage inter-VLAN, le filtrage des paquets
+                            et la gestion des interfaces réseau. Passerelle entre les VLAN
+                            et les réseaux externes.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#16a34a;">PFS</div>
+                                <div>
+                                    <div class="author-name">pfSense</div>
+                                    <div class="author-role">Open Source FW</div>
+                                </div>
+                            </div>
+                            <button class="read-btn">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 5 -->
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_9103.jpg" alt="Configuration des règles firewall" class="card-img">
+                        <span class="card-tag">Sécurité</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">5. Configuration des règles Firewall</h2>
+                        <p class="card-desc">
+                            Règles de sécurité pfSense pour contrôler précisément les échanges inter-VLAN :
+                            contrôle des accès, restriction des communications et sécurisation
+                            du trafic réseau.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#dc2626;">FW</div>
+                                <div>
+                                    <div class="author-name">Firewall rules</div>
+                                    <div class="author-role">pfSense</div>
+                                </div>
+                            </div>
+                            <button class="read-btn">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 6 -->
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_9104.jpg" alt="Configuration NAT" class="card-img">
+                        <span class="card-tag">NAT</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">6. Configuration du NAT</h2>
+                        <p class="card-desc">
+                            NAT dans pfSense pour permettre l'accès Internet de tous les VLAN avec masquage
+                            des adresses IP privées. Contrôle des connexions sortantes validé
+                            par tests de connectivité.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#7c3aed;">NAT</div>
+                                <div>
+                                    <div class="author-name">Network Address</div>
+                                    <div class="author-role">Translation</div>
+                                </div>
+                            </div>
+                            <button class="read-btn">Voir plus</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
+        <button class="nav-btn nav-next" id="next">&#8250;</button>
     </div>
 
-    <!-- Étape 2 -->
-    <div class="card">
-        <img class="card__img" src="IMG_9098.jpg" alt="Brassage réseau">
-        <div class="card__contenu">
-            <h2>2. Raccordement des équipements</h2>
-            <p>
-                Après l'installation du matériel, les prises réseau sont
-                raccordées aux équipements actifs.
-            </p>
-
-            <p>
-                Chaque liaison Ethernet permet de relier les postes utilisateurs,
-                le pare-feu et le switch afin d'assurer la circulation des données.
-            </p>
-
-            <p>
-                Cette étape garantit une base physique stable avant la
-                configuration logique du réseau.
-            </p>
-        </div>
-    </div>
-
-    <!-- Étape 3 -->
-    <div class="card">
-        <img class="card__img" src="IMG_9099.jpg" alt="Switch Cisco Catalyst 9300">
-        <div class="card__contenu">
-            <h2>3. Configuration du switch Cisco</h2>
-
-            <p>
-                Le switch Cisco Catalyst 9300 constitue le cœur de
-                l'infrastructure réseau.
-            </p>
-
-            <ul>
-                <li>Création des VLAN</li>
-                <li>Attribution des ports aux VLAN</li>
-                <li>Configuration des liaisons trunk</li>
-                <li>Gestion de la segmentation réseau</li>
-            </ul>
-
-            <p>
-                Cette configuration permet d'isoler les différents sous-réseaux
-                tout en maintenant une administration centralisée.
-            </p>
-        </div>
-    </div>
-
-    <!-- Étape 4 -->
-    <div class="card">
-        <img class="card__img" src="IMG_9101.jpg" alt="Pare-feu pfSense">
-        <div class="card__contenu">
-            <h2>4. Déploiement du pare-feu pfSense</h2>
-
-            <p>
-                Un mini-PC a été utilisé pour héberger pfSense, une solution
-                open source spécialisée dans la sécurité réseau.
-            </p>
-
-            <ul>
-                <li>Routage inter-VLAN</li>
-                <li>Filtrage des paquets</li>
-                <li>Gestion des interfaces réseau</li>
-                <li>Protection du réseau local</li>
-            </ul>
-
-            <p>
-                pfSense agit comme passerelle entre les différents VLAN et les
-                réseaux externes.
-            </p>
-        </div>
-    </div>
-
-    <!-- Étape 5 -->
-    <div class="card">
-        <img class="card__img" src="IMG_9103.jpg" alt="Configuration des règles firewall">
-        <div class="card__contenu">
-            <h2>5. Configuration des règles Firewall</h2>
-
-            <p>
-                Une fois les interfaces configurées, des règles de sécurité
-                ont été créées dans pfSense.
-            </p>
-
-            <p>
-                Ces règles permettent de contrôler précisément les échanges
-                entre les différents VLAN et d'autoriser uniquement les
-                communications nécessaires.
-            </p>
-
-            <ul>
-                <li>Contrôle des accès</li>
-                <li>Restriction des communications</li>
-                <li>Sécurisation du trafic</li>
-                <li>Gestion des flux réseau</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Étape 6 -->
-    <div class="card">
-        <img class="card__img" src="IMG_9104.jpg" alt="Configuration NAT">
-        <div class="card__contenu">
-            <h2>6. Configuration du NAT</h2>
-
-            <p>
-                La dernière étape consiste à configurer le NAT
-                (Network Address Translation) dans pfSense.
-            </p>
-
-            <p>
-                Cette fonctionnalité permet aux différents VLAN d'accéder
-                au réseau externe tout en masquant leurs adresses IP privées.
-            </p>
-
-            <ul>
-                <li>Traduction des adresses IP</li>
-                <li>Accès Internet des VLAN</li>
-                <li>Contrôle des connexions sortantes</li>
-                <li>Renforcement de la sécurité</li>
-            </ul>
-
-            <p>
-                Après validation des configurations, les tests de connectivité
-                permettent de confirmer le bon fonctionnement de l'ensemble
-                de l'infrastructure.
-            </p>
-        </div>
-    </div>
+    <div class="dots" id="dots"></div>
 
 </section>
+
+<script>
+    const track = document.getElementById('track');
+    const cards = Array.from(track.querySelectorAll('.card-slide'));
+    const dotsEl = document.getElementById('dots');
+    const total = cards.length;
+    let perPage = getPerPage();
+    let pages = Math.ceil(total / perPage);
+    let current = 0;
+
+    function getPerPage() {
+        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        pages = Math.ceil(total / perPage);
+        for (let i = 0; i < pages; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Page ' + (i + 1));
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        }
+    }
+
+    function goTo(page) {
+        current = Math.max(0, Math.min(page, pages - 1));
+        const gap = 20;
+        const cardW = cards[0].offsetWidth + gap;
+        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
+        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+    buildDots();
+
+    window.addEventListener('resize', () => {
+        const newPer = getPerPage();
+        if (newPer !== perPage) {
+            perPage = newPer;
+            current = 0;
+            track.style.transform = 'translateX(0)';
+            buildDots();
+        }
+    });
+</script>
 
 </body>
 </html>
