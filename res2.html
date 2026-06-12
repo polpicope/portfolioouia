@@ -6,331 +6,336 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chronologie - Infrastructure Virtualisée Proxmox</title>
     <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-body {
-    min-height: 100vh;
-    background: url("pp.jpg") no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
-}
+        body {
+            min-height: 100vh;
+            background: url("pp.jpg") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    z-index: -1;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: -1;
+        }
 
-.header-page {
-    background: #223447;
-    padding: 18px 30px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    text-align: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-}
+        /* HEADER UNIQUE */
+        .header-page {
+            background: #223447;
+            padding: 18px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
 
-.header-page h1 {
-    color: white;
-    font-size: 1.4rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-}
+        .header-page h1 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            /* Empêche le titre de collisionner avec les boutons latéraux */
+            padding: 0 140px; 
+        }
 
-.back-btn {
-    position: absolute;
-    left: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    text-decoration: none;
-    color: #e5e7eb;
-    border: 1px solid #e5e7eb;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: background 0.3s, color 0.3s;
-}
+        /* STYLE COMMUN POUR LES BOUTONS DU HEADER */
+        .back-btn, .next-page-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-decoration: none;
+            color: #e5e7eb;
+            border: 1px solid #e5e7eb;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-}
+        /* Alignement à gauche (Retour) */
+        .back-btn {
+            left: 25px;
+        }
 
-.wrapper {
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 40px;
-    gap: 24px;
-}
+        /* Alignement à droite (Suivant) */
+        .next-page-btn {
+            right: 25px;
+        }
 
-.carousel-outer {
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .back-btn:hover, .next-page-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-color: white;
+        }
 
-.carousel-viewport {
-    flex: 1;
-    overflow: hidden;
-}
+        /* CAROUSEL CONTENU */
+        .wrapper {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 40px;
+            gap: 24px;
+        }
 
-.carousel-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
-}
+        .carousel-outer {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.card-slide {
-    flex: 0 0 calc(33.333% - 14px);
-    background: #ffffff;
-    border-radius: 18px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .carousel-viewport {
+            flex: 1;
+            overflow: hidden;
+        }
 
-.card-slide:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-}
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
+        }
 
-.card-img-wrap {
-    position: relative;
-    width: 100%;
-    height: 190px;
-    overflow: hidden;
-    background: #1f2937;
-}
+        .card-slide {
+            flex: 0 0 calc(33.333% - 14px);
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-}
+        .card-slide:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+        }
 
-.card-slide:hover .card-img {
-    transform: scale(1.05);
-}
+        .card-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background: #1f2937;
+        }
 
-.card-tag {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(255, 255, 255, 0.92);
-    color: #1e3a5f;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 20px;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-}
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
 
-.card-body {
-    padding: 18px 18px 16px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+        .card-slide:hover .card-img {
+            transform: scale(1.05);
+        }
 
-.card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
+        .card-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1e3a5f;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
 
-.card-desc {
-    font-size: 0.875rem;
-    color: #6b7280;
-    line-height: 1.6;
-    flex: 1;
-    margin-bottom: 10px;
-}
+        .card-body {
+            padding: 18px 18px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-.card-astuce {
-    background: #f0f9ff;
-    border-left: 3px solid #0ea5e9;
-    border-radius: 0 8px 8px 0;
-    padding: 8px 12px;
-    font-size: 0.82rem;
-    color: #0369a1;
-    line-height: 1.5;
-    margin-bottom: 14px;
-}
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
 
-.astuce-label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 2px;
-    font-size: 0.8rem;
-}
+        .card-desc {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 10px;
+        }
 
-.card-astuce code {
-    background: #e0f2fe;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 0.8rem;
-}
+        .card-astuce {
+            background: #f0f9ff;
+            border-left: 3px solid #0ea5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            color: #0369a1;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
 
-.card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid #f3f4f6;
-    padding-top: 14px;
-}
+        .astuce-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.8rem;
+        }
 
-.card-author {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .card-astuce code {
+            background: #e0f2fe;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
 
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
-    flex-shrink: 0;
-}
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 14px;
+        }
 
-.author-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #111827;
-}
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.author-role {
-    font-size: 11px;
-    color: #9ca3af;
-    margin-top: 1px;
-}
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
 
-.read-btn {
-    background: #6366f1;
-    color: white;
-    border: none;
-    padding: 9px 18px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
+        .author-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+        }
 
-.read-btn:hover {
-    background: #4f46e5;
-    transform: scale(1.03);
-}
+        .author-role {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 1px;
+        }
 
-.nav-btn {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 22px;
-    color: #374151;
-    flex-shrink: 0;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+        /* NAVIGATION INTERNE CAROUSEL */
+        .nav-btn {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px;
+            color: #374151;
+            flex-shrink: 0;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.nav-btn:hover {
-    background: #f9fafb;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-}
+        .nav-btn:hover {
+            background: #f9fafb;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
 
-.dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
+        .dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
 
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s, width 0.3s, border-radius 0.3s;
-    padding: 0;
-}
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, width 0.3s, border-radius 0.3s;
+            padding: 0;
+        }
 
-.dot.active {
-    background: white;
-    width: 22px;
-    border-radius: 4px;
-}
+        .dot.active {
+            background: white;
+            width: 22px;
+            border-radius: 4px;
+        }
 
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
 
-@media (max-width: 1100px) {
-    .card-slide {
-        flex: 0 0 calc(50% - 10px);
-    }
-}
+        /* MULTI-RESPONSIVE COMPATIBILITÉ */
+        @media (max-width: 1100px) {
+            .card-slide {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
 
-@media (max-width: 768px) {
-    .header-page {
-        padding: 20px 10px 60px;
-    }
-    .back-btn {
-        left: 10px;
-        top: 70px;
-        transform: none;
-    }
-    .header-page h1 {
-        font-size: 1rem;
-    }
-    .wrapper {
-        padding: 30px 16px;
-    }
-    .card-slide {
-        flex: 0 0 100%;
-    }
-    .carousel-outer {
-        gap: 6px;
-    }
-    .nav-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
-    }
-}
+        @media (max-width: 768px) {
+            .header-page {
+                padding: 20px 10px 110px; /* Espace augmenté pour empiler les boutons proprement */
+            }
+            .header-page h1 {
+                font-size: 1rem;
+                padding: 0;
+            }
+            .back-btn {
+                left: 15px;
+                top: 75px;
+                transform: none;
+            }
+            .next-page-btn {
+                right: 15px;
+                top: 75px;
+                transform: none;
+            }
+            .wrapper {
+                padding: 30px 16px;
+            }
+            .card-slide {
+                flex: 0 0 100%;
+            }
+            .carousel-outer {
+                gap: 6px;
+            }
+            .nav-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
@@ -339,6 +344,7 @@ body::before {
 <header class="header-page">
     <a href="res.html" class="back-btn">⬅ Retour</a>
     <h1>Chronologie Technique : Infrastructure Virtualisée Proxmox</h1>
+    <a href="re3.html" class="next-page-btn">Suivant ➡</a>
 </header>
 
 <section class="wrapper">
