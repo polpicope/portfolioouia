@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronologie - Routage Inter-VLAN & WAN Cisco</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #1e293b; /* Même fond de couleur ardoise / bleu nuit */
+            position: relative;
+        }
+
+        /* HEADER UNIQUE */
+        .header-page {
+            background: #223447;
+            padding: 18px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-page h1 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 0 140px; 
+        }
+
+        /* STYLE DES BOUTONS DU HEADER */
+        .back-btn, .next-page-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-decoration: none;
+            color: #e5e7eb;
+            border: 1px solid #e5e7eb;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .back-btn { left: 25px; }
+        .next-page-btn { right: 25px; }
+
+        .back-btn:hover, .next-page-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-color: white;
+        }
+
+        /* CAROUSEL CONTENU */
+        .wrapper {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 40px;
+            gap: 24px;
+        }
+
+        .carousel-outer {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .carousel-viewport {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
+        }
+
+        .card-slide {
+            flex: 0 0 calc(33.333% - 14px);
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-slide:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background: #1f2937;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .card-slide:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1e3a5f;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 18px 18px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 10px;
+        }
+
+        .card-astuce {
+            background: #f0f9ff;
+            border-left: 3px solid #0ea5e9;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            color: #0369a1;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .astuce-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.82rem;
+        }
+
+        .card-astuce code {
+            background: #e0f2fe;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 14px;
+        }
+
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .author-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .author-role {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 1px;
+        }
+
+        /* NAVIGATION INTERNE CAROUSEL */
+        .nav-btn {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px;
+            color: #374151;
+            flex-shrink: 0;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: #f9fafb;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, width 0.3s, border-radius 0.3s;
+            padding: 0;
+        }
+
+        .dot.active {
+            background: white;
+            width: 22px;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .card-slide { flex: 0 0 calc(50% - 10px); }
+        }
+
+        @media (max-width: 768px) {
+            .header-page { padding: 20px 10px 110px; }
+            .header-page h1 { font-size: 1rem; padding: 0; }
+            .back-btn { left: 15px; top: 75px; transform: none; }
+            .next-page-btn { right: 15px; top: 75px; transform: none; }
+            .wrapper { padding: 30px 16px; }
+            .card-slide { flex: 0 0 100%; }
+            .carousel-outer { gap: 6px; }
+            .nav-btn { width: 32px; height: 32px; font-size: 18px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header-page">
+    <a href="res2.html" class="back-btn">⬅ Retour</a>
+    <h1>Compte Rendu : Routage Inter-VLAN & Architecture WAN</h1>
+    <a href="veille.html" class="next-page-btn">Suivant ➡</a>
+</header>
+
+<section class="wrapper">
+
+    <div class="carousel-outer">
+        <button class="nav-btn nav-prev" id="prev">&#8249;</button>
+
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="track">
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_2738.jpeg" alt="Topologie Réseau Initiale" class="card-img">
+                        <span class="card-tag">Topologie</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">01. Problématique & Objectif</h2>
+                        <p class="card-desc">L'objectif est d'assurer et de garantir un routage inter-VLAN sécurisé entre deux réseaux locaux virtuels distincts via un routeur unique (Cisco 2911) and un switch (2950 T).</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Risque</span> Sans isolation, les paquets non autorisés transitent librement d'un VLAN à un autre.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0284c7;">Cisco</div>
+                                <div><div class="author-name">Routage</div><div class="author-role">Inter-VLAN</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_2739.jpeg" alt="Création des VLAN" class="card-img">
+                        <span class="card-tag">Switch</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">02. Configuration des VLANs</h2>
+                        <p class="card-desc">Initialisation et création des VLAN 10 et 11 sur le switch Cisco. Attribution des noms respectifs et vérification de la base de données flash.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Utiliser <code>vlan 10</code> puis <code>name [Nom]</code> en mode de configuration globale.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#16a34a;">SW</div>
+                                <div><div class="author-name">Cisco 2950</div><div class="author-role">VLAN Database</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_2740.jpeg" alt="Assignation des ports" class="card-img">
+                        <span class="card-tag">Interfaces</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">03. Assignation des Switchports</h2>
+                        <p class="card-desc">Configuration des ports d'accès du switch pour lier chaque interface physique à son VLAN d'appartenance à l'aide de la commande switchport access.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Commande : <code>switchport access vlan 10</code> après être entré dans l'interface cible.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#f59e0b;">ACC</div>
+                                <div><div class="author-name">Access Mode</div><div class="author-role">Ports Terminaux</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_2742.jpeg" alt="Configuration du Mode Trunk" class="card-img">
+                        <span class="card-tag">Trunking</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">04. Activation du Mode Trunk</h2>
+                        <p class="card-desc">Configuration de la liaison montante vers le routeur. Le port d'interconnexion passe en mode Trunk afin de transporter les trames étiquetées (dot1Q) de tous les VLANs.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Utiliser impérativement <code>switchport mode trunk</code> sur l'interface reliée au routeur.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#7c3aed;">TRK</div>
+                                <div><div class="author-name">802.1Q</div><div class="author-role">Agrégation Flux</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_2745.jpeg" alt="Sous-interfaces Routeur" class="card-img">
+                        <span class="card-tag">Routeur</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">05. Sous-Interfaces (Router-on-a-Stick)</h2>
+                        <p class="card-desc">Création des sous-interfaces logiques sur l'interface GigabithEthernet du routeur (g0/1.10 et g0/1.11) pour encapsuler le trafic de chaque VLAN.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> L'encapsulation se fait via <code>encapsulation dot1Q [ID_VLAN]</code> avant de fixer l'IP.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#ea580c;">RTR</div>
+                                <div><div class="author-name">Sub-interfaces</div><div class="author-role">Cisco 2911</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="IMG_2746.jpeg" alt="Sauvegarde de la configuration" class="card-img">
+                        <span class="card-tag">Mémoire</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">06. Sauvegarde & Écriture RAM</h2>
+                        <p class="card-desc">Validation et écriture permanente des fichiers de configuration système de la mémoire volatile (Running-Config) vers la NVRAM (Startup-Config).</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Exécuter l'abréviation <code>wr</code> ou la commande complète <code>copy run start</code>.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#4b5563;">MEM</div>
+                                <div><div class="author-name">NVRAM</div><div class="author-role">Write Memory</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="o.jpg" alt="Configuration Inter-Routeurs WAN" class="card-img">
+                        <span class="card-tag">WAN</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">07. Interconnexion & Liaison WAN</h2>
+                        <p class="card-desc">Configuration des adresses réseaux WAN pour lier le routeur local à un second équipement distant via des réseaux de masques d'accord <code>255.255.255.252 (/30)</code>.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 IP</span> Routeur 1 configuré sur l'adresse IP WAN : <code>10.0.0.1</code>.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0891b2;">WAN</div>
+                                <div><div class="author-name">Subnetting /30</div><div class="author-role">Réseau Distant</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="p.jpg" alt="Validation et Test de Connexion Ping" class="card-img">
+                        <span class="card-tag">Validation</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">08. Validation & Tests de Continuité</h2>
+                        <p class="card-desc">Vérification finale du bon fonctionnement de l'infrastructure par des requêtes d'échos ICMP (Ping). Les tests valident le routage inter-VLAN et l'accès au WAN.</p>
+                        <div class="card-astuce"><span class="astuce-label">💡 Résultat</span> Réussite complète des pings (Success rate 100%), confirmant la communication de bout en bout.</div>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#dc2626;">ICMP</div>
+                                <div><div class="author-name">Test Ping</div><div class="author-role">Réseau Opérationnel</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="nav-btn nav-next" id="next">&#8250;</button>
+    </div>
+
+    <div class="dots" id="dots"></div>
+
+</section>
+
+<script>
+    const track = document.getElementById('track');
+    const cards = Array.from(track.querySelectorAll('.card-slide'));
+    const dotsEl = document.getElementById('dots');
+    const total = cards.length;
+    let perPage = getPerPage();
+    let pages = Math.ceil(total / perPage);
+    let current = 0;
+
+    function getPerPage() {
+        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        pages = Math.ceil(total / perPage);
+        for (let i = 0; i < pages; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Page ' + (i + 1));
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        }
+    }
+
+    function goTo(page) {
+        current = Math.max(0, Math.min(page, pages - 1));
+        const gap = 20;
+        const cardW = cards[0].offsetWidth + gap;
+        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
+        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+    buildDots();
+
+    window.addEventListener('resize', () => {
+        const newPer = getPerPage();
+        if (newPer !== perPage) {
+            perPage = newPer;
+            current = 0;
+            track.style.transform = 'translateX(0)';
+            buildDots();
+        }
+    });
+</script>
+
+</body>
+</html>
