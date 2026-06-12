@@ -321,7 +321,7 @@
                     <div class="card-body">
                         <h2 class="card-title">01. Problématique & Objectif</h2>
                         <p class="card-desc">L'objectif est d'assurer et de garantir un routage inter-VLAN sécurisé entre deux réseaux locaux virtuels distincts via un routeur unique (Cisco 2911) and un switch (2950 T).</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Risque</span> Sans isolation, les paquets non autorisés transitent librement d'un VLAN à un autre.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#0284c7;">Cisco</div>
@@ -339,7 +339,7 @@
                     <div class="card-body">
                         <h2 class="card-title">02. Configuration des VLANs</h2>
                         <p class="card-desc">Initialisation et création des VLAN 10 et 11 sur le switch Cisco. Attribution des noms respectifs et vérification de la base de données flash.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Utiliser <code>vlan 10</code> puis <code>name [Nom]</code> en mode de configuration globale.</div>
+                       
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#16a34a;">SW</div>
@@ -375,7 +375,7 @@
                     <div class="card-body">
                         <h2 class="card-title">04. Activation du Mode Trunk</h2>
                         <p class="card-desc">Configuration de la liaison montante vers le routeur. Le port d'interconnexion passe en mode Trunk afin de transporter les trames étiquetées (dot1Q) de tous les VLANs.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Utiliser impérativement <code>switchport mode trunk</code> sur l'interface reliée au routeur.</div>
+                       
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#7c3aed;">TRK</div>
@@ -411,7 +411,7 @@
                     <div class="card-body">
                         <h2 class="card-title">06. Sauvegarde & Écriture RAM</h2>
                         <p class="card-desc">Validation et écriture permanente des fichiers de configuration système de la mémoire volatile (Running-Config) vers la NVRAM (Startup-Config).</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Exécuter l'abréviation <code>wr</code> ou la commande complète <code>copy run start</code>.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#4b5563;">MEM</div>
@@ -429,7 +429,7 @@
                     <div class="card-body">
                         <h2 class="card-title">07. Interconnexion & Liaison WAN</h2>
                         <p class="card-desc">Configuration des adresses réseaux WAN pour lier le routeur local à un second équipement distant via des réseaux de masques d'accord <code>255.255.255.252 (/30)</code>.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 IP</span> Routeur 1 configuré sur l'adresse IP WAN : <code>10.0.0.1</code>.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#0891b2;">WAN</div>
@@ -447,7 +447,7 @@
                     <div class="card-body">
                         <h2 class="card-title">08. Validation & Tests de Continuité</h2>
                         <p class="card-desc">Vérification finale du bon fonctionnement de l'infrastructure par des requêtes d'échos ICMP (Ping). Les tests valident le routage inter-VLAN et l'accès au WAN.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Résultat</span> Réussite complète des pings (Success rate 100%), confirmant la communication de bout en bout.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#dc2626;">ICMP</div>
