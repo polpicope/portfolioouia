@@ -363,7 +363,7 @@
                     <div class="card-body">
                         <h2 class="card-title">01. Objectif du Projet</h2>
                         <p class="card-desc">Déploiement d'une infrastructure virtualisée complète sous Proxmox VE intégrant OPNsense, Samba, FTP, GLPI et Windows Server 2022.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Préparer l'architecture réseau avant la création des machines virtuelles.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#6366f1;">PVE</div>
@@ -381,7 +381,7 @@
                     <div class="card-body">
                         <h2 class="card-title">02. Switch Cisco 2960</h2>
                         <p class="card-desc">Remise en service du switch bloqué en mode ROMMON et démarrage manuel de l'image IOS depuis la mémoire flash.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Vérifier la présence de l'IOS avec <code>flash_init</code> puis <code>dir flash:</code>.</div>
+                       
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#f59e0b; color:#1c1917;">IOS</div>
@@ -399,7 +399,7 @@
                     <div class="card-body">
                         <h2 class="card-title">02b. Erreurs de Commandes Switch</h2>
                         <p class="card-desc">Visualisation des erreurs de saisie "Unknown cmd" lors des tentatives de commandes IOS standard (en, exit, end) dans le mode boot.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> En mode d'initialisation minimale, les raccourcis de configuration classique ne sont pas encore chargés.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#4b5563;">TTY</div>
@@ -435,7 +435,7 @@
                     <div class="card-body">
                         <h2 class="card-title">04. Déploiement OPNsense</h2>
                         <p class="card-desc">Création de la VM OPNsense avec deux interfaces réseau connectées aux bridges vmbr0 et vmbr1.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Prévoir les interfaces WAN et LAN dès la création de la machine virtuelle.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#16a34a;">OPN</div>
@@ -453,7 +453,7 @@
                     <div class="card-body">
                         <h2 class="card-title">05. Configuration WAN / LAN</h2>
                         <p class="card-desc">Assignation des interfaces em0 (WAN) et em1 (LAN), puis définition de la passerelle LAN à 192.168.1.254.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Vérifier la connectivité réseau avant d'installer les services.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#7c3aed;">LAN</div>
@@ -471,7 +471,7 @@
                     <div class="card-body">
                         <h2 class="card-title">07. Serveur FTP (vsftpd)</h2>
                         <p class="card-desc">Résolution du crash de connexion <code>500 OOPS: refusing to run with writable root inside chroot()</code> lors de la tentative d'accès ftpuser.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> Ajoutez <code>allow_writeable_chroot=YES</code> dans <code>/etc/vsftpd.conf</code> ou supprimez les droits d'écriture du dossier racine.</div>
+                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#0891b2;">FTP</div>
