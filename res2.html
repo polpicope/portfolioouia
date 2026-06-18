@@ -1,8 +1,3 @@
-Voici le code HTML complet, mis à jour de manière à correspondre à 100 % à l'**ordre chronologique exact** et au contenu de votre document **`compte rendu1.pdf`**.
-
-Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les étapes du fichier (Objectif, Matériel, Câblage, Boot & Clé, Port COM, Pare-feu, Menu pfSense).
-
-```html
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -246,6 +241,7 @@ Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les
             justify-content: center;
             align-items: center;
             gap: 8px;
+            margin-bottom: 10px;
         }
 
         .dot {
@@ -292,6 +288,60 @@ Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les
             transform: translateY(-2px);
         }
 
+        /* SECTION EXPLICATION DU TRAVAIL EFFECTUÉ */
+        .cr-summary-box {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-left: 6px solid #223447;
+        }
+
+        .cr-summary-box h3 {
+            color: #223447;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        .cr-summary-box p {
+            font-size: 0.95rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .cr-summary-box ul {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+
+        .cr-summary-box li {
+            font-size: 0.92rem;
+            color: #4b5563;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .cr-summary-box li::before {
+            content: "➔";
+            position: absolute;
+            left: 0;
+            color: #223447;
+            font-weight: bold;
+        }
+
+        .cr-summary-box strong {
+            color: #111827;
+        }
+
         .cr-preview-container {
             width: 100%;
             max-width: 1100px;
@@ -299,7 +349,7 @@ Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les
             border-radius: 18px;
             padding: 24px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .preview-title {
@@ -499,6 +549,19 @@ Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les
         </a>
     </div>
 
+    <div class="cr-summary-box">
+        <h3>Résumé des Actions Techniques Réalisées</h3>
+        <p>Sur la base de votre document <strong>compte rendu1.pdf</strong>, voici les étapes d'ingénierie réseau et système que vous avez configurées :</p>
+        <ul>
+            <li><strong>Définition du Besoin :</strong> Vous avez modélisé la problématique de routage en environnement virtuel afin d'isoler les flux de sécurité et préserver l'accès Internet des utilisateurs.</li>
+            <li><strong>Architecture & Topologie :</strong> À l'aide de <em>Draw.io</em>, vous avez conçu le plan de câblage structurant les liaisons physiques (Mini-PC au réseau, routeur vers le switch, puis raccordement vers l'instance pfSense).</li>
+            <li><strong>Amorçage Système :</strong> Vous avez configuré une clé USB bootable via <em>Rufus</em> embarquant l'image ISO de Proxmox, puis forcé le Mini-PC à démarrer dessus en intervenant directement sur le BIOS (touches <kbd>Suppr</kbd> / <kbd>F7</kbd>).</li>
+            <li><strong>Liaison Console Locale :</strong> Via le <em>Gestionnaire de périphériques</em> Windows, vous avez localisé le port série matériel <strong>Ports (COM & LPT)</strong> actif permettant de piloter l'équipement en liaison brute.</li>
+            <li><strong>Ouverture des Flux :</strong> Afin d'écarter tout blocage réseau lors des tests d'interconnexion (notamment les requêtes ICMP/Ping), vous avez désactivé complètement le <em>Pare-feu Windows Defender</em> pour les profils de réseaux privés et publics.</li>
+            <li><strong>Adressage d'Interface :</strong> Vous avez configuré manuellement les propriétés TCP/IPv4 de la carte Ethernet Windows (IP <code>192.168.11.1</code>) puis basculé sur la console texte de <em>pfSense</em> (Options 1 et 2) pour attribuer de manière stable la passerelle et la plage réseau du LAN (<code>192.168.10.1/24</code>).</li>
+        </ul>
+    </div>
+
     <div class="cr-preview-container">
         <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
         <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
@@ -557,5 +620,3 @@ Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les
 
 </body>
 </html>
-
-```
