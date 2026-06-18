@@ -1,182 +1,176 @@
+/* ───── Réinitialisation complète ───── */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* ───── Fond de page ───── */
+:root {
+    --bg-overlay: rgba(15, 23, 42, 0.85);
+    --card-bg: #ffffff;
+    --primary: #4f46e5;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+}
+
+/* ───── Fond d'écran général ───── */
 body {
     min-height: 100vh;
     background: url("pp.jpg") no-repeat center center fixed;
     background-size: cover;
     position: relative;
+    color: var(--text-main);
 }
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: var(--bg-overlay);
     z-index: -1;
 }
 
-/* ───── Header ───── */
+/* ───── Barre de navigation (Header) ───── */
 .header-page {
-    background: #1f2937;
+    background: #1e293b;
     padding: 18px 30px;
     position: sticky;
     top: 0;
     z-index: 100;
     text-align: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid #334155;
 }
 
 .header-page h1 {
-    color: white;
-    font-size: 1.6rem;
-    font-weight: 500;
-    letter-spacing: 1px;
+    color: #f8fafc;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
-.back-btn,
-.next-btn {
+.back-btn, .next-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     text-decoration: none;
-    color: #e5e7eb;
-    border: 1px solid #e5e7eb;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: background 0.3s, color 0.3s;
+    color: #cbd5e1;
+    border: 1px solid #475569;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #334155;
+    transition: all 0.2s ease;
 }
 
 .back-btn { left: 25px; }
 .next-btn { right: 25px; }
 
-.back-btn:hover,
-.next-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+.back-btn:hover, .next-btn:hover {
+    background: var(--primary);
     color: white;
+    border-color: var(--primary);
 }
 
-/* ───── Zone principale ───── */
+/* ───── Conteneur central (Wrapper) ───── */
 .wrapper {
-    min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 50px 40px;
-    gap: 24px;
+    padding: 40px 20px;
+    gap: 30px;
+    width: 100%;
 }
 
-/* ───── Carousel ───── */
+/* ───── Structure Carrousel ───── */
 .carousel-outer {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .carousel-viewport {
     flex: 1;
     overflow: hidden;
+    padding: 15px 5px;
 }
 
 .carousel-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
+    transition: transform 0.5s cubic-bezier(.25, .8, .25, 1);
 }
 
-/* ───── Cartes ───── */
+/* ───── Cartes (Slides) ───── */
 .card-slide {
     flex: 0 0 calc(33.333% - 14px);
-    background: #ffffff;
-    border-radius: 18px;
+    background: var(--card-bg);
+    border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-slide:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
 }
 
-/* Image */
 .card-img-wrap {
     position: relative;
     width: 100%;
     height: 190px;
-    overflow: hidden;
-    background: #1f2937;
+    background: #0f172a;
 }
 
 .card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
 }
 
-.card-slide:hover .card-img {
-    transform: scale(1.05);
-}
-
-/* Badge tag */
 .card-tag {
     position: absolute;
     top: 12px;
     left: 12px;
-    background: rgba(255, 255, 255, 0.92);
-    color: #3730a3;
-    font-size: 11px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #fff;
+    font-size: 10px;
     font-weight: 600;
-    padding: 4px 12px;
+    padding: 5px 12px;
     border-radius: 20px;
-    letter-spacing: 0.6px;
     text-transform: uppercase;
 }
 
-/* Corps */
 .card-body {
-    padding: 18px 18px 16px;
+    padding: 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .card-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: #111827;
     margin-bottom: 10px;
-    line-height: 1.4;
 }
 
 .card-desc {
-    font-size: 0.875rem;
-    color: #6b7280;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
     flex: 1;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 }
 
-/* Footer carte */
 .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid #f3f4f6;
-    padding-top: 14px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
 }
 
 .card-author {
@@ -192,70 +186,46 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
     font-size: 11px;
-    font-weight: 600;
-    flex-shrink: 0;
+    font-weight: 700;
 }
 
 .author-name {
     font-size: 13px;
     font-weight: 600;
-    color: #111827;
 }
 
 .author-role {
     font-size: 11px;
-    color: #9ca3af;
-    margin-top: 1px;
+    color: var(--text-muted);
 }
 
-.read-btn {
-    background: #6366f1;
-    color: white;
-    border: none;
-    padding: 9px 18px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
-
-.read-btn:hover {
-    background: #4f46e5;
-    transform: scale(1.03);
-}
-
-/* ───── Boutons nav ───── */
+/* Boutons de navigation */
 .nav-btn {
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 22px;
-    color: #374151;
-    flex-shrink: 0;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
 }
 
 .nav-btn:hover {
-    background: #f9fafb;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
 
-/* ───── Dots ───── */
+/* Indicateurs (dots) */
 .dots {
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 8px;
 }
 
@@ -263,24 +233,71 @@ body::before {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.35);
     border: none;
     cursor: pointer;
-    transition: background 0.3s, width 0.3s, border-radius 0.3s;
-    padding: 0;
+    transition: all 0.3s;
 }
 
 .dot.active {
-    background: white;
-    width: 22px;
+    background: var(--primary);
+    width: 24px;
     border-radius: 4px;
 }
 
-/* ───── Scrollbar ───── */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+/* ───── ZONE DU BOUTON PDF ───── */
+.cr-action-zone {
+    margin-top: 15px;
+    text-align: center;
+}
 
-/* ───── Responsive tablette ───── */
+.cr-view-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    transition: all 0.3s ease;
+}
+
+.cr-view-btn:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+}
+
+/* ───── CONSOLE D'AFFICHAGE DU PDF (IFRAME) ───── */
+.cr-preview-container {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 10px;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.preview-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.cr-iframe {
+    width: 100%;
+    height: 700px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+/* ───── Responsive design ───── */
 @media (max-width: 1100px) {
     .card-slide {
         flex: 0 0 calc(50% - 10px);
@@ -288,41 +305,10 @@ body::before {
 }
 
 @media (max-width: 768px) {
-    .header-page {
-        padding: 20px 10px 60px;
-    }
-
-    .back-btn {
-        left: 10px;
-        top: 70px;
-        transform: none;
-    }
-
-    .next-btn {
-        right: 10px;
-        top: 70px;
-        transform: none;
-    }
-
-    .header-page h1 {
-        font-size: 1.1rem;
-    }
-
-    .wrapper {
-        padding: 30px 16px;
-    }
-
-    .card-slide {
-        flex: 0 0 100%;
-    }
-
-    .carousel-outer {
-        gap: 6px;
-    }
-
-    .nav-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
-    }
+    .header-page { padding-bottom: 60px; }
+    .back-btn, .next-btn { top: auto; bottom: 10px; transform: none; }
+    .back-btn { left: 15px; }
+    .next-btn { right: 15px; }
+    .card-slide { flex: 0 0 100%; }
+    .cr-iframe { height: 480px; }
 }
