@@ -183,7 +183,7 @@
             border-radius: 4px;
         }
 
-        /* BLOC DEMANDÉ : PLACÉ AU-DESSUS DE L'APERÇU */
+        /* BLOC TECHNIQUE EXPLICATIF AVEC CODES IMAGES SUR CHAQUE ZONE */
         .analyse-document-bloc {
             width: 100%;
             max-width: 1100px;
@@ -202,6 +202,17 @@
             padding-bottom: 12px;
             font-weight: 700;
             text-transform: uppercase;
+        }
+
+        .problematique-box {
+            background: #f3f4f6;
+            border-left: 4px solid #1e3a8a;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: #374151;
+            line-height: 1.5;
         }
 
         .etape-item {
@@ -340,194 +351,3 @@
                         <h2 class="card-title">Topologie Draw.io</h2>
                         <p class="card-desc">Cartographie logique de l'infrastructure réseau pour valider les règles de filtrage.</p>
                     </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" class="card-img" alt="Rufus">
-                        <span class="card-tag">Étape 3</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">Flashage via Rufus</h2>
-                        <p class="card-desc">Préparation du support de stockage USB d'installation pour amorcer le Mini-PC.</p>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212347_.jpeg" class="card-img" alt="Port COM">
-                        <span class="card-tag">Étape 4</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">Contrôle du Port COM</h2>
-                        <p class="card-desc">Repérage de la ligne série de communication active dans les périphériques Windows.</p>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" class="card-img" alt="Pare-feu">
-                        <span class="card-tag">Étape 5</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">Pare-feu Defender</h2>
-                        <p class="card-desc">Désactivation complète de la protection locale pour valider les flux ICMP.</p>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" class="card-img" alt="Console pfSense">
-                        <span class="card-tag">Étape 6</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">Console de pfSense</h2>
-                        <p class="card-desc">Paramétrage texte final pour assigner de manière fixe les interfaces WAN et LAN.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <button class="nav-btn" id="next">&#8250;</button>
-    </div>
-
-    <div class="dots" id="dots"></div>
-
-
-    <div class="analyse-document-bloc">
-        <h3 class="analyse-title">Explications Techniques issues du Compte-Rendu N°1</h3>
-        
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Câblage">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">1. Câblage Matériel Initial</div>
-                <p class="etape-description">
-                    Cette partie détaille la mise en place physique de la maquette informatique. Le document consigne l'ordre d'interconnexion : brancher le Mini-PC au réseau d'infrastructure, relier le routeur au switch, et connecter le switch à l'interface pfSense.
-                </p>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Draw.io">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">2. Cartographie Réseau Logique</div>
-                <p class="etape-description">
-                    Schématisation complète de l'architecture réalisée sur <strong>Draw.io</strong>. Cette étape sert à cartographier les blocs d'adresses, à concevoir l'isolation du réseau et à préparer l'organisation du routage global.
-                </p>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Rufus">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">3. Utilitaire Rufus et Amorçage du Système</div>
-                <p class="etape-description">
-                    Configuration du logiciel <strong>Rufus</strong> afin de flasher et préparer la clé USB bootable d'installation. La procédure de démarrage physique du Mini-PC est ensuite explicitée : presser la touche <kbd>Suppr</kbd> ou <kbd>F7</kbd> de manière répétée à l'allumage pour lancer le média d'installation.
-                </p>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">4. Identification du Port de Communication (COM)</div>
-                <p class="etape-description">
-                    Pour prendre le contrôle de l'équipement via la liaison série locale, le compte-rendu montre le recours au <strong>Gestionnaire de périphériques de Windows</strong>. L'action consiste à aller chercher la catégorie <strong>Ports (COM et LPT)</strong> afin de déterminer le numéro de port actif connecté.
-                </p>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Pare-feu Windows">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">5. Configuration Réseau et Désactivation du Pare-feu</div>
-                <p class="etape-description">
-                    Pour tester la continuité réseau, vous détaillez l'accès au <em>Pare-feu Windows Defender</em>. Le document précise qu'il a fallu <strong>désactiver le pare-feu</strong> local afin d'autoriser le trafic de test et d'éviter les blocages de pings (ICMP).
-                </p>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Console pfSense">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">6. Interface Shell pfSense et Paramétrage IP</div>
-                <p class="etape-description">
-                    La phase finale montre la console en mode texte de <strong>pfSense</strong>. Cette interface a permis d'assigner les adresses de sous-réseau fixes des cartes réseaux (WAN et LAN) en sélectionnant l'<strong>Option 2 (Set interface(s) IP address)</strong>, et d'effectuer des vérifications à l'aide de l'<strong>Option 7 (Ping host)</strong>.
-                </p>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="cr-preview-container">
-        <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
-        <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
-    </div>
-
-</section>
-
-<script>
-    const track = document.getElementById('track');
-    const cards = Array.from(track.querySelectorAll('.card-slide'));
-    const dotsEl = document.getElementById('dots');
-    const total = cards.length;
-    let perPage = getPerPage();
-    let pages = Math.ceil(total / perPage);
-    let current = 0;
-
-    function getPerPage() {
-        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
-    }
-
-    function buildDots() {
-        dotsEl.innerHTML = '';
-        pages = Math.ceil(total / perPage);
-        for (let i = 0; i < pages; i++) {
-            const d = document.createElement('button');
-            d.className = 'dot' + (i === 0 ? ' active' : '');
-            d.addEventListener('click', () => goTo(i));
-            dotsEl.appendChild(d);
-        }
-    }
-
-    function goTo(page) {
-        current = Math.max(0, Math.min(page, pages - 1));
-        const gap = 20;
-        const cardW = cards[0].offsetWidth + gap;
-        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
-        const dots = dotsEl.querySelectorAll('.dot');
-        if(dots.length > current) {
-            dots.forEach((d, i) => d.classList.toggle('active', i === current));
-        }
-    }
-
-    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-
-    buildDots();
-
-    window.addEventListener('resize', () => {
-        const newPer = getPerPage();
-        if (newPer !== perPage) {
-            perPage = newPer;
-            current = 0;
-            track.style.transform = 'translateX(0)';
-            buildDots();
-        }
-    });
-</script>
-
-</body>
-</html>
