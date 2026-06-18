@@ -1,115 +1,203 @@
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compte Rendu pfSense & Proxmox</title>
 
 <style>
-
-/* TON CSS ICI */
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-:root{
-    --bg-overlay:rgba(15,23,42,.85);
-    --card-bg:#fff;
-    --primary:#4f46e5;
-    --text-main:#0f172a;
-    --text-muted:#64748b;
-    --border-color:#e2e8f0;
+:root {
+    --bg-overlay: rgba(15, 23, 42, 0.85);
+    --card-bg: #ffffff;
+    --primary: #4f46e5;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
 }
 
-body{
-    min-height:100vh;
-    background:url("pp.jpg") no-repeat center center fixed;
-    background-size:cover;
-    position:relative;
-    color:var(--text-main);
+/* Background */
+body {
+    min-height: 100vh;
+    background: url("pp.jpg") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    color: var(--text-main);
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:var(--bg-overlay);
-    z-index:-1;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--bg-overlay);
+    z-index: -1;
 }
 
-.header-page{
-    background:#1e293b;
-    padding:18px 30px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    text-align:center;
-    box-shadow:0 4px 12px rgba(0,0,0,.4);
+/* HEADER */
+.header-page {
+    background: #1e293b;
+    padding: 18px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,.4);
 }
 
-.header-page h1{
-    color:#fff;
+.header-page h1 {
+    color: #fff;
+    font-size: 1.4rem;
 }
 
-.back-btn,.next-btn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    text-decoration:none;
-    color:#cbd5e1;
-    border:1px solid #475569;
-    padding:8px 16px;
-    border-radius:6px;
-    background:#334155;
+.back-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #cbd5e1;
+    border: 1px solid #475569;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #334155;
 }
 
-.back-btn{left:25px;}
-.next-btn{right:25px;}
+.back-btn { left: 25px; }
+.next-btn { right: 25px; }
 
-.wrapper{
-    padding:40px 20px;
+.back-btn:hover, .next-btn:hover {
+    background: var(--primary);
+    color: white;
 }
 
-.card-slide{
-    background:#fff;
-    border-radius:12px;
-    overflow:hidden;
-    margin-bottom:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+/* WRAPPER */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 30px;
 }
 
-.card-img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
+/* CAROUSEL */
+.carousel-outer {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.card-body{
-    padding:20px;
+.carousel-viewport {
+    overflow: hidden;
+    flex: 1;
+    padding: 10px;
 }
 
-.card-title{
-    margin-bottom:10px;
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
 }
 
-.card-desc{
-    color:#64748b;
+/* CARD */
+.card-slide {
+    flex: 0 0 calc(33.333% - 14px);
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,.3);
+    display: flex;
+    flex-direction: column;
 }
 
-.cr-preview-container{
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
+.card-img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
 }
 
-.cr-iframe{
-    width:100%;
-    height:700px;
+.card-body {
+    padding: 18px;
 }
 
+.card-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* NAV BUTTONS */
+.nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: white;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.nav-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* DOTS */
+.dots {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+}
+
+.dot.active {
+    width: 20px;
+    border-radius: 4px;
+    background: var(--primary);
+}
+
+/* PDF */
+.cr-preview-container {
+    width: 100%;
+    max-width: 1000px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.cr-iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .card-slide { flex: 0 0 calc(50% - 10px); }
+}
+
+@media (max-width: 768px) {
+    .card-slide { flex: 0 0 100%; }
+}
 </style>
 </head>
 
@@ -123,63 +211,140 @@ body::before{
 
 <section class="wrapper">
 
-<div class="card-slide">
-    <img src="image1.png" class="card-img">
-    <div class="card-body">
-        <h2 class="card-title">1. Objectifs</h2>
-        <p class="card-desc">
-            Créer un réseau de virtualisation avec pfSense afin d'assurer le routage et la sécurité des communications.
-        </p>
+<div class="carousel-outer">
+
+    <button class="nav-btn" id="prev">‹</button>
+
+    <div class="carousel-viewport">
+        <div class="carousel-track" id="track">
+
+            <div class="card-slide">
+                <img src="image1.png" class="card-img">
+                <div class="card-body">
+                    <h2 class="card-title">1. Objectifs</h2>
+                    <p class="card-desc">
+                        Créer un réseau de virtualisation avec pfSense pour assurer le routage et la sécurité.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-slide">
+                <img src="image2.png" class="card-img">
+                <div class="card-body">
+                    <h2 class="card-title">2. Problématique</h2>
+                    <p class="card-desc">
+                        Comment sécuriser les échanges réseau tout en assurant le routage en virtualisation ?
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-slide">
+                <img src="image3.png" class="card-img">
+                <div class="card-body">
+                    <h2 class="card-title">3. Risques</h2>
+                    <p class="card-desc">
+                        Risques d’accès non autorisés et perte de connectivité réseau.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-slide">
+                <img src="image4.png" class="card-img">
+                <div class="card-body">
+                    <h2 class="card-title">4. Matériel</h2>
+                    <p class="card-desc">
+                        pfSense, Mini-PC, routeur, switch, Proxmox, outils réseau.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card-slide">
+                <img src="image5.png" class="card-img">
+                <div class="card-body">
+                    <h2 class="card-title">5. Schéma de câblage</h2>
+                    <p class="card-desc">
+                        Connexion entre switch, routeur, Mini-PC et pfSense.
+                    </p>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+    <button class="nav-btn" id="next">›</button>
 </div>
 
-<div class="card-slide">
-    <img src="image2.png" class="card-img">
-    <div class="card-body">
-        <h2 class="card-title">2. Problématique</h2>
-        <p class="card-desc">
-            Comment garantir un routage en virtualisation tout en sécurisant les échanges réseau ?
-        </p>
-    </div>
-</div>
-
-<div class="card-slide">
-    <img src="image3.png" class="card-img">
-    <div class="card-body">
-        <h2 class="card-title">3. Risques</h2>
-        <p class="card-desc">
-            Risque d'accès non autorisé entre les réseaux et perte d'accès Internet.
-        </p>
-    </div>
-</div>
-
-<div class="card-slide">
-    <img src="image4.png" class="card-img">
-    <div class="card-body">
-        <h2 class="card-title">4. Matériel</h2>
-        <p class="card-desc">
-            2 machines, pfSense, Mini-PC, routeur, switch, Rufus et Draw.io.
-        </p>
-    </div>
-</div>
-
-<div class="card-slide">
-    <img src="image5.png" class="card-img">
-    <div class="card-body">
-        <h2 class="card-title">5. Schéma de câblage</h2>
-        <p class="card-desc">
-            Branchement du Mini-PC, du routeur, du switch et de pfSense.
-        </p>
-    </div>
-</div>
+<div class="dots" id="dots"></div>
 
 <div class="cr-preview-container">
-    <h3>Aperçu du Compte-Rendu</h3>
+    <h3>Aperçu du PDF</h3>
     <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
 </div>
 
 </section>
 
+<script>
+const track = document.getElementById("track");
+const cards = document.querySelectorAll(".card-slide");
+const dotsContainer = document.getElementById("dots");
+
+let index = 0;
+let perPage = 3;
+
+function updatePerPage() {
+    if (window.innerWidth <= 768) perPage = 1;
+    else if (window.innerWidth <= 1100) perPage = 2;
+    else perPage = 3;
+}
+
+function update() {
+    const cardWidth = cards[0].offsetWidth + 20;
+    track.style.transform = `translateX(-${index * perPage * cardWidth}px)`;
+
+    document.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.toggle("active", i === index);
+    });
+}
+
+function buildDots() {
+    dotsContainer.innerHTML = "";
+    const pages = Math.ceil(cards.length / perPage);
+
+    for (let i = 0; i < pages; i++) {
+        const dot = document.createElement("button");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+
+        dot.addEventListener("click", () => {
+            index = i;
+            update();
+        });
+
+        dotsContainer.appendChild(dot);
+    }
+}
+
+document.getElementById("prev").onclick = () => {
+    index = Math.max(0, index - 1);
+    update();
+};
+
+document.getElementById("next").onclick = () => {
+    index = Math.min(Math.ceil(cards.length / perPage) - 1, index + 1);
+    update();
+};
+
+window.addEventListener("resize", () => {
+    updatePerPage();
+    index = 0;
+    buildDots();
+    update();
+});
+
+updatePerPage();
+buildDots();
+update();
+</script>
+
 </body>
 </html>
-
