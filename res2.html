@@ -293,6 +293,57 @@
             border-radius: 4px;
         }
 
+        /* AJOUTS DES STYLES DE L'APERÇU */
+        .cr-action-zone {
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .cr-view-btn {
+            display: inline-block;
+            background: #223447;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cr-view-btn:hover {
+            background: #2c425b;
+            transform: translateY(-2px);
+        }
+
+        .cr-preview-container {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            margin-top: 10px;
+        }
+
+        .preview-title {
+            font-size: 1.1rem;
+            color: #223447;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cr-iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+        }
+
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
 
@@ -334,6 +385,9 @@
                 width: 32px;
                 height: 32px;
                 font-size: 18px;
+            }
+            .cr-iframe {
+                height: 450px;
             }
         }
     </style>
@@ -488,6 +542,17 @@
     </div>
 
     <div class="dots" id="dots"></div>
+
+    <div class="cr-action-zone">
+        <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
+            👁️ Ouvrir le Compte-Rendu PDF en plein écran 
+        </a>
+    </div>
+
+    <div class="cr-preview-container">
+        <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
+        <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
+    </div>
 
 </section>
 
