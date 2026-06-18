@@ -7,7 +7,9 @@
 
 <style>
 
-/* RESET */
+/* ==========================
+   RESET
+========================== */
 *{
     margin:0;
     padding:0;
@@ -15,10 +17,20 @@
     font-family:'Segoe UI',sans-serif;
 }
 
+:root{
+    --primary:#4f46e5;
+    --dark:#1e293b;
+    --light:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+}
+
 body{
-    background:url("pp.jpg") center/cover fixed;
     min-height:100vh;
-    color:#0f172a;
+    background:url("pp.jpg") no-repeat center center fixed;
+    background-size:cover;
+    color:var(--text);
+    position:relative;
 }
 
 body::before{
@@ -29,20 +41,56 @@ body::before{
     z-index:-1;
 }
 
+/* ==========================
+   HEADER
+========================== */
 .header{
-    background:#1e293b;
+    background:var(--dark);
     padding:20px;
+    position:sticky;
+    top:0;
+    z-index:100;
     text-align:center;
-    color:white;
     box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
 
 .header h1{
+    color:white;
     font-size:1.5rem;
 }
 
+.back-btn,
+.next-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    text-decoration:none;
+    color:white;
+    background:#334155;
+    padding:10px 18px;
+    border-radius:8px;
+    border:1px solid #475569;
+    transition:.3s;
+}
+
+.back-btn{
+    left:20px;
+}
+
+.next-btn{
+    right:20px;
+}
+
+.back-btn:hover,
+.next-btn:hover{
+    background:var(--primary);
+}
+
+/* ==========================
+   WRAPPER
+========================== */
 .wrapper{
-    max-width:1200px;
+    max-width:1300px;
     margin:auto;
     padding:40px 20px;
 }
@@ -53,11 +101,14 @@ body::before{
     gap:25px;
 }
 
+/* ==========================
+   CARD
+========================== */
 .card{
     background:white;
     border-radius:15px;
     overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
     transition:.3s;
 }
 
@@ -77,32 +128,35 @@ body::before{
 
 .tag{
     display:inline-block;
-    background:#4f46e5;
+    background:var(--primary);
     color:white;
-    padding:6px 14px;
-    border-radius:20px;
     font-size:12px;
-    margin-bottom:10px;
+    padding:6px 14px;
+    border-radius:30px;
+    margin-bottom:12px;
 }
 
-h2{
+.content h2{
     margin-bottom:12px;
     font-size:1.2rem;
 }
 
-p{
-    color:#64748b;
+.content p{
+    color:var(--muted);
     line-height:1.6;
 }
 
+/* ==========================
+   PDF
+========================== */
 .pdf-btn{
     display:block;
     width:max-content;
     margin:40px auto;
-    background:#4f46e5;
+    background:var(--primary);
     color:white;
     text-decoration:none;
-    padding:15px 30px;
+    padding:14px 28px;
     border-radius:30px;
     font-weight:bold;
 }
@@ -113,9 +167,9 @@ p{
 
 .pdf-container{
     background:white;
-    padding:20px;
     border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
 .pdf-container h2{
@@ -127,15 +181,51 @@ iframe{
     width:100%;
     height:800px;
     border:none;
+    border-radius:10px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media(max-width:768px){
+
+    .header{
+        padding-bottom:70px;
+    }
+
+    .back-btn,
+    .next-btn{
+        top:auto;
+        bottom:10px;
+        transform:none;
+    }
+
+    .back-btn{
+        left:10px;
+    }
+
+    .next-btn{
+        right:10px;
+    }
+
+    iframe{
+        height:500px;
+    }
 }
 
 </style>
-
 </head>
+
 <body>
 
 <header class="header">
+
+    <a href="index.html" class="back-btn">⬅ Retour</a>
+
     <h1>Compte Rendu - pfSense & Proxmox</h1>
+
+    <a href="page2.html" class="next-btn">Suivant ➡</a>
+
 </header>
 
 <div class="wrapper">
@@ -143,156 +233,145 @@ iframe{
 <div class="cards">
 
     <div class="card">
-        <img src="image1.png">
+        <img src="image1.png" alt="">
         <div class="content">
             <span class="tag">Objectifs</span>
             <h2>1. Objectifs</h2>
             <p>
-                Le but de cette activité est de créer un réseau de
-                virtualisation avec pfSense afin de gérer le routage,
-                la sécurité et l'accès au réseau.
+                Créer un réseau de virtualisation avec pfSense afin
+                d'assurer le routage et la sécurité des communications.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image2.png">
+        <img src="image2.png" alt="">
         <div class="content">
             <span class="tag">Problématique</span>
             <h2>2. Problématique</h2>
             <p>
-                Comment garantir un routage en virtualisation ?
-                Comment sécuriser les échanges réseau et éviter
-                les accès non autorisés ?
+                Comment garantir un routage en virtualisation
+                tout en assurant la sécurité du réseau ?
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image3.png">
+        <img src="image3.png" alt="">
         <div class="content">
-            <span class="tag">Risques</span>
-            <h2>3. Sécurité & Impacts</h2>
+            <span class="tag">Sécurité</span>
+            <h2>3. Risques & Impacts</h2>
             <p>
-                Risque d'accès non autorisé entre les réseaux.
-                Une mauvaise configuration peut également empêcher
-                l'accès à Internet et bloquer le travail des utilisateurs.
+                Risque d'accès non autorisé entre les réseaux
+                et perte d'accès Internet pour les utilisateurs.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image4.png">
+        <img src="image4.png" alt="">
         <div class="content">
             <span class="tag">Matériel</span>
             <h2>4. Présentation du matériel</h2>
             <p>
-                2 machines utilisateurs, un Mini-PC, pfSense,
-                un routeur, un switch, Rufus pour créer la clé USB
-                bootable et Draw.io pour réaliser les schémas.
+                2 machines, pfSense, Mini-PC,
+                routeur, switch, Rufus et Draw.io.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image5.png">
+        <img src="image5.png" alt="">
         <div class="content">
             <span class="tag">Câblage</span>
             <h2>5. Schéma de câblage</h2>
             <p>
-                Brancher le Mini-PC au réseau,
-                connecter le routeur au switch puis
-                raccorder le switch à pfSense.
+                Brancher le Mini-PC, connecter le routeur,
+                le switch et pfSense selon le schéma.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image6.png">
+        <img src="image6.png" alt="">
         <div class="content">
             <span class="tag">Draw.io</span>
-            <h2>6. Schéma pfSense</h2>
+            <h2>6. Schéma réseau</h2>
             <p>
-                Réalisation du schéma du circuit réseau sous Draw.io
-                afin de représenter l'architecture et les connexions.
+                Réalisation du schéma de l'architecture réseau
+                avec Draw.io.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image7.png">
+        <img src="image7.png" alt="">
         <div class="content">
             <span class="tag">Proxmox</span>
             <h2>7. Configuration du Mini-PC</h2>
             <p>
-                Télécharger Proxmox VE et Rufus.
-                Configurer le proxy puis attribuer
-                une adresse IP pour accéder à l'interface.
+                Installation de Proxmox et configuration
+                de l'adressage réseau.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image8.png">
+        <img src="image8.png" alt="">
         <div class="content">
             <span class="tag">Commandes</span>
             <h2>8. Commandes utiles</h2>
             <p>
                 ip addr : afficher les paramètres réseau.
-                nano /etc/network/interfaces :
-                modifier la configuration réseau.
+                nano /etc/network/interfaces : modifier la configuration.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image9.png">
+        <img src="image9.png" alt="">
         <div class="content">
             <span class="tag">Adressage</span>
             <h2>9. Configuration IP</h2>
             <p>
-                Utilisation de Set Interface IP Address.
-                Attribution de l'adresse 192.168.2.2
-                avec le masque 255.255.255.0.
+                Attribution de l'adresse IP 192.168.2.2
+                et du masque 255.255.255.0.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image10.png">
+        <img src="image10.png" alt="">
         <div class="content">
             <span class="tag">Installation</span>
             <h2>10. Installation de Proxmox</h2>
             <p>
-                Démarrer le Mini-PC avec la touche Suppr ou F7.
-                Vérifier le port COM utilisé depuis
-                le Gestionnaire de périphériques.
+                Démarrage du Mini-PC et vérification
+                du port COM utilisé.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image11.png">
+        <img src="image11.png" alt="">
         <div class="content">
             <span class="tag">Pare-feu</span>
-            <h2>11. Désactivation du Pare-feu</h2>
+            <h2>11. Pare-feu Windows Defender</h2>
             <p>
-                Désactiver le Pare-feu Windows Defender afin
-                d'éviter les blocages de communication réseau
-                durant les tests.
+                Désactivation du pare-feu afin de faciliter
+                les tests et la communication réseau.
             </p>
         </div>
     </div>
 
     <div class="card">
-        <img src="image12.png">
+        <img src="image12.png" alt="">
         <div class="content">
             <span class="tag">Configuration</span>
-            <h2>12. Paramètres Réseau</h2>
+            <h2>12. Paramètres réseau</h2>
             <p>
-                Configurer l'adresse IP, le masque de sous-réseau,
-                la passerelle et le DNS préféré depuis
-                les paramètres Ethernet.
+                Configuration de l'adresse IP,
+                du masque, de la passerelle et du DNS.
             </p>
         </div>
     </div>
@@ -304,8 +383,11 @@ iframe{
 </a>
 
 <div class="pdf-container">
+
     <h2>Aperçu du Compte-Rendu</h2>
+
     <iframe src="compte rendu1.pdf"></iframe>
+
 </div>
 
 </div>
