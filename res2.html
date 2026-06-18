@@ -1,3 +1,8 @@
+Voici le code HTML corrigé et final.
+
+Cette version intègre directement les noms exacts de vos fichiers d'images (`Capture d’écran_10-6-2026_...`) et affiche au sein du bloc d'explication une description textuelle rigoureuse de **ce qui est visible et rédigé sur votre propre document `compte rendu1.pdf**`.
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -101,4 +106,451 @@
         }
 
         .card-slide {
-            flex: 0
+            flex: 0 0 calc(33.333% - 14px);
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background: #1f2937;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #1e3a5f;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 18px 18px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+            width: 22px;
+            border-radius: 4px;
+        }
+
+        /* BLOC DEMANDÉ : ANALYSE ET EXPLICATION DU COMPTE RENDU AVEC IMAGES */
+        .analyse-document-bloc {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 18px;
+            padding: 30px;
+            margin-top: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .analyse-title {
+            font-size: 1.35rem;
+            color: #223447;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #223447;
+            padding-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .etape-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 35px;
+            padding-bottom: 30px;
+            border-bottom: 1px dashed #d1d5db;
+            align-items: flex-start;
+        }
+
+        .etape-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .etape-visuel {
+            width: 320px;
+            flex-shrink: 0;
+        }
+
+        .etape-visuel img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid #c9d1d9;
+        }
+
+        .etape-legende {
+            display: block;
+            text-align: center;
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .etape-contenu {
+            flex: 1;
+        }
+
+        .etape-header-titre {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .etape-description {
+            font-size: 0.95rem;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .etape-description strong {
+            color: #111827;
+        }
+
+        /* CONTENEUR PREVIEW */
+        .cr-preview-container {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            margin-top: 10px;
+        }
+
+        .preview-title {
+            font-size: 1.1rem;
+            color: #223447;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .cr-iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 1100px) {
+            .card-slide { flex: 0 0 calc(50% - 10px); }
+            .etape-item { flex-direction: column; }
+            .etape-visuel { width: 100%; max-width: 450px; }
+        }
+
+        @media (max-width: 768px) {
+            .header-page { padding: 20px 10px 110px; }
+            .header-page h1 { font-size: 1rem; padding: 0; }
+            .back-btn, .next-page-btn { top: 75px; transform: none; }
+            .wrapper { padding: 30px 16px; }
+            .card-slide { flex: 0 0 100%; }
+            .cr-iframe { height: 450px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header-page">
+    <a href="res.html" class="back-btn">⬅ Retour</a>
+    <h1>Chronologie Spécifique - Installation pfSense</h1>
+    <a href="re3.html" class="next-page-btn">Suivant ➡</a>
+</header>
+
+<section class="wrapper">
+
+    <div class="carousel-outer">
+        <button class="nav-btn" id="prev">&#8249;</button>
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="track">
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" class="card-img" alt="Câblage">
+                        <span class="card-tag">Étape 1</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Schéma & Interconnexions</h2>
+                        <p class="card-desc">Liaison physique ordonnée des équipements : du Mini-PC vers le commutateur réseau global.</p>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212025_.jpeg" class="card-img" alt="Draw.io">
+                        <span class="card-tag">Étape 2</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Topologie Draw.io</h2>
+                        <p class="card-desc">Cartographie logique de l'infrastructure réseau pour valider les règles de filtrage.</p>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" class="card-img" alt="Rufus">
+                        <span class="card-tag">Étape 3</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Flashage via Rufus</h2>
+                        <p class="card-desc">Préparation du support de stockage USB d'installation pour amorcer le Mini-PC.</p>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212347_.jpeg" class="card-img" alt="Port COM">
+                        <span class="card-tag">Étape 4</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Contrôle du Port COM</h2>
+                        <p class="card-desc">Repérage de la ligne série de communication active dans les périphériques Windows.</p>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" class="card-img" alt="Pare-feu">
+                        <span class="card-tag">Étape 5</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Pare-feu Defender</h2>
+                        <p class="card-desc">Désactivation complète de la protection locale pour valider les flux ICMP.</p>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" class="card-img" alt="Console pfSense">
+                        <span class="card-tag">Étape 6</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Console de pfSense</h2>
+                        <p class="card-desc">Paramétrage texte final pour assigner de manière fixe les interfaces WAN et LAN.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <button class="nav-btn" id="next">&#8250;</button>
+    </div>
+
+    <div class="dots" id="dots"></div>
+
+
+    <div class="analyse-document-bloc">
+        <h3 class="analyse-title">Contenu Détaillé du Compte Rendu Technique</h3>
+        
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Topologie Initiale">
+                <span class="etape-legende">Capture 1 : Schéma d'interconnexion</span>
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">1. Problématique et Architecture de Câblage</div>
+                <p class="etape-description">
+                    Le document commence par exposer la problématique de la gestion du routage et de la sécurité des accès Internet en environnement virtuel. Pour y répondre, vous avez décrit l'ordre matériel des branchements : connecter le <strong>Mini-PC physique au réseau global</strong>, relier le routeur au commutateur (switch), puis raccorder le switch à l'interface de la machine <strong>pfSense</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Schéma logique Draw.io">
+                <span class="etape-legende">Capture 2 : Modélisation sous Draw.io</span>
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">2. Cartographie Logique de l'Infrastructure</div>
+                <p class="etape-description">
+                    Cette étape présente le diagramme technique complet généré avec <strong>Draw.io</strong>. Ce schéma permet d'identifier l'affectation logique des blocs réseaux, de poser les bases de la séparation des flux entre le réseau interne (LAN) et l'accès externe (WAN), et de préparer la configuration du routage.
+                </p>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Outil Rufus">
+                <span class="etape-legende">Capture 3 : Utilitaire de flashage Rufus</span>
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">3. Préparation de la Clé Bootable et Boot du Mini PC</div>
+                <p class="etape-description">
+                    Pour installer le système d'exploitation, vous avez utilisé le logiciel <strong>Rufus</strong> afin de générer un support d'installation USB bootable. Le document consigne la procédure d'amorçage du Mini PC : effectuer des pressions répétées sur les touches <kbd>Suppr</kbd> ou <kbd>F7</kbd> au démarrage de l'ordinateur pour forcer le lancement automatique sur la clé USB.
+                </p>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques COM">
+                <span class="etape-legende">Capture 4 : Identification de la ligne COM</span>
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">4. Identification du Port Série Matériel (COM)</div>
+                <p class="etape-description">
+                    Afin d'établir une connexion console directe avec la machine, le compte-rendu montre l'utilisation du <strong>Gestionnaire de périphériques de Windows</strong>. L'action consiste à dérouler l'onglet <strong>Ports (COM & LPT)</strong> pour relever le numéro exact du port de communication actif relié au boîtier physique.
+                </p>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Pare-feu Windows Defender">
+                <span class="etape-legende">Capture 5 : Neutralisation du Pare-feu</span>
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">5. Configuration Réseau et Désactivation du Pare-feu</div>
+                <p class="etape-description">
+                    Pour valider l'interconnexion sans blocage de paquets, vous vous êtes rendu dans le <em>Panneau de configuration > Système et sécurité > Pare-feu Windows Defender</em>. Le compte-rendu indique qu'il a fallu <strong>désactiver le pare-feu</strong>, car ses règles par défaut interdisaient les communications de test nécessaires à l'établissement de la liaison réseau.
+                </p>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Interface texte pfSense">
+                <span class="etape-legende">Capture 6 : Console d'administration pfSense</span>
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">6. Menu de Configuration Shell pfSense</div>
+                <p class="etape-description">
+                    La dernière partie détaille la prise en main de la console texte de <strong>pfSense</strong>. Vous avez interagi avec le menu pour attribuer l'adressage IP des cartes (Option 2 - <em>Set interface(s) IP address</em>) et configurer le sous-réseau. La capture montre également la liste des commandes disponibles, y compris l'<strong>Option 7 (Ping host)</strong> pour valider la bonne communication avec la passerelle.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="cr-preview-container">
+        <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
+        <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
+    </div>
+
+</section>
+
+<script>
+    const track = document.getElementById('track');
+    const cards = Array.from(track.querySelectorAll('.card-slide'));
+    const dotsEl = document.getElementById('dots');
+    const total = cards.length;
+    let perPage = getPerPage();
+    let pages = Math.ceil(total / perPage);
+    let current = 0;
+
+    function getPerPage() {
+        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        pages = Math.ceil(total / perPage);
+        for (let i = 0; i < pages; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        }
+    }
+
+    function goTo(page) {
+        current = Math.max(0, Math.min(page, pages - 1));
+        const gap = 20;
+        const cardW = cards[0].offsetWidth + gap;
+        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
+        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+    buildDots();
+
+    window.addEventListener('resize', () => {
+        const newPer = getPerPage();
+        if (newPer !== perPage) {
+            perPage = newPer;
+            current = 0;
+            track.style.transform = 'translateX(0)';
+            buildDots();
+        }
+    });
+</script>
+
+</body>
+</html>
+
+```
