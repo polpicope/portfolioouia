@@ -1,396 +1,211 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compte Rendu - pfSense & Proxmox</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte Rendu pfSense & Proxmox</title>
 
-<style>
+    <style>
+        /* COLLE ICI TOUT LE CSS QUE TU VIENS D'ENVOYER */
+    </style>
 
-/* ==========================
-   RESET
-========================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
-
-:root{
-    --primary:#4f46e5;
-    --dark:#1e293b;
-    --light:#ffffff;
-    --text:#0f172a;
-    --muted:#64748b;
-}
-
-body{
-    min-height:100vh;
-    background:url("pp.jpg") no-repeat center center fixed;
-    background-size:cover;
-    color:var(--text);
-    position:relative;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(15,23,42,.85);
-    z-index:-1;
-}
-
-/* ==========================
-   HEADER
-========================== */
-.header{
-    background:var(--dark);
-    padding:20px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    text-align:center;
-    box-shadow:0 4px 10px rgba(0,0,0,.4);
-}
-
-.header h1{
-    color:white;
-    font-size:1.5rem;
-}
-
-.back-btn,
-.next-btn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    text-decoration:none;
-    color:white;
-    background:#334155;
-    padding:10px 18px;
-    border-radius:8px;
-    border:1px solid #475569;
-    transition:.3s;
-}
-
-.back-btn{
-    left:20px;
-}
-
-.next-btn{
-    right:20px;
-}
-
-.back-btn:hover,
-.next-btn:hover{
-    background:var(--primary);
-}
-
-/* ==========================
-   WRAPPER
-========================== */
-.wrapper{
-    max-width:1300px;
-    margin:auto;
-    padding:40px 20px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:25px;
-}
-
-/* ==========================
-   CARD
-========================== */
-.card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
-
-.content{
-    padding:20px;
-}
-
-.tag{
-    display:inline-block;
-    background:var(--primary);
-    color:white;
-    font-size:12px;
-    padding:6px 14px;
-    border-radius:30px;
-    margin-bottom:12px;
-}
-
-.content h2{
-    margin-bottom:12px;
-    font-size:1.2rem;
-}
-
-.content p{
-    color:var(--muted);
-    line-height:1.6;
-}
-
-/* ==========================
-   PDF
-========================== */
-.pdf-btn{
-    display:block;
-    width:max-content;
-    margin:40px auto;
-    background:var(--primary);
-    color:white;
-    text-decoration:none;
-    padding:14px 28px;
-    border-radius:30px;
-    font-weight:bold;
-}
-
-.pdf-btn:hover{
-    background:#4338ca;
-}
-
-.pdf-container{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
-}
-
-.pdf-container h2{
-    text-align:center;
-    margin-bottom:15px;
-}
-
-iframe{
-    width:100%;
-    height:800px;
-    border:none;
-    border-radius:10px;
-}
-
-/* ==========================
-   RESPONSIVE
-========================== */
-@media(max-width:768px){
-
-    .header{
-        padding-bottom:70px;
-    }
-
-    .back-btn,
-    .next-btn{
-        top:auto;
-        bottom:10px;
-        transform:none;
-    }
-
-    .back-btn{
-        left:10px;
-    }
-
-    .next-btn{
-        right:10px;
-    }
-
-    iframe{
-        height:500px;
-    }
-}
-
-</style>
 </head>
-
 <body>
 
-<header class="header">
-
+<header class="header-page">
     <a href="index.html" class="back-btn">⬅ Retour</a>
-
-    <h1>Compte Rendu - pfSense & Proxmox</h1>
-
+    <h1>Compte Rendu pfSense & Proxmox</h1>
     <a href="page2.html" class="next-btn">Suivant ➡</a>
-
 </header>
 
-<div class="wrapper">
+<section class="wrapper">
 
-<div class="cards">
+<div class="carousel-outer">
 
-    <div class="card">
-        <img src="image1.png" alt="">
-        <div class="content">
-            <span class="tag">Objectifs</span>
-            <h2>1. Objectifs</h2>
-            <p>
-                Créer un réseau de virtualisation avec pfSense afin
-                d'assurer le routage et la sécurité des communications.
-            </p>
-        </div>
+<button class="nav-btn nav-prev" id="prev">&#8249;</button>
+
+<div class="carousel-viewport">
+
+<div class="carousel-track" id="track">
+
+<!-- CARTE 1 -->
+<div class="card-slide">
+    <div class="card-img-wrap">
+        <img src="image1.png" class="card-img">
+        <span class="card-tag">Objectifs</span>
     </div>
 
-    <div class="card">
-        <img src="image2.png" alt="">
-        <div class="content">
-            <span class="tag">Problématique</span>
-            <h2>2. Problématique</h2>
-            <p>
-                Comment garantir un routage en virtualisation
-                tout en assurant la sécurité du réseau ?
-            </p>
+    <div class="card-body">
+        <h2 class="card-title">1. Objectifs</h2>
+
+        <p class="card-desc">
+            Créer un réseau de virtualisation avec pfSense afin
+            d'assurer le routage et la sécurité des communications.
+        </p>
+
+        <div class="card-footer">
+            <div class="card-author">
+                <div class="avatar" style="background:#4f46e5;">OBJ</div>
+                <div>
+                    <div class="author-name">Projet Réseau</div>
+                    <div class="author-role">Objectifs</div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+
+<!-- CARTE 2 -->
+<div class="card-slide">
+    <div class="card-img-wrap">
+        <img src="image2.png" class="card-img">
+        <span class="card-tag">Problématique</span>
     </div>
 
-    <div class="card">
-        <img src="image3.png" alt="">
-        <div class="content">
-            <span class="tag">Sécurité</span>
-            <h2>3. Risques & Impacts</h2>
-            <p>
-                Risque d'accès non autorisé entre les réseaux
-                et perte d'accès Internet pour les utilisateurs.
-            </p>
+    <div class="card-body">
+        <h2 class="card-title">2. Problématique</h2>
+
+        <p class="card-desc">
+            Comment garantir un routage en virtualisation
+            tout en sécurisant les échanges réseau ?
+        </p>
+
+        <div class="card-footer">
+            <div class="card-author">
+                <div class="avatar" style="background:#0ea5e9;">PB</div>
+                <div>
+                    <div class="author-name">Analyse</div>
+                    <div class="author-role">Problème</div>
+                </div>
+            </div>
         </div>
+    </div>
+</div>
+
+<!-- CARTE 3 -->
+<div class="card-slide">
+    <div class="card-img-wrap">
+        <img src="image3.png" class="card-img">
+        <span class="card-tag">Sécurité</span>
     </div>
 
-    <div class="card">
-        <img src="image4.png" alt="">
-        <div class="content">
-            <span class="tag">Matériel</span>
-            <h2>4. Présentation du matériel</h2>
-            <p>
-                2 machines, pfSense, Mini-PC,
-                routeur, switch, Rufus et Draw.io.
-            </p>
-        </div>
-    </div>
+    <div class="card-body">
+        <h2 class="card-title">3. Risques</h2>
 
-    <div class="card">
-        <img src="image5.png" alt="">
-        <div class="content">
-            <span class="tag">Câblage</span>
-            <h2>5. Schéma de câblage</h2>
-            <p>
-                Brancher le Mini-PC, connecter le routeur,
-                le switch et pfSense selon le schéma.
-            </p>
-        </div>
-    </div>
+        <p class="card-desc">
+            Risque d'accès non autorisé entre les réseaux
+            et perte d'accès Internet pour les utilisateurs.
+        </p>
 
-    <div class="card">
-        <img src="image6.png" alt="">
-        <div class="content">
-            <span class="tag">Draw.io</span>
-            <h2>6. Schéma réseau</h2>
-            <p>
-                Réalisation du schéma de l'architecture réseau
-                avec Draw.io.
-            </p>
+        <div class="card-footer">
+            <div class="card-author">
+                <div class="avatar" style="background:#f59e0b;">SEC</div>
+                <div>
+                    <div class="author-name">Sécurité</div>
+                    <div class="author-role">Risques</div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="card">
-        <img src="image7.png" alt="">
-        <div class="content">
-            <span class="tag">Proxmox</span>
-            <h2>7. Configuration du Mini-PC</h2>
-            <p>
-                Installation de Proxmox et configuration
-                de l'adressage réseau.
-            </p>
-        </div>
-    </div>
+<!-- AJOUTER LES AUTRES CARTES ICI -->
 
-    <div class="card">
-        <img src="image8.png" alt="">
-        <div class="content">
-            <span class="tag">Commandes</span>
-            <h2>8. Commandes utiles</h2>
-            <p>
-                ip addr : afficher les paramètres réseau.
-                nano /etc/network/interfaces : modifier la configuration.
-            </p>
-        </div>
-    </div>
+</div>
+</div>
 
-    <div class="card">
-        <img src="image9.png" alt="">
-        <div class="content">
-            <span class="tag">Adressage</span>
-            <h2>9. Configuration IP</h2>
-            <p>
-                Attribution de l'adresse IP 192.168.2.2
-                et du masque 255.255.255.0.
-            </p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="image10.png" alt="">
-        <div class="content">
-            <span class="tag">Installation</span>
-            <h2>10. Installation de Proxmox</h2>
-            <p>
-                Démarrage du Mini-PC et vérification
-                du port COM utilisé.
-            </p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="image11.png" alt="">
-        <div class="content">
-            <span class="tag">Pare-feu</span>
-            <h2>11. Pare-feu Windows Defender</h2>
-            <p>
-                Désactivation du pare-feu afin de faciliter
-                les tests et la communication réseau.
-            </p>
-        </div>
-    </div>
-
-    <div class="card">
-        <img src="image12.png" alt="">
-        <div class="content">
-            <span class="tag">Configuration</span>
-            <h2>12. Paramètres réseau</h2>
-            <p>
-                Configuration de l'adresse IP,
-                du masque, de la passerelle et du DNS.
-            </p>
-        </div>
-    </div>
+<button class="nav-btn nav-next" id="next">&#8250;</button>
 
 </div>
 
-<a href="compte rendu1.pdf" target="_blank" class="pdf-btn">
-📄 Ouvrir le Compte-Rendu PDF
-</a>
+<div class="dots" id="dots"></div>
 
-<div class="pdf-container">
-
-    <h2>Aperçu du Compte-Rendu</h2>
-
-    <iframe src="compte rendu1.pdf"></iframe>
-
+<div class="cr-action-zone">
+    <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
+        📄 Ouvrir le Compte-Rendu PDF
+    </a>
 </div>
 
+<div class="cr-preview-container">
+    <h3 class="preview-title">Aperçu du Compte-Rendu :</h3>
+    <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
 </div>
+
+</section>
+
+<script>
+
+const track = document.getElementById('track');
+const cards = Array.from(track.querySelectorAll('.card-slide'));
+const dotsEl = document.getElementById('dots');
+const total = cards.length;
+
+let perPage = getPerPage();
+let pages = Math.ceil(total / perPage);
+let current = 0;
+
+function getPerPage() {
+    return window.innerWidth <= 768 ? 1 :
+           window.innerWidth <= 1100 ? 2 : 3;
+}
+
+function buildDots() {
+
+    dotsEl.innerHTML = '';
+
+    pages = Math.ceil(total / perPage);
+
+    for(let i=0;i<pages;i++){
+
+        const d = document.createElement('button');
+
+        d.className = 'dot' + (i===0 ? ' active' : '');
+
+        d.addEventListener('click',()=>goTo(i));
+
+        dotsEl.appendChild(d);
+    }
+}
+
+function goTo(page){
+
+    current = Math.max(0,Math.min(page,pages-1));
+
+    const gap = 20;
+
+    const cardW = cards[0].offsetWidth + gap;
+
+    track.style.transform =
+    'translateX(-'+(current*perPage*cardW)+'px)';
+
+    dotsEl.querySelectorAll('.dot').forEach((d,i)=>{
+        d.classList.toggle('active',i===current);
+    });
+}
+
+document.getElementById('prev')
+.addEventListener('click',()=>goTo(current-1));
+
+document.getElementById('next')
+.addEventListener('click',()=>goTo(current+1));
+
+buildDots();
+
+window.addEventListener('resize',()=>{
+    const newPer = getPerPage();
+
+    if(newPer!==perPage){
+
+        perPage=newPer;
+        current=0;
+
+        track.style.transform='translateX(0)';
+
+        buildDots();
+    }
+});
+
+</script>
 
 </body>
 </html>
