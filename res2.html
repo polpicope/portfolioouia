@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronologie - Réseau de Virtualisation pfSense</title>
+    <title>Chronologie - Infrastructure Virtualisée pfSense</title>
     <style>
         * {
             box-sizing: border-box;
@@ -241,7 +241,6 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            margin-bottom: 10px;
         }
 
         .dot {
@@ -259,6 +258,67 @@
             background: white;
             width: 22px;
             border-radius: 4px;
+        }
+
+        /* SECTION NOUVELLE : EXPLICATION DU COMPTE-RENDU AVEC IMAGES */
+        .analyse-document {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 18px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .analyse-title {
+            font-size: 1.4rem;
+            color: #223447;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #223447;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .etape-bloc {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #e5e7eb;
+            align-items: center;
+        }
+
+        .etape-bloc:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .etape-img {
+            width: 280px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid #d1d5db;
+            flex-shrink: 0;
+        }
+
+        .etape-texte {
+            flex: 1;
+        }
+
+        .etape-num {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #223447;
+            margin-bottom: 8px;
+        }
+
+        .etape-texte p {
+            font-size: 0.95rem;
+            color: #4b5563;
+            line-height: 1.6;
         }
 
         /* ACTIONS & VISUALISATION DU PDF */
@@ -288,60 +348,6 @@
             transform: translateY(-2px);
         }
 
-        /* SECTION EXPLICATION DU TRAVAIL EFFECTUÉ */
-        .cr-summary-box {
-            width: 100%;
-            max-width: 1100px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 18px;
-            padding: 25px;
-            margin-top: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-left: 6px solid #223447;
-        }
-
-        .cr-summary-box h3 {
-            color: #223447;
-            font-size: 1.25rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 8px;
-        }
-
-        .cr-summary-box p {
-            font-size: 0.95rem;
-            color: #374151;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .cr-summary-box ul {
-            list-style-type: none;
-            padding-left: 5px;
-        }
-
-        .cr-summary-box li {
-            font-size: 0.92rem;
-            color: #4b5563;
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-            line-height: 1.5;
-        }
-
-        .cr-summary-box li::before {
-            content: "➔";
-            position: absolute;
-            left: 0;
-            color: #223447;
-            font-weight: bold;
-        }
-
-        .cr-summary-box strong {
-            color: #111827;
-        }
-
         .cr-preview-container {
             width: 100%;
             max-width: 1100px;
@@ -349,7 +355,7 @@
             border-radius: 18px;
             padding: 24px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .preview-title {
@@ -374,6 +380,14 @@
             .card-slide {
                 flex: 0 0 calc(50% - 10px);
             }
+            .etape-bloc {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .etape-img {
+                width: 100%;
+                max-width: 400px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -384,18 +398,33 @@
                 font-size: 1rem;
                 padding: 0;
             }
-            .back-btn, .next-page-btn {
+            .back-btn {
+                left: 15px;
                 top: 75px;
                 transform: none;
             }
-            .back-btn { left: 15px; }
-            .next-page-btn { right: 15px; }
-            
-            .wrapper { padding: 30px 16px; }
-            .card-slide { flex: 0 0 100%; }
-            .carousel-outer { gap: 6px; }
-            .nav-btn { width: 32px; height: 32px; font-size: 18px; }
-            .cr-iframe { height: 450px; }
+            .next-page-btn {
+                right: 15px;
+                top: 75px;
+                transform: none;
+            }
+            .wrapper {
+                padding: 30px 16px;
+            }
+            .card-slide {
+                flex: 0 0 100%;
+            }
+            .carousel-outer {
+                gap: 6px;
+            }
+            .nav-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
+            }
+            .cr-iframe {
+                height: 450px;
+            }
         }
     </style>
 </head>
@@ -404,7 +433,7 @@
 
 <header class="header-page">
     <a href="res.html" class="back-btn">⬅ Retour</a>
-    <h1>Chronologie Technique : Réseau de Virtualisation pfSense</h1>
+    <h1>Chronologie Technique : Infrastructure Virtualisée pfSense</h1>
     <a href="re3.html" class="next-page-btn">Suivant ➡</a>
 </header>
 
@@ -418,16 +447,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Sommaire et objectifs" class="card-img">
-                        <span class="card-tag">Objectif</span>
+                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Câblage initial" class="card-img">
+                        <span class="card-tag">Étape 1</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">01. Objectif & Problématique</h2>
-                        <p class="card-desc">Conception d'un réseau sécurisé virtualisé. Résolution des contraintes d'isolation, routage et gestion des accès Internet.</p>
+                        <h2 class="card-title">01. Câblage Initial</h2>
+                        <p class="card-desc">Branchement du Mini-PC au réseau, interconnexion du routeur vers le switch, puis du switch vers la pfSense.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#1e3a8a;">OBJ</div>
-                                <div><div class="author-name">Problématique</div><div class="author-role">Virtualisation</div></div>
+                                <div class="avatar" style="background:#223447;">PHY</div>
+                                <div><div class="author-name">Physique</div><div class="author-role">Interconnexion</div></div>
                             </div>
                         </div>
                     </div>
@@ -435,16 +464,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Outils et Logiciels" class="card-img">
-                        <span class="card-tag">Matériel</span>
+                        <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Schéma réseau" class="card-img">
+                        <span class="card-tag">Étape 2</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">02. Ressources Matérielles & Logiciels</h2>
-                        <p class="card-desc">Inventaire requis : 2 machines utilisateurs, 1 routeur, 1 switch, 1 Mini-PC physique ainsi que Rufus, pfSense et Draw.io.</p>
+                        <h2 class="card-title">02. Topologie logique Draw.io</h2>
+                        <p class="card-desc">Conception de la cartographie logique du réseau pour structurer et valider l'isolation et le routage.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#f59e0b;">HW</div>
-                                <div><div class="author-name">Équipements</div><div class="author-role">Physique & Virtuel</div></div>
+                                <div class="avatar" style="background:#0ea5e9;">LOG</div>
+                                <div><div class="author-name">Draw.io</div><div class="author-role">Architecture</div></div>
                             </div>
                         </div>
                     </div>
@@ -452,33 +481,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Schéma Draw.io" class="card-img">
-                        <span class="card-tag">Câblage</span>
+                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Boot Rufus Proxmox" class="card-img">
+                        <span class="card-tag">Étape 3</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">03. Schéma de Liaison Réseau</h2>
-                        <p class="card-desc">Ordre des interconnexions physiques : Mini-PC au réseau global, routeur relié au switch, et switch raccordé à pfSense.</p>
+                        <h2 class="card-title">03. Support clé USB Rufus</h2>
+                        <p class="card-desc">Création de la clé USB d'installation bootable pour initialiser l'environnement système de l'infrastructure.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#0ea5e9;">TOP</div>
-                                <div><div class="author-name">Draw.io</div><div class="author-role">Topologie Réseau</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212326_.jpeg" alt="Amorçage du Mini PC" class="card-img">
-                        <span class="card-tag">Boot</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">04. Préparation & Boot du Mini-PC</h2>
-                        <p class="card-desc">Création de la clé USB d'installation. Amorçage physique en pressant de façon répétée la touche "Suppr" ou "F7" au démarrage.</p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#ef4444;">USB</div>
-                                <div><div class="author-name">BIOS / Boot</div><div class="author-role">Lancement système</div></div>
+                                <div class="avatar" style="background:#f59e0b;">ISO</div>
+                                <div><div class="author-name">Rufus</div><div class="author-role">Bootable USB</div></div>
                             </div>
                         </div>
                     </div>
@@ -487,15 +499,15 @@
                 <div class="card-slide">
                     <div class="card-img-wrap">
                         <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques COM" class="card-img">
-                        <span class="card-tag">Console</span>
+                        <span class="card-tag">Étape 4</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">05. Identification du Port COM</h2>
-                        <p class="card-desc">Ouverture du Gestionnaire de périphériques sous Windows pour identifier le port série de communication actif (Ports COM & LPT).</p>
+                        <h2 class="card-title">04. Détection du Port COM</h2>
+                        <p class="card-desc">Analyse dans le gestionnaire de périphériques Windows pour identifier le port de communication série (COM).</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#4b5563;">COM</div>
-                                <div><div class="author-name">Gestionnaire</div><div class="author-role">Liaison Série</div></div>
+                                <div class="avatar" style="background:#4b5563;">MGR</div>
+                                <div><div class="author-name">Windows</div><div class="author-role">Port Série</div></div>
                             </div>
                         </div>
                     </div>
@@ -503,16 +515,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Désactivation Defender" class="card-img">
-                        <span class="card-tag">Sécurité</span>
+                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Désactivation du Pare-feu" class="card-img">
+                        <span class="card-tag">Étape 5</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">06. Ajustement du Pare-feu Windows</h2>
-                        <p class="card-desc">Désactivation complète du Pare-feu Windows Defender pour autoriser l'interconnexion réseau et éviter le blocage des pings.</p>
+                        <h2 class="card-title">05. Désactivation Pare-feu</h2>
+                        <p class="card-desc">Désactivation du Pare-feu Windows Defender pour autoriser le trafic de test et éliminer les blocages de flux.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#7c3aed;">FW</div>
-                                <div><div class="author-name">Defender</div><div class="author-role">Flux Ouverts</div></div>
+                                <div class="avatar" style="background:#7c3aed;">SEC</div>
+                                <div><div class="author-name">Defender</div><div class="author-role">Ouverture Flux</div></div>
                             </div>
                         </div>
                     </div>
@@ -520,16 +532,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Interface Console pfSense" class="card-img">
-                        <span class="card-tag">pfSense</span>
+                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Menu principal pfSense" class="card-img">
+                        <span class="card-tag">Étape 6</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">07. Menu de Configuration pfSense</h2>
-                        <p class="card-desc">Accès au menu principal texte : assignation des interfaces réseaux (WAN/LAN), attribution des adresses IP et tests ping (Option 7).</p>
+                        <h2 class="card-title">06. Menu Console pfSense</h2>
+                        <p class="card-desc">Prise en main du terminal pfSense pour assigner les adresses d'interfaces (Option 2) et lancer des diagnostics ping.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#16a34a;">PFS</div>
-                                <div><div class="author-name">Console Menu</div><div class="author-role">Routage Actif</div></div>
+                                <div class="avatar" style="background:#16a34a;">CLI</div>
+                                <div><div class="author-name">pfSense</div><div class="author-role">Configuration IP</div></div>
                             </div>
                         </div>
                     </div>
@@ -543,23 +555,62 @@
 
     <div class="dots" id="dots"></div>
 
+    <div class="analyse-document">
+        <h3 class="analyse-title">Explication Chronologique du Travail Réalisé</h3>
+        
+        <div class="etape-bloc">
+            <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Étape 1" class="etape-img">
+            <div class="etape-texte">
+                <div class="etape-num">Étape 1 : Branchements Physiques et Câblage</div>
+                <p>La première action a consisté à réaliser l'interconnexion matérielle des équipements : raccorder le Mini PC au réseau général, relier le routeur au commutateur (switch), et assurer la liaison vers le boîtier hébergeant le système pfSense.</p>
+            </div>
+        </div>
+
+        <div class="etape-bloc">
+            <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Étape 2" class="etape-img">
+            <div class="etape-texte">
+                <div class="etape-num">Étape 2 : Modélisation de la Topologie Réseau sous Draw.io</div>
+                <p>Afin de structurer la logique de routage et d'étudier l'isolation des flux, un schéma informatique détaillé a été conçu sur Draw.io. Ce modèle sert de fil conducteur pour appliquer l'adressage IP sur les différentes interfaces de communication.</p>
+            </div>
+        </div>
+
+        <div class="etape-bloc">
+            <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Étape 3" class="etape-img">
+            <div class="etape-texte">
+                <div class="etape-num">Étape 3 : Création de la Clé USB d’Installation via Rufus</div>
+                <p>Pour pouvoir injecter et installer le système sur la machine cible, l'utilitaire Rufus a été configuré sur un poste d'administration afin de flasher proprement l'image système bootable sur le support de stockage flash amovible.</p>
+            </div>
+        </div>
+
+        <div class="etape-bloc">
+            <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Étape 4" class="etape-img">
+            <div class="etape-texte">
+                <div class="etape-num">Étape 4 : Identification du Port Console (COM)</div>
+                <p>Au démarrage du Mini-PC (en sollicitant les touches d'accès BIOS <kbd>Suppr</kbd> ou <kbd>F7</kbd>), il a fallu analyser le "Gestionnaire de périphériques" de Windows sous l'onglet "Ports (COM et LPT)" pour identifier précisément le numéro de port série physique actif utilisé pour le contrôle console.</p>
+            </div>
+        </div>
+
+        <div class="etape-bloc">
+            <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Étape 5" class="etape-img">
+            <div class="etape-texte">
+                <div class="etape-num">Étape 5 : Désactivation du Pare-feu local Windows Defender</div>
+                <p>Afin de s'assurer que les flux de test (requêtes ICMP / Pings) transitent librement sans filtrage intempestif entre la machine hôte et la passerelle, une désactivation complète des règles du Pare-feu Windows Defender a été opérée.</p>
+            </div>
+        </div>
+
+        <div class="etape-bloc">
+            <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Étape 6" class="etape-img">
+            <div class="etape-texte">
+                <div class="etape-num">Étape 6 : Configuration des adresses IP et Tests dans le menu pfSense</div>
+                <p>Enfin, l'accès au menu principal en mode texte de pfSense a permis d'assigner l'adresse de passerelle LAN fixe via l'<strong>Option 2 (Set interface(s) IP address)</strong>, d'activer la distribution dynamique DHCP et d'exécuter des diagnostics de continuité réseau grâce à l'<strong>Option 7 (Ping host)</strong>.</p>
+            </div>
+        </div>
+    </div>
+
     <div class="cr-action-zone">
         <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
             👁️ Ouvrir le Compte-Rendu PDF en plein écran
         </a>
-    </div>
-
-    <div class="cr-summary-box">
-        <h3>Résumé des Actions Techniques Réalisées</h3>
-        <p>Sur la base de votre document <strong>compte rendu1.pdf</strong>, voici les étapes d'ingénierie réseau et système que vous avez configurées :</p>
-        <ul>
-            <li><strong>Définition du Besoin :</strong> Vous avez modélisé la problématique de routage en environnement virtuel afin d'isoler les flux de sécurité et préserver l'accès Internet des utilisateurs.</li>
-            <li><strong>Architecture & Topologie :</strong> À l'aide de <em>Draw.io</em>, vous avez conçu le plan de câblage structurant les liaisons physiques (Mini-PC au réseau, routeur vers le switch, puis raccordement vers l'instance pfSense).</li>
-            <li><strong>Amorçage Système :</strong> Vous avez configuré une clé USB bootable via <em>Rufus</em> embarquant l'image ISO de Proxmox, puis forcé le Mini-PC à démarrer dessus en intervenant directement sur le BIOS (touches <kbd>Suppr</kbd> / <kbd>F7</kbd>).</li>
-            <li><strong>Liaison Console Locale :</strong> Via le <em>Gestionnaire de périphériques</em> Windows, vous avez localisé le port série matériel <strong>Ports (COM & LPT)</strong> actif permettant de piloter l'équipement en liaison brute.</li>
-            <li><strong>Ouverture des Flux :</strong> Afin d'écarter tout blocage réseau lors des tests d'interconnexion (notamment les requêtes ICMP/Ping), vous avez désactivé complètement le <em>Pare-feu Windows Defender</em> pour les profils de réseaux privés et publics.</li>
-            <li><strong>Adressage d'Interface :</strong> Vous avez configuré manuellement les propriétés TCP/IPv4 de la carte Ethernet Windows (IP <code>192.168.11.1</code>) puis basculé sur la console texte de <em>pfSense</em> (Options 1 et 2) pour attribuer de manière stable la passerelle et la plage réseau du LAN (<code>192.168.10.1/24</code>).</li>
-        </ul>
     </div>
 
     <div class="cr-preview-container">
