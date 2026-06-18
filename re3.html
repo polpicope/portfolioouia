@@ -4,295 +4,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronologie - Routage Inter-VLAN & WAN Cisco</title>
+    <title>Compte Rendu - Infrastructure Réseau Virtualisée, Sécurisée et Segmentée</title>
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --bg-overlay: rgba(15, 23, 42, 0.88);
+            --card-bg: #ffffff;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --bg-tech: #f8fafc;
         }
 
         body {
             min-height: 100vh;
-            background-color: #1e293b; /* Même fond de couleur ardoise / bleu nuit */
+            background: url("pp.jpg") no-repeat center center fixed;
+            background-size: cover;
             position: relative;
+            color: var(--text-main);
         }
 
-        /* HEADER UNIQUE */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: var(--bg-overlay);
+            z-index: -1;
+        }
+
+        /* HEADER */
         .header-page {
-            background: #223447;
+            background: #1e293b;
             padding: 18px 30px;
             position: sticky;
             top: 0;
             z-index: 100;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,.4);
         }
 
         .header-page h1 {
-            color: white;
+            color: #fff;
             font-size: 1.4rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            padding: 0 140px; 
+            font-weight: 600;
         }
 
-        /* STYLE DES BOUTONS DU HEADER */
-        .back-btn, .next-page-btn {
+        .back-btn, .next-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             text-decoration: none;
-            color: #e5e7eb;
-            border: 1px solid #e5e7eb;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: background 0.3s, color 0.3s, border-color 0.3s;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: #334155;
+            transition: background 0.3s, color 0.3s;
         }
 
         .back-btn { left: 25px; }
-        .next-page-btn { right: 25px; }
+        .next-btn { right: 25px; }
 
-        .back-btn:hover, .next-page-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .back-btn:hover, .next-btn:hover {
+            background: var(--primary);
             color: white;
-            border-color: white;
+            border-color: var(--primary);
         }
 
-        /* CAROUSEL CONTENU */
+        /* WRAPPER */
         .wrapper {
-            min-height: calc(100vh - 80px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 50px 40px;
-            gap: 24px;
+            padding: 40px 20px;
+            gap: 35px;
         }
 
+        /* CAROUSEL CONTENUR OUTER */
         .carousel-outer {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .carousel-viewport {
-            flex: 1;
             overflow: hidden;
+            flex: 1;
+            padding: 10px 5px;
         }
 
         .carousel-track {
             display: flex;
             gap: 20px;
-            transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
+            transition: transform 0.5s cubic-bezier(.25, .8, .25, 1);
         }
 
+        /* LES CARTES DU CAROUSEL */
         .card-slide {
             flex: 0 0 calc(33.333% - 14px);
-            background: #ffffff;
-            border-radius: 18px;
+            background: var(--card-bg);
+            border-radius: 14px;
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,.25);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .card-slide:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+            transform: translateY(-2px);
         }
 
         .card-img-wrap {
             position: relative;
             width: 100%;
-            height: 190px;
+            height: 195px;
+            background: #0f172a;
             overflow: hidden;
-            background: #1f2937;
         }
 
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .card-slide:hover .card-img {
-            transform: scale(1.05);
         }
 
         .card-tag {
             position: absolute;
             top: 12px;
             left: 12px;
-            background: rgba(255, 255, 255, 0.92);
-            color: #1e3a5f;
+            background: var(--primary);
+            color: white;
             font-size: 11px;
             font-weight: 600;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
-            letter-spacing: 0.6px;
             text-transform: uppercase;
         }
 
         .card-body {
-            padding: 18px 18px 16px;
+            padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
         }
 
         .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #111827;
+            font-size: 1.1rem;
             margin-bottom: 10px;
-            line-height: 1.4;
+            color: var(--text-main);
+            font-weight: 600;
         }
 
         .card-desc {
-            font-size: 0.875rem;
-            color: #6b7280;
-            line-height: 1.6;
-            flex: 1;
-            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.55;
         }
 
-        .card-astuce {
-            background: #f0f9ff;
-            border-left: 3px solid #0ea5e9;
-            border-radius: 0 8px 8px 0;
-            padding: 8px 12px;
-            font-size: 0.82rem;
-            color: #0369a1;
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .astuce-label {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 2px;
-            font-size: 0.82rem;
-        }
-
-        .card-astuce code {
-            background: #e0f2fe;
-            padding: 1px 5px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8rem;
-        }
-
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid #f3f4f6;
-            padding-top: 14px;
-        }
-
-        .card-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 11px;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .author-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: #111827;
-        }
-
-        .author-role {
-            font-size: 11px;
-            color: #9ca3af;
-            margin-top: 1px;
-        }
-
-        /* NAVIGATION INTERNE CAROUSEL */
+        /* NAVIGATION CAROUSEL */
         .nav-btn {
-            background: white;
-            border: 1px solid #e5e7eb;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            border: 1px solid var(--border-color);
+            background: white;
+            cursor: pointer;
+            font-size: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            font-size: 22px;
-            color: #374151;
-            flex-shrink: 0;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background 0.3s, color 0.3s;
         }
 
         .nav-btn:hover {
-            background: #f9fafb;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            background: var(--primary);
+            color: white;
         }
 
         .dots {
             display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 8px;
+            margin-top: -10px;
         }
 
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.35);
             border: none;
             cursor: pointer;
-            transition: background 0.3s, width 0.3s, border-radius 0.3s;
-            padding: 0;
+            transition: all 0.3s ease;
         }
 
         .dot.active {
-            background: white;
             width: 22px;
-            border-radius: 4px;
+            border-radius: 5px;
+            background: var(--primary);
         }
 
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+        /* BLOC TECHNIQUE ANALYSE & CONFIGURATION */
+        .analyse-document-bloc {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+        }
 
-        /* RESPONSIVE */
+        .analyse-title {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .problematique-box {
+            background: #f1f5f9;
+            border-left: 5px solid var(--primary);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+        }
+
+        .problematique-box h4 {
+            font-size: 1.05rem;
+            color: #1e293b;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .problematique-box p {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .etape-item {
+            display: flex;
+            gap: 35px;
+            margin-bottom: 40px;
+            padding-bottom: 35px;
+            border-bottom: 1px dashed #cbd5e1;
+            align-items: flex-start;
+        }
+
+        .etape-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .etape-visuel {
+            width: 360px;
+            flex-shrink: 0;
+        }
+
+        .etape-visuel img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.18);
+            border: 1px solid var(--border-color);
+        }
+
+        .etape-contenu {
+            flex: 1;
+        }
+
+        .etape-header-titre {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .etape-description {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.65;
+        }
+
+        .etape-description ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .etape-description li {
+            margin-bottom: 4px;
+        }
+
+        /* CONFIGURATION PREVIEW PDF */
+        .cr-preview-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .cr-preview-container h3 {
+            font-size: 1.15rem;
+            margin-bottom: 18px;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .cr-iframe {
+            width: 100%;
+            height: 750px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        /* RESPONSIVE DESIGN */
         @media (max-width: 1100px) {
             .card-slide { flex: 0 0 calc(50% - 10px); }
+            .etape-item { flex-direction: column; }
+            .etape-visuel { width: 100%; max-width: 500px; margin: 0 auto; }
         }
 
         @media (max-width: 768px) {
-            .header-page { padding: 20px 10px 110px; }
-            .header-page h1 { font-size: 1rem; padding: 0; }
-            .back-btn { left: 15px; top: 75px; transform: none; }
-            .next-page-btn { right: 15px; top: 75px; transform: none; }
-            .wrapper { padding: 30px 16px; }
+            .header-page { padding: 20px 15px 100px; }
+            .header-page h1 { font-size: 1.1rem; }
+            .back-btn, .next-btn { top: 70px; transform: none; }
+            .back-btn { left: 15px; }
+            .next-btn { right: 15px; }
+            .wrapper { padding: 25px 15px; }
             .card-slide { flex: 0 0 100%; }
-            .carousel-outer { gap: 6px; }
-            .nav-btn { width: 32px; height: 32px; font-size: 18px; }
+            .cr-iframe { height: 500px; }
         }
     </style>
 </head>
@@ -300,220 +360,212 @@
 <body>
 
 <header class="header-page">
-    <a href="res2.html" class="back-btn">⬅ Retour</a>
-    <h1>Compte Rendu : Routage Inter-VLAN & Architecture WAN</h1>
-    <a href="veille.html" class="next-page-btn">Suivant ➡</a>
+    <a href="res.html" class="back-btn">⬅ Retour</a>
+    <h1>Infrastructure Réseau Virtualisée, Sécurisée & Segmentée</h1>
+    <a href="res3.html" class="next-btn">Suivant ➡</a>
 </header>
 
 <section class="wrapper">
 
     <div class="carousel-outer">
-        <button class="nav-btn nav-prev" id="prev">&#8249;</button>
+        <button class="nav-btn" id="prev">‹</button>
 
         <div class="carousel-viewport">
             <div class="carousel-track" id="track">
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_2738.jpeg" alt="Topologie Réseau Initiale" class="card-img">
-                        <span class="card-tag">Topologie</span>
+                        <img src="image1.png" class="card-img" alt="Objectifs">
+                        <span class="card-tag">Contexte</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">01. Problématique & Objectif</h2>
-                        <p class="card-desc">L'objectif est d'assurer et de garantir un routage inter-VLAN sécurisé entre deux réseaux locaux virtuels distincts via un routeur unique (Cisco 2911) and un switch (2950 T).</p>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#0284c7;">Cisco</div>
-                                <div><div class="author-name">Routage</div><div class="author-role">Inter-VLAN</div></div>
-                            </div>
-                        </div>
+                        <h2 class="card-title">1. Objectifs Généraux</h2>
+                        <p class="card-desc">Déployer une infrastructure complète intégrant segmentation VLAN, pare-feu (pfSense), serveurs de fichiers (Samba/FTP) et gestion de parc GLPI.</p>
                     </div>
                 </div>
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_2739.jpeg" alt="Création des VLAN" class="card-img">
-                        <span class="card-tag">Switch</span>
+                        <img src="image2.png" class="card-img" alt="Problématique">
+                        <span class="card-tag">Analyse</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">02. Configuration des VLANs</h2>
-                        <p class="card-desc">Initialisation et création des VLAN 10 et 11 sur le switch Cisco. Attribution des noms respectifs et vérification de la base de données flash.</p>
-                       
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#16a34a;">SW</div>
-                                <div><div class="author-name">Cisco 2950</div><div class="author-role">VLAN Database</div></div>
-                            </div>
-                        </div>
+                        <h2 class="card-title">2. Problématique Métier</h2>
+                        <p class="card-desc">Comment mettre en place une infrastructure réseau virtualisée, sécurisée et segmentée pour répondre aux besoins d'une entreprise moderne ?</p>
                     </div>
                 </div>
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_2740.jpeg" alt="Assignation des ports" class="card-img">
-                        <span class="card-tag">Interfaces</span>
+                        <img src="image3.png" class="card-img" alt="Risques">
+                        <span class="card-tag">Sécurité</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">03. Assignation des Switchports</h2>
-                        <p class="card-desc">Configuration des ports d'accès du switch pour lier chaque interface physique à son VLAN d'appartenance à l'aide de la commande switchport access.</p>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#f59e0b;">ACC</div>
-                                <div><div class="author-name">Access Mode</div><div class="author-role">Ports Terminaux</div></div>
-                            </div>
-                        </div>
+                        <h2 class="card-title">3. Matrice de Risques</h2>
+                        <p class="card-desc">Analyse fine des impacts : accès non autorisés inter-réseaux, rupture d'accès Internet, défauts de routage inter-VLAN ou coupures du bridge de communication.</p>
                     </div>
                 </div>
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_2742.jpeg" alt="Configuration du Mode Trunk" class="card-img">
-                        <span class="card-tag">Trunking</span>
+                        <img src="image4.png" class="card-img" alt="Matériel">
+                        <span class="card-tag">Équipements</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">04. Activation du Mode Trunk</h2>
-                        <p class="card-desc">Configuration de la liaison montante vers le routeur. Le port d'interconnexion passe en mode Trunk afin de transporter les trames étiquetées (dot1Q) de tous les VLANs.</p>
-                       
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#7c3aed;">TRK</div>
-                                <div><div class="author-name">802.1Q</div><div class="author-role">Agrégation Flux</div></div>
-                            </div>
-                        </div>
+                        <h2 class="card-title">4. Matériel Éligible</h2>
+                        <p class="card-desc">Exploitation de 3 postes utilisateurs, d'environnements virtualisés (Windows Server, Linux Debian/Ubuntu), d'un commutateur L3 et de l'hyperviseur Proxmox VE.</p>
                     </div>
                 </div>
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_2745.jpeg" alt="Sous-interfaces Routeur" class="card-img">
-                        <span class="card-tag">Routeur</span>
+                        <img src="image5.png" class="card-img" alt="Répartition">
+                        <span class="card-tag">Équipe</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">05. Sous-Interfaces (Router-on-a-Stick)</h2>
-                        <p class="card-desc">Création des sous-interfaces logiques sur l'interface GigabithEthernet du routeur (g0/1.10 et g0/1.11) pour encapsuler le trafic de chaque VLAN.</p>
-                        <div class="card-astuce"><span class="astuce-label">💡 Astuce</span> L'encapsulation se fait via <code>encapsulation dot1Q [ID_VLAN]</code> avant de fixer l'IP.</div>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#ea580c;">RTR</div>
-                                <div><div class="author-name">Sub-interfaces</div><div class="author-role">Cisco 2911</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="IMG_2746.jpeg" alt="Sauvegarde de la configuration" class="card-img">
-                        <span class="card-tag">Mémoire</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">06. Sauvegarde & Écriture RAM</h2>
-                        <p class="card-desc">Validation et écriture permanente des fichiers de configuration système de la mémoire volatile (Running-Config) vers la NVRAM (Startup-Config).</p>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#4b5563;">MEM</div>
-                                <div><div class="author-name">NVRAM</div><div class="author-role">Write Memory</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="o.jpg" alt="Configuration Inter-Routeurs WAN" class="card-img">
-                        <span class="card-tag">WAN</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">07. Interconnexion & Liaison WAN</h2>
-                        <p class="card-desc">Configuration des adresses réseaux WAN pour lier le routeur local à un second équipement distant via des réseaux de masques d'accord <code>255.255.255.252 (/30)</code>.</p>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#0891b2;">WAN</div>
-                                <div><div class="author-name">Subnetting /30</div><div class="author-role">Réseau Distant</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="p.jpg" alt="Validation et Test de Connexion Ping" class="card-img">
-                        <span class="card-tag">Validation</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">08. Validation & Tests de Continuité</h2>
-                        <p class="card-desc">Vérification finale du bon fonctionnement de l'infrastructure par des requêtes d'échos ICMP (Ping). Les tests valident le routage inter-VLAN et l'accès au WAN.</p>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#dc2626;">ICMP</div>
-                                <div><div class="author-name">Test Ping</div><div class="author-role">Réseau Opérationnel</div></div>
-                            </div>
-                        </div>
+                        <h2 class="card-title">5. Tâches Attribuées</h2>
+                        <p class="card-desc">Distribution des rôles : Bruno (pfSense, Switch L3, Windows Server), David (Proxmox, Samba, DNS, WAN) et Idir (GLPI, Ubuntu, DHCP, Compte-rendu).</p>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <button class="nav-btn nav-next" id="next">&#8250;</button>
+        <button class="nav-btn" id="next">›</button>
     </div>
 
     <div class="dots" id="dots"></div>
 
+    <div class="analyse-document-bloc">
+        <h3 class="analyse-title">Déploiement et validations de l'Infrastructure</h3>
+
+        <div class="problematique-box">
+            <h4>Analyse d'Impact Réseau & Isolement</h4>
+            <p>Une mauvaise isolation ou un routage inter-VLAN mal configuré au niveau du commutateur central peut amener à des failles d'accès non autorisés ou bloquer totalement la communication et la livraison des configurations DHCP/DNS aux serveurs et clients.</p>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="image1.png" alt="Topologie Réseau complète Draw.io">
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">Étape 1 : Topologie Documentaire & Câblage</div>
+                <div class="etape-description">
+                    <p>Modélisation de l'infrastructure sur <strong>Draw.io</strong> pour ordonner la segmentation. Le plan structure la passerelle 192.168.24.254, le cluster Proxmox (192.168.24.1), le pare-feu pfSense, ainsi que la segmentation logique entre le VLAN Serveur et le VLAN Utilisateurs.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="image2.png" alt="Installation Proxmox sur Mini-PC GMKtec">
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">Étape 2 : Initialisation de l'Hyperviseur Proxmox</div>
+                <div class="etape-description">
+                    <p>Déploiement du système bare-metal sur Mini-PC <strong>GMKtec</strong> à l'aide d'une clé d'installation bootable ciblée via le menu BIOS (F7). Configuration de l'interface réseau d'administration <code>nic0</code> avec l'IP fixe <code>192.168.24.1/24</code> et redirection DNS vers <code>8.8.8.8</code>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="image3.png" alt="Test de validation ping et configuration switch">
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">Étape 3 : Interconnexion & Configuration du Switch L3</div>
+                <div class="etape-description">
+                    <p>Validation opérationnelle de la liaison locale. Les tests d'échanges de paquets ICMP (Ping) valident une connectivité parfaite sans perte (0% loss) entre la passerelle pfSense et le commutateur de niveau 3, garantissant l'établissement du routage inter-VLAN.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="etape-item">
+            <div class="etape-visuel">
+                <img src="image4.png" alt="Déploiement de GLPI et services Linux">
+            </div>
+            <div class="etape-contenu">
+                <div class="etape-header-titre">Étape 4 : Intégration de GLPI & Services Fichiers</div>
+                <div class="etape-description">
+                    <p>Déploiement de l'environnement de gestion d'inventaire <strong>GLPI 11</strong> sous socle Apache/MariaDB et automatisation de la base via console CLI. Parallèlement, installation et écriture du fichier de configuration <code>smb.conf</code> pour l'activation des partages Samba de l'entreprise.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cr-preview-container">
+        <h3>Aperçu du Compte Rendu (Document Source)</h3>
+        <iframe class="cr-iframe" src="compte rendu3.pdf"></iframe>
+    </div>
+
 </section>
 
 <script>
-    const track = document.getElementById('track');
-    const cards = Array.from(track.querySelectorAll('.card-slide'));
-    const dotsEl = document.getElementById('dots');
-    const total = cards.length;
-    let perPage = getPerPage();
-    let pages = Math.ceil(total / perPage);
-    let current = 0;
+const track = document.getElementById("track");
+const cards = document.querySelectorAll(".card-slide");
+const dotsContainer = document.getElementById("dots");
 
-    function getPerPage() {
-        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
-    }
+let index = 0;
+let perPage = 3;
 
-    function buildDots() {
-        dotsEl.innerHTML = '';
-        pages = Math.ceil(total / perPage);
-        for (let i = 0; i < pages; i++) {
-            const d = document.createElement('button');
-            d.className = 'dot' + (i === 0 ? ' active' : '');
-            d.setAttribute('aria-label', 'Page ' + (i + 1));
-            d.addEventListener('click', () => goTo(i));
-            dotsEl.appendChild(d);
-        }
-    }
+function updatePerPage() {
+    if (window.innerWidth <= 768) perPage = 1;
+    else if (window.innerWidth <= 1100) perPage = 2;
+    else perPage = 3;
+}
 
-    function goTo(page) {
-        current = Math.max(0, Math.min(page, pages - 1));
-        const gap = 20;
-        const cardW = cards[0].offsetWidth + gap;
-        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
-        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    }
+function update() {
+    const cardWidth = cards[0].offsetWidth + 20;
+    track.style.transform = `translateX(-${index * cardWidth}px)`;
 
-    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
-
-    buildDots();
-
-    window.addEventListener('resize', () => {
-        const newPer = getPerPage();
-        if (newPer !== perPage) {
-            perPage = newPer;
-            current = 0;
-            track.style.transform = 'translateX(0)';
-            buildDots();
-        }
+    document.querySelectorAll(".dot").forEach((d, i) => {
+        d.classList.toggle("active", i === index);
     });
+}
+
+function buildDots() {
+    dotsContainer.innerHTML = "";
+    const totalPages = cards.length - perPage + 1;
+
+    if (totalPages <= 0) return;
+
+    for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement("button");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+
+        dot.addEventListener("click", () => {
+            index = i;
+            update();
+        });
+
+        dotsContainer.appendChild(dot);
+    }
+}
+
+document.getElementById("prev").onclick = () => {
+    index = Math.max(0, index - 1);
+    update();
+};
+
+document.getElementById("next").onclick = () => {
+    const maxIndex = cards.length - perPage;
+    index = Math.min(maxIndex, index + 1);
+    update();
+};
+
+window.addEventListener("resize", () => {
+    updatePerPage();
+    index = 0;
+    buildDots();
+    update();
+});
+
+// Init
+updatePerPage();
+buildDots();
+update();
 </script>
 
 </body>
