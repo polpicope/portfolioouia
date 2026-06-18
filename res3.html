@@ -436,61 +436,6 @@
 
     <div class="dots" id="dots"></div>
 
-    <div class="analyse-document-bloc">
-        <h3 class="analyse-title">Déploiement et validations de l'Infrastructure</h3>
-
-        <div class="problematique-box">
-            <h4>Analyse d'Impact Réseau & Isolement</h4>
-            <p>Une mauvaise isolation ou un routage inter-VLAN mal configuré au niveau du commutateur central peut amener à des failles d'accès non autorisés ou bloquer totalement la communication et la livraison des configurations DHCP/DNS aux serveurs et clients.</p>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="image1.png" alt="Topologie Réseau complète Draw.io">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">Étape 1 : Topologie Documentaire & Câblage</div>
-                <div class="etape-description">
-                    <p>Modélisation de l'infrastructure sur <strong>Draw.io</strong> pour ordonner la segmentation. Le plan structure la passerelle 192.168.24.254, le cluster Proxmox (192.168.24.1), le pare-feu pfSense, ainsi que la segmentation logique entre le VLAN Serveur et le VLAN Utilisateurs.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="image2.png" alt="Installation Proxmox sur Mini-PC GMKtec">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">Étape 2 : Initialisation de l'Hyperviseur Proxmox</div>
-                <div class="etape-description">
-                    <p>Déploiement du système bare-metal sur Mini-PC <strong>GMKtec</strong> à l'aide d'une clé d'installation bootable ciblée via le menu BIOS (F7). Configuration de l'interface réseau d'administration <code>nic0</code> avec l'IP fixe <code>192.168.24.1/24</code> et redirection DNS vers <code>8.8.8.8</code>.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="image3.png" alt="Test de validation ping et configuration switch">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">Étape 3 : Interconnexion & Configuration du Switch L3</div>
-                <div class="etape-description">
-                    <p>Validation opérationnelle de la liaison locale. Les tests d'échanges de paquets ICMP (Ping) valident une connectivité parfaite sans perte (0% loss) entre la passerelle pfSense et le commutateur de niveau 3, garantissant l'établissement du routage inter-VLAN.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="etape-item">
-            <div class="etape-visuel">
-                <img src="image4.png" alt="Déploiement de GLPI et services Linux">
-            </div>
-            <div class="etape-contenu">
-                <div class="etape-header-titre">Étape 4 : Intégration de GLPI & Services Fichiers</div>
-                <div class="etape-description">
-                    <p>Déploiement de l'environnement de gestion d'inventaire <strong>GLPI 11</strong> sous socle Apache/MariaDB et automatisation de la base via console CLI. Parallèlement, installation et écriture du fichier de configuration <code>smb.conf</code> pour l'activation des partages Samba de l'entreprise.</p>
-                </div>
-            </div>
-        </div>
 
     </div>
 
