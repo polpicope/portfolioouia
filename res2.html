@@ -100,6 +100,7 @@
         .carousel-viewport {
             flex: 1;
             overflow: hidden;
+            border-radius: 18px;
         }
 
         .carousel-track {
@@ -179,32 +180,6 @@
             line-height: 1.6;
             flex: 1;
             margin-bottom: 10px;
-        }
-
-        .card-astuce {
-            background: #f0f9ff;
-            border-left: 3px solid #0ea5e9;
-            border-radius: 0 8px 8px 0;
-            padding: 8px 12px;
-            font-size: 0.82rem;
-            color: #0369a1;
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .astuce-label {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 2px;
-            font-size: 0.8rem;
-        }
-
-        .card-astuce code {
-            background: #e0f2fe;
-            padding: 1px 5px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8rem;
         }
 
         .card-footer {
@@ -293,12 +268,12 @@
             border-radius: 4px;
         }
 
-        /* AJOUTS DES STYLES DE L'APERÇU */
+        /* ACTIONS & VISUALISATION DU PDF */
         .cr-action-zone {
             width: 100%;
             max-width: 1100px;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .cr-view-btn {
@@ -312,7 +287,7 @@
             font-size: 15px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .cr-view-btn:hover {
@@ -326,7 +301,7 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 18px;
             padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             margin-top: 10px;
         }
 
@@ -356,7 +331,7 @@
 
         @media (max-width: 768px) {
             .header-page {
-                padding: 20px 10px 110px; /* Espace augmenté pour empiler les boutons proprement */
+                padding: 20px 10px 110px; /* Espace pour empiler les boutons proprement */
             }
             .header-page h1 {
                 font-size: 1rem;
@@ -417,7 +392,6 @@
                     <div class="card-body">
                         <h2 class="card-title">01. Objectif du Projet</h2>
                         <p class="card-desc">Déploiement d'une infrastructure virtualisée complète sous Proxmox VE intégrant OPNsense, Samba, FTP, GLPI et Windows Server 2022.</p>
-                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#6366f1;">PVE</div>
@@ -435,7 +409,6 @@
                     <div class="card-body">
                         <h2 class="card-title">02. Switch Cisco 2960</h2>
                         <p class="card-desc">Remise en service du switch bloqué en mode ROMMON et démarrage manuel de l'image IOS depuis la mémoire flash.</p>
-                       
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#f59e0b; color:#1c1917;">IOS</div>
@@ -453,7 +426,6 @@
                     <div class="card-body">
                         <h2 class="card-title">02b. Erreurs de Commandes Switch</h2>
                         <p class="card-desc">Visualisation des erreurs de saisie "Unknown cmd" lors des tentatives de commandes IOS standard (en, exit, end) dans le mode boot.</p>
-                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#4b5563;">TTY</div>
@@ -471,7 +443,6 @@
                     <div class="card-body">
                         <h2 class="card-title">03. Bridges Réseau Proxmox</h2>
                         <p class="card-desc">Création des bridges vmbr0 (WAN) et vmbr1 (LAN) afin de relier les VMs au réseau physique.</p>
-                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#0ea5e9;">BR</div>
@@ -489,7 +460,6 @@
                     <div class="card-body">
                         <h2 class="card-title">04. Déploiement OPNsense</h2>
                         <p class="card-desc">Création de la VM OPNsense avec deux interfaces réseau connectées aux bridges vmbr0 et vmbr1.</p>
-                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#16a34a;">OPN</div>
@@ -507,7 +477,6 @@
                     <div class="card-body">
                         <h2 class="card-title">05. Configuration WAN / LAN</h2>
                         <p class="card-desc">Assignation des interfaces em0 (WAN) et em1 (LAN), puis définition de la passerelle LAN à 192.168.1.254.</p>
-                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#7c3aed;">LAN</div>
@@ -525,7 +494,6 @@
                     <div class="card-body">
                         <h2 class="card-title">07. Serveur FTP (vsftpd)</h2>
                         <p class="card-desc">Résolution du crash de connexion <code>500 OOPS: refusing to run with writable root inside chroot()</code> lors de la tentative d'accès ftpuser.</p>
-                        
                         <div class="card-footer">
                             <div class="card-author">
                                 <div class="avatar" style="background:#0891b2;">FTP</div>
@@ -545,7 +513,7 @@
 
     <div class="cr-action-zone">
         <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
-            👁️ Ouvrir le Compte-Rendu PDF en plein écran 
+            👁️ Ouvrir le Compte-Rendu PDF en plein écran
         </a>
     </div>
 
