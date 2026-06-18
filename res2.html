@@ -1,8 +1,3 @@
-Je vous prie de m'excuser, j'ai surchargé le code précédent avec trop d'éléments, ce qui a dû casser l'affichage de votre page.
-
-Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il contient votre carrousel d'origine et intègre, juste au-dessus de l'aperçu du compte-rendu, le **bloc descriptif exact** détaillant les captures d'écran et les manipulations que vous avez consignées dans `compte rendu1.pdf`.
-
-```html
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -188,7 +183,7 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
             border-radius: 4px;
         }
 
-        /* BLOC DEMANDÉ : ANALYSE DU COMPTE RENDU 1 AVEC IMAGES ET EXPLICATIONS */
+        /* BLOC DEMANDÉ : PLACÉ AU-DESSUS DE L'APERÇU */
         .analyse-document-bloc {
             width: 100%;
             max-width: 1100px;
@@ -254,7 +249,7 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
             line-height: 1.6;
         }
 
-        /* CONTENEUR PREVIEW PDF */
+        /* PREVIEW PDF */
         .cr-preview-container {
             width: 100%;
             max-width: 1100px;
@@ -400,7 +395,7 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
 
 
     <div class="analyse-document-bloc">
-        <h3 class="analyse-title">Explications Techniques du Compte-Rendu N°1</h3>
+        <h3 class="analyse-title">Explications Techniques issues du Compte-Rendu N°1</h3>
         
         <div class="etape-item">
             <div class="etape-visuel">
@@ -409,7 +404,7 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
             <div class="etape-contenu">
                 <div class="etape-header-titre">1. Câblage Matériel Initial</div>
                 <p class="etape-description">
-                    Cette partie détaille la mise en place physique de la maquette. Vous y expliquez l'ordre des interconnexions : brancher le Mini-PC directement au réseau principal, relier le routeur au commutateur (switch), et raccorder ce dernier à l'environnement pfSense.
+                    Cette partie détaille la mise en place physique de la maquette informatique. Le document consigne l'ordre d'interconnexion : brancher le Mini-PC au réseau d'infrastructure, relier le routeur au switch, et connecter le switch à l'interface pfSense.
                 </p>
             </div>
         </div>
@@ -421,7 +416,7 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
             <div class="etape-contenu">
                 <div class="etape-header-titre">2. Cartographie Réseau Logique</div>
                 <p class="etape-description">
-                    Utilisation de l'outil <strong>Draw.io</strong> pour schématiser l'architecture. Cette étape permet de visualiser la séparation des flux et de préparer l'attribution des adresses réseaux pour garantir l'isolation et le routage inter-VLAN.
+                    Schématisation complète de l'architecture réalisée sur <strong>Draw.io</strong>. Cette étape sert à cartographier les blocs d'adresses, à concevoir l'isolation du réseau et à préparer l'organisation du routage global.
                 </p>
             </div>
         </div>
@@ -431,9 +426,9 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
                 <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Rufus">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">3. Préparation de la Clé USB et Boot du Mini-PC</div>
+                <div class="etape-header-titre">3. Utilitaire Rufus et Amorçage du Système</div>
                 <p class="etape-description">
-                    Configuration de l'utilitaire <strong>Rufus</strong> pour créer un média d'installation bootable. Vous décrivez ensuite la méthode pour forcer le Mini-PC à démarrer sur la clé en appuyant à plusieurs reprises sur la touche <kbd>Suppr</kbd> ou <kbd>F7</kbd> lors de l'allumage physique.
+                    Configuration du logiciel <strong>Rufus</strong> afin de flasher et préparer la clé USB bootable d'installation. La procédure de démarrage physique du Mini-PC est ensuite explicitée : presser la touche <kbd>Suppr</kbd> ou <kbd>F7</kbd> de manière répétée à l'allumage pour lancer le média d'installation.
                 </p>
             </div>
         </div>
@@ -443,21 +438,21 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
                 <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">4. Identification du Port Série (COM)</div>
+                <div class="etape-header-titre">4. Identification du Port de Communication (COM)</div>
                 <p class="etape-description">
-                    Pour piloter le système en mode console, le document montre l'ouverture du <strong>Gestionnaire de périphériques</strong> sous Windows. L'objectif est d'inspecter la catégorie <strong>Ports (COM & LPT)</strong> afin de valider le numéro de port série actif connecté à l'équipement.
+                    Pour prendre le contrôle de l'équipement via la liaison série locale, le compte-rendu montre le recours au <strong>Gestionnaire de périphériques de Windows</strong>. L'action consiste à aller chercher la catégorie <strong>Ports (COM et LPT)</strong> afin de déterminer le numéro de port actif connecté.
                 </p>
             </div>
         </div>
 
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Pare-feu Defender">
+                <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Pare-feu Windows">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">5. Désactivation du Pare-feu Local</div>
+                <div class="etape-header-titre">5. Configuration Réseau et Désactivation du Pare-feu</div>
                 <p class="etape-description">
-                    Ajustement de la sécurité Windows en naviguant dans le <em>Pare-feu Windows Defender</em>. Vous indiquez qu'il est indispensable de le désactiver temporairement pour éviter le blocage des requêtes de diagnostic réseau (pings/ICMP) entre les hôtes.
+                    Pour tester la continuité réseau, vous détaillez l'accès au <em>Pare-feu Windows Defender</em>. Le document précise qu'il a fallu <strong>désactiver le pare-feu</strong> local afin d'autoriser le trafic de test et d'éviter les blocages de pings (ICMP).
                 </p>
             </div>
         </div>
@@ -467,9 +462,9 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
                 <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Console pfSense">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">6. Configuration Console pfSense</div>
+                <div class="etape-header-titre">6. Interface Shell pfSense et Paramétrage IP</div>
                 <p class="etape-description">
-                    Prise en main de l'interface shell de <strong>pfSense</strong>. Cette section expose la configuration des adresses IP des interfaces WAN/LAN (via l'<strong>Option 2</strong>) et l'utilisation de l'<strong>Option 7 (Ping host)</strong> pour valider l'établissement de la connectivité réseau.
+                    La phase finale montre la console en mode texte de <strong>pfSense</strong>. Cette interface a permis d'assigner les adresses de sous-réseau fixes des cartes réseaux (WAN et LAN) en sélectionnant l'<strong>Option 2 (Set interface(s) IP address)</strong>, et d'effectuer des vérifications à l'aide de l'<strong>Option 7 (Ping host)</strong>.
                 </p>
             </div>
         </div>
@@ -536,5 +531,3 @@ Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il cont
 
 </body>
 </html>
-
-```
