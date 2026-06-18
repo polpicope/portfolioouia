@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infrastructure Réseau Cisco & pfSense</title>
+    <title>Infrastructure Réseau LAN, VLANs & Virtualisation</title>
     <link rel="stylesheet" href="res.css">
 </head>
 
@@ -12,7 +12,7 @@
 
 <header class="header-page">
     <a href="index.html" class="back-btn">⬅ Retour</a>
-    <h1>Infrastructure Réseau Cisco & pfSense</h1>
+    <h1>Infrastructure Réseau LAN, VLANs & Virtualisation</h1>
     <a href="res2.html" class="next-btn">Suiv ➡</a>
 </header>
 
@@ -24,158 +24,112 @@
         <div class="carousel-viewport">
             <div class="carousel-track" id="track">
 
-                <!-- Carte 1 -->
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_9097.jpg" alt="Vue générale du projet" class="card-img">
-                        <span class="card-tag">Infrastructure</span>
+                        <img src="image_0.png" alt="Objectifs et Problématique" class="card-img">
+                        <span class="card-tag">Introduction</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">1. Mise en place de l'infrastructure</h2>
+                        <h2 class="card-title">1. Objectifs & Problématique</h2>
                         <p class="card-desc">
-                            Architecture composée d'un switch Cisco Catalyst 9300, d'un pare-feu pfSense
-                            hébergé sur mini-PC et de postes d'administration. Objectif : réseau segmenté par VLAN
-                            pour améliorer la sécurité et le contrôle des communications.
+                            Configuration des VLANs, routage inter-VLAN sur switch L3 et déploiement de VMs (Windows Server & Linux). L'enjeu est de garantir un routage sécurisé en virtualisation, d'isoler les flux et d'éviter les risques d'accès non autorisés.
                         </p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#4f46e5;">SW</div>
+                                <div class="avatar" style="background:#4f46e5;">OBJ</div>
                                 <div>
-                                    <div class="author-name">Switch Cisco</div>
-                                    <div class="author-role">Catalyst 9300</div>
+                                    <div class="author-name">Projet Réseau</div>
+                                    <div class="author-role">Cadrage</div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
 
-                <!-- Carte 2 -->
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_9098.jpg" alt="Brassage réseau" class="card-img">
+                        <img src="image_1.png" alt="Présentation du matériel" class="card-img">
+                        <span class="card-tag">Matériel</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">2. Présentation du matériel</h2>
+                        <p class="card-desc">
+                            Mise en place de l'environnement physique et logique : 2 postes utilisateurs répartis sur les VLANs, un serveur Windows Server et une machine Linux virtualisés, connectés à un Switch L3 qui centralise et gère le routage inter-VLAN.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0ea5e9;">HW</div>
+                                <div>
+                                    <div class="author-name">Équipements</div>
+                                    <div class="author-role">Infrastructures</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="image_7.png" alt="Schéma de câblage Draw.io" class="card-img">
                         <span class="card-tag">Câblage</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">2. Raccordement des équipements</h2>
+                        <h2 class="card-title">3. Schéma de câblage (Draw.io)</h2>
                         <p class="card-desc">
-                            Liaison des prises réseau aux équipements actifs. Connexions Ethernet entre
-                            postes utilisateurs, pare-feu et switch pour assurer la circulation des données
-                            et garantir une base physique stable.
+                            Modélisation de l'architecture sur Draw.io. Raccordement du Switch L3, distribution du LAN vers le WAN (172.16.1.254), segmentation des réseaux avec le VLAN 10 (192.168.10.0/24) et le VLAN 11 (192.168.11.0/24) reliés par un Bridge.
                         </p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#0ea5e9;">ETH</div>
+                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">TOP</div>
                                 <div>
-                                    <div class="author-name">Réseau local</div>
-                                    <div class="author-role">Ethernet</div>
+                                    <div class="author-name">Architecture</div>
+                                    <div class="author-role">Topologie</div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
 
-                <!-- Carte 3 -->
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_9099.jpg" alt="Switch Cisco Catalyst 9300" class="card-img">
-                        <span class="card-tag">VLAN</span>
+                        <img src="image_6.png" alt="Configuration du Switch L3" class="card-img">
+                        <span class="card-tag">Configuration</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">3. Configuration du switch Cisco</h2>
+                        <h2 class="card-title">4. Configuration du Switch L3</h2>
                         <p class="card-desc">
-                            Création des VLAN, attribution des ports, configuration des liaisons trunk
-                            et gestion de la segmentation réseau. Administration centralisée permettant
-                            d'isoler les différents sous-réseaux.
+                            Étape d'implémentation sur le Switch L3 : écriture et injection du code d'administration pour déclarer les VLANs 10 et 11, attribuer les adresses de passerelles respectives (.254) et activer le routage entre les sous-réseaux.
                         </p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">IOS</div>
+                                <div class="avatar" style="background:#16a34a;">SW</div>
                                 <div>
-                                    <div class="author-name">Cisco IOS</div>
-                                    <div class="author-role">Catalyst 9300</div>
+                                    <div class="author-name">Switch L3</div>
+                                    <div class="author-role">Administration</div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
 
-                <!-- Carte 4 -->
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="IMG_9101.jpg" alt="Pare-feu pfSense" class="card-img">
-                        <span class="card-tag">Pare-feu</span>
+                        <img src="image_3.png" alt="Configuration Proxmox & DNS" class="card-img">
+                        <span class="card-tag">Système</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">4. Déploiement du pare-feu pfSense</h2>
+                        <h2 class="card-title">5. Virtualisation & DNS</h2>
                         <p class="card-desc">
-                            Mini-PC hébergeant pfSense pour le routage inter-VLAN, le filtrage des paquets
-                            et la gestion des interfaces réseau. Passerelle entre les VLAN
-                            et les réseaux externes.
+                            Déploiement des environnements sous Proxmox. Configuration des cartes réseaux des virtualisateurs Linux et Windows Server, installation des rôles ADDS / DNS, désactivation du pare-feu Windows Defender et adressage IP fixe des serveurs.
                         </p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#16a34a;">PFS</div>
+                                <div class="avatar" style="background:#7c3aed;">VM</div>
                                 <div>
-                                    <div class="author-name">pfSense</div>
-                                    <div class="author-role">Open Source FW</div>
+                                    <div class="author-name">Proxmox / ADDS</div>
+                                    <div class="author-role">Services</div>
                                 </div>
                             </div>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carte 5 -->
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="IMG_9103.jpg" alt="Configuration des règles firewall" class="card-img">
-                        <span class="card-tag">Sécurité</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">5. Configuration des règles Firewall</h2>
-                        <p class="card-desc">
-                            Règles de sécurité pfSense pour contrôler précisément les échanges inter-VLAN :
-                            contrôle des accès, restriction des communications et sécurisation
-                            du trafic réseau.
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#dc2626;">FW</div>
-                                <div>
-                                    <div class="author-name">Firewall rules</div>
-                                    <div class="author-role">pfSense</div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carte 6 -->
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="IMG_9104.jpg" alt="Configuration NAT" class="card-img">
-                        <span class="card-tag">NAT</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">6. Configuration du NAT</h2>
-                        <p class="card-desc">
-                            NAT dans pfSense pour permettre l'accès Internet de tous les VLAN avec masquage
-                            des adresses IP privées. Contrôle des connexions sortantes validé
-                            par tests de connectivité.
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#7c3aed;">NAT</div>
-                                <div>
-                                    <div class="author-name">Network Address</div>
-                                    <div class="author-role">Translation</div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -187,6 +141,17 @@
     </div>
 
     <div class="dots" id="dots"></div>
+
+    <div class="cr-action-zone">
+        <a href="Copie de Copie de Copie de Copie de Compte Rendu du 512.pdf" target="_blank" class="cr-view-btn">
+            👁️ Ouvrir le Compte-Rendu PDF en plein écran
+        </a>
+    </div>
+
+    <div class="cr-preview-container">
+        <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
+        <iframe class="cr-iframe" src="Copie de Copie de Copie de Copie de Compte Rendu du 512.pdf"></iframe>
+    </div>
 
 </section>
 
