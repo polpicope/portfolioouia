@@ -1,15 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte Rendu pfSense & Proxmox</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compte Rendu pfSense & Proxmox</title>
 
-    <style>
-        /* COLLE ICI TOUT LE CSS QUE TU VIENS D'ENVOYER */
-    </style>
+<style>
 
+/* TON CSS ICI */
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+}
+
+:root{
+    --bg-overlay:rgba(15,23,42,.85);
+    --card-bg:#fff;
+    --primary:#4f46e5;
+    --text-main:#0f172a;
+    --text-muted:#64748b;
+    --border-color:#e2e8f0;
+}
+
+body{
+    min-height:100vh;
+    background:url("pp.jpg") no-repeat center center fixed;
+    background-size:cover;
+    position:relative;
+    color:var(--text-main);
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:var(--bg-overlay);
+    z-index:-1;
+}
+
+.header-page{
+    background:#1e293b;
+    padding:18px 30px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+
+.header-page h1{
+    color:#fff;
+}
+
+.back-btn,.next-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    text-decoration:none;
+    color:#cbd5e1;
+    border:1px solid #475569;
+    padding:8px 16px;
+    border-radius:6px;
+    background:#334155;
+}
+
+.back-btn{left:25px;}
+.next-btn{right:25px;}
+
+.wrapper{
+    padding:40px 20px;
+}
+
+.card-slide{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.card-img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.card-title{
+    margin-bottom:10px;
+}
+
+.card-desc{
+    color:#64748b;
+}
+
+.cr-preview-container{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+}
+
+.cr-iframe{
+    width:100%;
+    height:700px;
+}
+
+</style>
 </head>
+
 <body>
 
 <header class="header-page">
@@ -20,192 +123,63 @@
 
 <section class="wrapper">
 
-<div class="carousel-outer">
-
-<button class="nav-btn nav-prev" id="prev">&#8249;</button>
-
-<div class="carousel-viewport">
-
-<div class="carousel-track" id="track">
-
-<!-- CARTE 1 -->
 <div class="card-slide">
-    <div class="card-img-wrap">
-        <img src="image1.png" class="card-img">
-        <span class="card-tag">Objectifs</span>
-    </div>
-
+    <img src="image1.png" class="card-img">
     <div class="card-body">
         <h2 class="card-title">1. Objectifs</h2>
-
         <p class="card-desc">
-            Créer un réseau de virtualisation avec pfSense afin
-            d'assurer le routage et la sécurité des communications.
+            Créer un réseau de virtualisation avec pfSense afin d'assurer le routage et la sécurité des communications.
         </p>
-
-        <div class="card-footer">
-            <div class="card-author">
-                <div class="avatar" style="background:#4f46e5;">OBJ</div>
-                <div>
-                    <div class="author-name">Projet Réseau</div>
-                    <div class="author-role">Objectifs</div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
-<!-- CARTE 2 -->
 <div class="card-slide">
-    <div class="card-img-wrap">
-        <img src="image2.png" class="card-img">
-        <span class="card-tag">Problématique</span>
-    </div>
-
+    <img src="image2.png" class="card-img">
     <div class="card-body">
         <h2 class="card-title">2. Problématique</h2>
-
         <p class="card-desc">
-            Comment garantir un routage en virtualisation
-            tout en sécurisant les échanges réseau ?
+            Comment garantir un routage en virtualisation tout en sécurisant les échanges réseau ?
         </p>
-
-        <div class="card-footer">
-            <div class="card-author">
-                <div class="avatar" style="background:#0ea5e9;">PB</div>
-                <div>
-                    <div class="author-name">Analyse</div>
-                    <div class="author-role">Problème</div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
-<!-- CARTE 3 -->
 <div class="card-slide">
-    <div class="card-img-wrap">
-        <img src="image3.png" class="card-img">
-        <span class="card-tag">Sécurité</span>
-    </div>
-
+    <img src="image3.png" class="card-img">
     <div class="card-body">
         <h2 class="card-title">3. Risques</h2>
-
         <p class="card-desc">
-            Risque d'accès non autorisé entre les réseaux
-            et perte d'accès Internet pour les utilisateurs.
+            Risque d'accès non autorisé entre les réseaux et perte d'accès Internet.
         </p>
-
-        <div class="card-footer">
-            <div class="card-author">
-                <div class="avatar" style="background:#f59e0b;">SEC</div>
-                <div>
-                    <div class="author-name">Sécurité</div>
-                    <div class="author-role">Risques</div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
-<!-- AJOUTER LES AUTRES CARTES ICI -->
-
+<div class="card-slide">
+    <img src="image4.png" class="card-img">
+    <div class="card-body">
+        <h2 class="card-title">4. Matériel</h2>
+        <p class="card-desc">
+            2 machines, pfSense, Mini-PC, routeur, switch, Rufus et Draw.io.
+        </p>
+    </div>
 </div>
-</div>
 
-<button class="nav-btn nav-next" id="next">&#8250;</button>
-
-</div>
-
-<div class="dots" id="dots"></div>
-
-<div class="cr-action-zone">
-    <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
-        📄 Ouvrir le Compte-Rendu PDF
-    </a>
+<div class="card-slide">
+    <img src="image5.png" class="card-img">
+    <div class="card-body">
+        <h2 class="card-title">5. Schéma de câblage</h2>
+        <p class="card-desc">
+            Branchement du Mini-PC, du routeur, du switch et de pfSense.
+        </p>
+    </div>
 </div>
 
 <div class="cr-preview-container">
-    <h3 class="preview-title">Aperçu du Compte-Rendu :</h3>
+    <h3>Aperçu du Compte-Rendu</h3>
     <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
 </div>
 
 </section>
 
-<script>
-
-const track = document.getElementById('track');
-const cards = Array.from(track.querySelectorAll('.card-slide'));
-const dotsEl = document.getElementById('dots');
-const total = cards.length;
-
-let perPage = getPerPage();
-let pages = Math.ceil(total / perPage);
-let current = 0;
-
-function getPerPage() {
-    return window.innerWidth <= 768 ? 1 :
-           window.innerWidth <= 1100 ? 2 : 3;
-}
-
-function buildDots() {
-
-    dotsEl.innerHTML = '';
-
-    pages = Math.ceil(total / perPage);
-
-    for(let i=0;i<pages;i++){
-
-        const d = document.createElement('button');
-
-        d.className = 'dot' + (i===0 ? ' active' : '');
-
-        d.addEventListener('click',()=>goTo(i));
-
-        dotsEl.appendChild(d);
-    }
-}
-
-function goTo(page){
-
-    current = Math.max(0,Math.min(page,pages-1));
-
-    const gap = 20;
-
-    const cardW = cards[0].offsetWidth + gap;
-
-    track.style.transform =
-    'translateX(-'+(current*perPage*cardW)+'px)';
-
-    dotsEl.querySelectorAll('.dot').forEach((d,i)=>{
-        d.classList.toggle('active',i===current);
-    });
-}
-
-document.getElementById('prev')
-.addEventListener('click',()=>goTo(current-1));
-
-document.getElementById('next')
-.addEventListener('click',()=>goTo(current+1));
-
-buildDots();
-
-window.addEventListener('resize',()=>{
-    const newPer = getPerPage();
-
-    if(newPer!==perPage){
-
-        perPage=newPer;
-        current=0;
-
-        track.style.transform='translateX(0)';
-
-        buildDots();
-    }
-});
-
-</script>
-
 </body>
 </html>
+
