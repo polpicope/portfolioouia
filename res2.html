@@ -1,530 +1,314 @@
-Voici le code complet réunissant le HTML et le CSS. Les informations fictives de votre template ont été entièrement remplacées par le contenu réel, les étapes techniques, l'adressage IP et le matériel décrits dans votre compte-rendu (`compte rendu1.pdf`).
-
-Vous pouvez copier-coller l'ensemble de ce bloc dans un seul fichier nommé **`res.html`** :
-
-```html
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte Rendu - Réseau de Virtualisation pfSense</title>
-    <style>
-        /* ───── Réinitialisation complète ───── */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compte Rendu - pfSense & Proxmox</title>
 
-        :root {
-            --bg-overlay: rgba(15, 23, 42, 0.85);
-            --card-bg: #ffffff;
-            --primary: #4f46e5;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-        }
+<style>
 
-        /* ───── Fond d'écran général ───── */
-        body {
-            min-height: 100vh;
-            background: url("pp.jpg") no-repeat center center fixed;
-            background-size: cover;
-            position: relative;
-            color: var(--text-main);
-        }
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: var(--bg-overlay);
-            z-index: -1;
-        }
+body{
+    background:url("pp.jpg") center/cover fixed;
+    min-height:100vh;
+    color:#0f172a;
+}
 
-        /* ───── Barre de navigation (Header) ───── */
-        .header-page {
-            background: #1e293b;
-            padding: 18px 30px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid #334155;
-        }
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.85);
+    z-index:-1;
+}
 
-        .header-page h1 {
-            color: #f8fafc;
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
+.header{
+    background:#1e293b;
+    padding:20px;
+    text-align:center;
+    color:white;
+    box-shadow:0 4px 10px rgba(0,0,0,.4);
+}
 
-        .back-btn, .next-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            text-decoration: none;
-            color: #cbd5e1;
-            border: 1px solid #475569;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            background: #334155;
-            transition: all 0.2s ease;
-        }
+.header h1{
+    font-size:1.5rem;
+}
 
-        .back-btn { left: 25px; }
-        .next-btn { right: 25px; }
+.wrapper{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+}
 
-        .back-btn:hover, .next-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
 
-        /* ───── Conteneur central (Wrapper) ───── */
-        .wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            gap: 30px;
-            width: 100%;
-        }
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    transition:.3s;
+}
 
-        /* ───── Structure Carrousel ───── */
-        .carousel-outer {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.card:hover{
+    transform:translateY(-5px);
+}
 
-        .carousel-viewport {
-            flex: 1;
-            overflow: hidden;
-            padding: 15px 5px;
-        }
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
 
-        .carousel-track {
-            display: flex;
-            gap: 20px;
-            transition: transform 0.5s cubic-bezier(.25, .8, .25, 1);
-        }
+.content{
+    padding:20px;
+}
 
-        /* ───── Cartes (Slides) ───── */
-        .card-slide {
-            flex: 0 0 calc(33.333% - 14px);
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+.tag{
+    display:inline-block;
+    background:#4f46e5;
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:10px;
+}
 
-        .card-slide:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
-        }
+h2{
+    margin-bottom:12px;
+    font-size:1.2rem;
+}
 
-        .card-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 190px;
-            background: #0f172a;
-        }
+p{
+    color:#64748b;
+    line-height:1.6;
+}
 
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.pdf-btn{
+    display:block;
+    width:max-content;
+    margin:40px auto;
+    background:#4f46e5;
+    color:white;
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:30px;
+    font-weight:bold;
+}
 
-        .card-tag {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(15, 23, 42, 0.85);
-            color: #fff;
-            font-size: 10px;
-            font-weight: 600;
-            padding: 5px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
+.pdf-btn:hover{
+    background:#4338ca;
+}
 
-        .card-body {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+.pdf-container{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
 
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
+.pdf-container h2{
+    text-align:center;
+    margin-bottom:15px;
+}
 
-        .card-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            flex: 1;
-            margin-bottom: 15px;
-        }
+iframe{
+    width:100%;
+    height:800px;
+    border:none;
+}
 
-        .card-footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 12px;
-        }
+</style>
 
-        .card-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .author-name {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .author-role {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        /* Boutons de navigation */
-        .nav-btn {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s;
-        }
-
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Indicateurs (dots) */
-        .dots {
-            display: flex;
-            gap: 8px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.35);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: var(--primary);
-            width: 24px;
-            border-radius: 4px;
-        }
-
-        /* ───── ZONE DU BOUTON PDF ───── */
-        .cr-action-zone {
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .cr-view-btn {
-            display: inline-flex;
-            align-items: center;
-            background: var(--primary);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 14px 28px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .cr-view-btn:hover {
-            background: #4338ca;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
-        }
-
-        /* ───── CONSOLE D'AFFICHAGE DU PDF (IFRAME) ───── */
-        .cr-preview-container {
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 10px;
-            background: #ffffff;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        .preview-title {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
-        .cr-iframe {
-            width: 100%;
-            height: 700px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: #f8fafc;
-        }
-
-        /* ───── Responsive design ───── */
-        @media (max-width: 1100px) {
-            .card-slide {
-                flex: 0 0 calc(50% - 10px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-page { padding-bottom: 60px; }
-            .back-btn, .next-btn { top: auto; bottom: 10px; transform: none; }
-            .back-btn { left: 15px; }
-            .next-btn { right: 15px; }
-            .card-slide { flex: 0 0 100%; }
-            .cr-iframe { height: 480px; }
-        }
-    </style>
 </head>
-
 <body>
 
-<header class="header-page">
-    <a href="index.html" class="back-btn">⬅ Retour</a>
-    <h1>Création d'un Réseau de Virtualisation avec pfSense</h1>
-    <a href="res2.html" class="next-btn">Suiv ➡</a>
+<header class="header">
+    <h1>Compte Rendu - pfSense & Proxmox</h1>
 </header>
 
-<section class="wrapper">
+<div class="wrapper">
 
-    <div class="carousel-outer">
-        <button class="nav-btn nav-prev" id="prev">&#8249;</button>
+<div class="cards">
 
-        <div class="carousel-viewport">
-            <div class="carousel-track" id="track">
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="image_0.png" alt="Objectifs et Problématique" class="card-img">
-                        <span class="card-tag">Introduction</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">1. Objectifs & Problématique</h2>
-                        <p class="card-desc">
-                            Le but de cette activité est de créer un réseau de virtualisation avec pfSense afin de répondre à la problématique : "Comment garantir un routage en virtualisation ?". Il s'agit de prévenir les risques d'accès non autorisés entre les réseaux et d'éviter les coupures de l'accès internet qui bloquent le travail des utilisateurs.
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#4f46e5;">OBJ</div>
-                                <div>
-                                    <div class="author-name">Activité Réseau</div>
-                                    <div class="author-role">Cadrage & Sécurité</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="image_1.png" alt="Présentation du matériel" class="card-img">
-                        <span class="card-tag">Matériel & Logiciels</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">2. Présentation du matériel</h2>
-                        <p class="card-desc">
-                            L'architecture repose sur : 1 Mini-PC physique (dédié à pfSense), 1 Routeur, 1 Switch et 2 Machines de postes utilisateurs. Côté logiciels, Rufus permet de créer les clés USB bootables, pfSense virtualise le routeur, et Draw.io est utilisé pour concevoir la topologie informatique.
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#0ea5e9;">HW</div>
-                                <div>
-                                    <div class="author-name">Équipements</div>
-                                    <div class="author-role">Physique & Logique</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="image_7.png" alt="Schéma de câblage Draw.io" class="card-img">
-                        <span class="card-tag">Câblage (Draw.io)</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">3. Schéma de connexion</h2>
-                        <p class="card-desc">
-                            Les étapes de branchement obligatoires : 1. Brancher le Mini PC au réseau général. 2. Raccorder le routeur physique au switch. 4. Interconnecter le switch directement à la structure pfSense. L'adressage réseau s'organise autour des segments 172.17.0.0/24, 172.17.1.0/24 et l'adresse passerelle 192.168.1.1.
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">TOP</div>
-                                <div>
-                                    <div class="author-name">Architecture</div>
-                                    <div class="author-role">Topologie des liens</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="image_6.png" alt="Configuration Proxmox" class="card-img">
-                        <span class="card-tag">Hyperviseur</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">4. Préparation du Mini-PC</h2>
-                        <p class="card-desc">
-                            Création d'un média d'installation bootable via Rufus pour flasher Proxmox. Après le démarrage du Mini-PC (en mitraillant la touche SUPP ou F7), l'adressage proxy initial en 192.168.X.X est configuré dans les paramètres. Commandes utiles de l'OS : 'ip add' (vérification réseau) et 'nano /etc/network/interfaces' (édition de la configuration).
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#16a34a;">SYS</div>
-                                <div>
-                                    <div class="author-name">Proxmox</div>
-                                    <div class="author-role">Système de base</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="image_3.png" alt="Configuration pfSense" class="card-img">
-                        <span class="card-tag">Routage</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">5. Assignation IP & pfSense</h2>
-                        <p class="card-desc">
-                            Configuration de l'interface LAN via l'option console 2 (Set interface IP address). L'adresse IPv4 LAN fixe est définie sur 192.168.10.1/24 avec une plage DHCP se terminant à 192.168.10.108. Les interfaces associées sont igco (WAN), igc1 (LAN) et igc3.60 (OPT3 en VLAN 60). Pour finir, le pare-feu Windows Defender local des postes est désactivé et configuré en IP fixe pour valider les liaisons.
-                        </p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#7c3aed;">FW</div>
-                                <div>
-                                    <div class="author-name">pfSense 2.7.2</div>
-                                    <div class="author-role">Routage & Filtrage</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+    <div class="card">
+        <img src="image1.png">
+        <div class="content">
+            <span class="tag">Objectifs</span>
+            <h2>1. Objectifs</h2>
+            <p>
+                Le but de cette activité est de créer un réseau de
+                virtualisation avec pfSense afin de gérer le routage,
+                la sécurité et l'accès au réseau.
+            </p>
         </div>
-
-        <button class="nav-btn nav-next" id="next">&#8250;</button>
     </div>
 
-    <div class="dots" id="dots"></div>
-
-    <div class="cr-action-zone">
-        <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
-            👁️ Ouvrir le Compte-Rendu PDF (pfSense) en plein écran 
-        </a>
+    <div class="card">
+        <img src="image2.png">
+        <div class="content">
+            <span class="tag">Problématique</span>
+            <h2>2. Problématique</h2>
+            <p>
+                Comment garantir un routage en virtualisation ?
+                Comment sécuriser les échanges réseau et éviter
+                les accès non autorisés ?
+            </p>
+        </div>
     </div>
 
-    <div class="cr-preview-container">
-        <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
-        <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
+    <div class="card">
+        <img src="image3.png">
+        <div class="content">
+            <span class="tag">Risques</span>
+            <h2>3. Sécurité & Impacts</h2>
+            <p>
+                Risque d'accès non autorisé entre les réseaux.
+                Une mauvaise configuration peut également empêcher
+                l'accès à Internet et bloquer le travail des utilisateurs.
+            </p>
+        </div>
     </div>
 
-</section>
+    <div class="card">
+        <img src="image4.png">
+        <div class="content">
+            <span class="tag">Matériel</span>
+            <h2>4. Présentation du matériel</h2>
+            <p>
+                2 machines utilisateurs, un Mini-PC, pfSense,
+                un routeur, un switch, Rufus pour créer la clé USB
+                bootable et Draw.io pour réaliser les schémas.
+            </p>
+        </div>
+    </div>
 
-<script>
-    const track = document.getElementById('track');
-    const cards = Array.from(track.querySelectorAll('.card-slide'));
-    const dotsEl = document.getElementById('dots');
-    const total = cards.length;
-    let perPage = getPerPage();
-    let pages = Math.ceil(total / perPage);
-    let current = 0;
+    <div class="card">
+        <img src="image5.png">
+        <div class="content">
+            <span class="tag">Câblage</span>
+            <h2>5. Schéma de câblage</h2>
+            <p>
+                Brancher le Mini-PC au réseau,
+                connecter le routeur au switch puis
+                raccorder le switch à pfSense.
+            </p>
+        </div>
+    </div>
 
-    function getPerPage() {
-        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
-    }
+    <div class="card">
+        <img src="image6.png">
+        <div class="content">
+            <span class="tag">Draw.io</span>
+            <h2>6. Schéma pfSense</h2>
+            <p>
+                Réalisation du schéma du circuit réseau sous Draw.io
+                afin de représenter l'architecture et les connexions.
+            </p>
+        </div>
+    </div>
 
-    function buildDots() {
-        dotsEl.innerHTML = '';
-        pages = Math.ceil(total / perPage);
-        for (let i = 0; i < pages; i++) {
-            const d = document.createElement('button');
-            d.className = 'dot' + (i === 0 ? ' active' : '');
-            d.setAttribute('aria-label', 'Page ' + (i + 1));
-            d.addEventListener('click', () => goTo(i));
-            dotsEl.appendChild(d);
-        }
-    }
+    <div class="card">
+        <img src="image7.png">
+        <div class="content">
+            <span class="tag">Proxmox</span>
+            <h2>7. Configuration du Mini-PC</h2>
+            <p>
+                Télécharger Proxmox VE et Rufus.
+                Configurer le proxy puis attribuer
+                une adresse IP pour accéder à l'interface.
+            </p>
+        </div>
+    </div>
 
-    function goTo(page) {
-        current = Math.max(0, Math.min(page, pages - 1));
-        const gap = 20;
-        const cardW = cards[0].offsetWidth + gap;
-        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
-        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    }
+    <div class="card">
+        <img src="image8.png">
+        <div class="content">
+            <span class="tag">Commandes</span>
+            <h2>8. Commandes utiles</h2>
+            <p>
+                ip addr : afficher les paramètres réseau.
+                nano /etc/network/interfaces :
+                modifier la configuration réseau.
+            </p>
+        </div>
+    </div>
 
-    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+    <div class="card">
+        <img src="image9.png">
+        <div class="content">
+            <span class="tag">Adressage</span>
+            <h2>9. Configuration IP</h2>
+            <p>
+                Utilisation de Set Interface IP Address.
+                Attribution de l'adresse 192.168.2.2
+                avec le masque 255.255.255.0.
+            </p>
+        </div>
+    </div>
 
-    buildDots();
+    <div class="card">
+        <img src="image10.png">
+        <div class="content">
+            <span class="tag">Installation</span>
+            <h2>10. Installation de Proxmox</h2>
+            <p>
+                Démarrer le Mini-PC avec la touche Suppr ou F7.
+                Vérifier le port COM utilisé depuis
+                le Gestionnaire de périphériques.
+            </p>
+        </div>
+    </div>
 
-    window.addEventListener('resize', () => {
-        const newPer = getPerPage();
-        if (newPer !== perPage) {
-            perPage = newPer;
-            current = 0;
-            track.style.transform = 'translateX(0)';
-            buildDots();
-        }
-    });
-</script>
+    <div class="card">
+        <img src="image11.png">
+        <div class="content">
+            <span class="tag">Pare-feu</span>
+            <h2>11. Désactivation du Pare-feu</h2>
+            <p>
+                Désactiver le Pare-feu Windows Defender afin
+                d'éviter les blocages de communication réseau
+                durant les tests.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="image12.png">
+        <div class="content">
+            <span class="tag">Configuration</span>
+            <h2>12. Paramètres Réseau</h2>
+            <p>
+                Configurer l'adresse IP, le masque de sous-réseau,
+                la passerelle et le DNS préféré depuis
+                les paramètres Ethernet.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<a href="compte rendu1.pdf" target="_blank" class="pdf-btn">
+📄 Ouvrir le Compte-Rendu PDF
+</a>
+
+<div class="pdf-container">
+    <h2>Aperçu du Compte-Rendu</h2>
+    <iframe src="compte rendu1.pdf"></iframe>
+</div>
+
+</div>
 
 </body>
 </html>
-
-
