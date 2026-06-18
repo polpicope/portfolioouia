@@ -1,10 +1,15 @@
+Voici le code HTML complet, mis à jour de manière à correspondre à 100 % à l'**ordre chronologique exact** et au contenu de votre document **`compte rendu1.pdf`**.
+
+Toutes les fiches du carrousel ont été réécrites pour suivre fidèlement les étapes du fichier (Objectif, Matériel, Câblage, Boot & Clé, Port COM, Pare-feu, Menu pfSense).
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronologie - Infrastructure Virtualisée Proxmox</title>
+    <title>Chronologie - Réseau de Virtualisation pfSense</title>
     <style>
         * {
             box-sizing: border-box;
@@ -44,7 +49,6 @@
             font-size: 1.4rem;
             font-weight: 500;
             letter-spacing: 1px;
-            /* Empêche le titre de collisionner avec les boutons latéraux */
             padding: 0 140px; 
         }
 
@@ -62,15 +66,8 @@
             transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
 
-        /* Alignement à gauche (Retour) */
-        .back-btn {
-            left: 25px;
-        }
-
-        /* Alignement à droite (Suivant) */
-        .next-page-btn {
-            right: 25px;
-        }
+        .back-btn { left: 25px; }
+        .next-page-btn { right: 25px; }
 
         .back-btn:hover, .next-page-btn:hover {
             background: rgba(255, 255, 255, 0.15);
@@ -331,39 +328,24 @@
 
         @media (max-width: 768px) {
             .header-page {
-                padding: 20px 10px 110px; /* Espace pour empiler les boutons proprement */
+                padding: 20px 10px 110px;
             }
             .header-page h1 {
                 font-size: 1rem;
                 padding: 0;
             }
-            .back-btn {
-                left: 15px;
+            .back-btn, .next-page-btn {
                 top: 75px;
                 transform: none;
             }
-            .next-page-btn {
-                right: 15px;
-                top: 75px;
-                transform: none;
-            }
-            .wrapper {
-                padding: 30px 16px;
-            }
-            .card-slide {
-                flex: 0 0 100%;
-            }
-            .carousel-outer {
-                gap: 6px;
-            }
-            .nav-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 18px;
-            }
-            .cr-iframe {
-                height: 450px;
-            }
+            .back-btn { left: 15px; }
+            .next-page-btn { right: 15px; }
+            
+            .wrapper { padding: 30px 16px; }
+            .card-slide { flex: 0 0 100%; }
+            .carousel-outer { gap: 6px; }
+            .nav-btn { width: 32px; height: 32px; font-size: 18px; }
+            .cr-iframe { height: 450px; }
         }
     </style>
 </head>
@@ -372,7 +354,7 @@
 
 <header class="header-page">
     <a href="res.html" class="back-btn">⬅ Retour</a>
-    <h1>Chronologie Technique : Infrastructure Virtualisée Proxmox</h1>
+    <h1>Chronologie Technique : Réseau de Virtualisation pfSense</h1>
     <a href="re3.html" class="next-page-btn">Suivant ➡</a>
 </header>
 
@@ -386,16 +368,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Architecture Globale" class="card-img">
+                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Sommaire et objectifs" class="card-img">
                         <span class="card-tag">Objectif</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">01. Objectif du Projet</h2>
-                        <p class="card-desc">Déploiement d'une infrastructure virtualisée complète sous Proxmox VE intégrant OPNsense, Samba, FTP, GLPI et Windows Server 2022.</p>
+                        <h2 class="card-title">01. Objectif & Problématique</h2>
+                        <p class="card-desc">Conception d'un réseau sécurisé virtualisé. Résolution des contraintes d'isolation, routage et gestion des accès Internet.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#6366f1;">PVE</div>
-                                <div><div class="author-name">Proxmox VE</div><div class="author-role">Hyperviseur</div></div>
+                                <div class="avatar" style="background:#1e3a8a;">OBJ</div>
+                                <div><div class="author-name">Problématique</div><div class="author-role">Virtualisation</div></div>
                             </div>
                         </div>
                     </div>
@@ -403,16 +385,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Mode ROMMON Cisco" class="card-img">
-                        <span class="card-tag">Cisco</span>
+                        <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Outils et Logiciels" class="card-img">
+                        <span class="card-tag">Matériel</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">02. Switch Cisco 2960</h2>
-                        <p class="card-desc">Remise en service du switch bloqué en mode ROMMON et démarrage manuel de l'image IOS depuis la mémoire flash.</p>
+                        <h2 class="card-title">02. Ressources Matérielles & Logiciels</h2>
+                        <p class="card-desc">Inventaire requis : 2 machines utilisateurs, 1 routeur, 1 switch, 1 Mini-PC physique ainsi que Rufus, pfSense et Draw.io.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">IOS</div>
-                                <div><div class="author-name">Cisco IOS</div><div class="author-role">2960 ROMMON</div></div>
+                                <div class="avatar" style="background:#f59e0b;">HW</div>
+                                <div><div class="author-name">Équipements</div><div class="author-role">Physique & Virtuel</div></div>
                             </div>
                         </div>
                     </div>
@@ -420,16 +402,50 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Console PuTTY inconnue" class="card-img">
+                        <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Schéma Draw.io" class="card-img">
+                        <span class="card-tag">Câblage</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">03. Schéma de Liaison Réseau</h2>
+                        <p class="card-desc">Ordre des interconnexions physiques : Mini-PC au réseau global, routeur relié au switch, et switch raccordé à pfSense.</p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0ea5e9;">TOP</div>
+                                <div><div class="author-name">Draw.io</div><div class="author-role">Topologie Réseau</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212326_.jpeg" alt="Amorçage du Mini PC" class="card-img">
+                        <span class="card-tag">Boot</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">04. Préparation & Boot du Mini-PC</h2>
+                        <p class="card-desc">Création de la clé USB d'installation. Amorçage physique en pressant de façon répétée la touche "Suppr" ou "F7" au démarrage.</p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#ef4444;">USB</div>
+                                <div><div class="author-name">BIOS / Boot</div><div class="author-role">Lancement système</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques COM" class="card-img">
                         <span class="card-tag">Console</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">02b. Erreurs de Commandes Switch</h2>
-                        <p class="card-desc">Visualisation des erreurs de saisie "Unknown cmd" lors des tentatives de commandes IOS standard (en, exit, end) dans le mode boot.</p>
+                        <h2 class="card-title">05. Identification du Port COM</h2>
+                        <p class="card-desc">Ouverture du Gestionnaire de périphériques sous Windows pour identifier le port série de communication actif (Ports COM & LPT).</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#4b5563;">TTY</div>
-                                <div><div class="author-name">PuTTY COM4</div><div class="author-role">Mode Console</div></div>
+                                <div class="avatar" style="background:#4b5563;">COM</div>
+                                <div><div class="author-name">Gestionnaire</div><div class="author-role">Liaison Série</div></div>
                             </div>
                         </div>
                     </div>
@@ -437,16 +453,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212326_.jpeg" alt="Bridges Proxmox Network" class="card-img">
-                        <span class="card-tag">Réseau</span>
+                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Désactivation Defender" class="card-img">
+                        <span class="card-tag">Sécurité</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">03. Bridges Réseau Proxmox</h2>
-                        <p class="card-desc">Création des bridges vmbr0 (WAN) et vmbr1 (LAN) afin de relier les VMs au réseau physique.</p>
+                        <h2 class="card-title">06. Ajustement du Pare-feu Windows</h2>
+                        <p class="card-desc">Désactivation complète du Pare-feu Windows Defender pour autoriser l'interconnexion réseau et éviter le blocage des pings.</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#0ea5e9;">BR</div>
-                                <div><div class="author-name">vmbr0 / vmbr1</div><div class="author-role">Bridges réseau</div></div>
+                                <div class="avatar" style="background:#7c3aed;">FW</div>
+                                <div><div class="author-name">Defender</div><div class="author-role">Flux Ouverts</div></div>
                             </div>
                         </div>
                     </div>
@@ -454,50 +470,16 @@
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Création VM OPNsense" class="card-img">
-                        <span class="card-tag">Pare-feu</span>
+                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Interface Console pfSense" class="card-img">
+                        <span class="card-tag">pfSense</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">04. Déploiement OPNsense</h2>
-                        <p class="card-desc">Création de la VM OPNsense avec deux interfaces réseau connectées aux bridges vmbr0 et vmbr1.</p>
+                        <h2 class="card-title">07. Menu de Configuration pfSense</h2>
+                        <p class="card-desc">Accès au menu principal texte : assignation des interfaces réseaux (WAN/LAN), attribution des adresses IP et tests ping (Option 7).</p>
                         <div class="card-footer">
                             <div class="card-author">
-                                <div class="avatar" style="background:#16a34a;">OPN</div>
-                                <div><div class="author-name">OPNsense</div><div class="author-role">Pare-feu VM</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Assignation Interfaces OPNsense" class="card-img">
-                        <span class="card-tag">Config</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">05. Configuration WAN / LAN</h2>
-                        <p class="card-desc">Assignation des interfaces em0 (WAN) et em1 (LAN), puis définition de la passerelle LAN à 192.168.1.254.</p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#7c3aed;">LAN</div>
-                                <div><div class="author-name">192.168.1.254</div><div class="author-role">Passerelle LAN</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-slide">
-                    <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Erreur vsftpd chroot" class="card-img">
-                        <span class="card-tag">FTP</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">07. Serveur FTP (vsftpd)</h2>
-                        <p class="card-desc">Résolution du crash de connexion <code>500 OOPS: refusing to run with writable root inside chroot()</code> lors de la tentative d'accès ftpuser.</p>
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <div class="avatar" style="background:#0891b2;">FTP</div>
-                                <div><div class="author-name">vsftpd err</div><div class="author-role">Debian 12</div></div>
+                                <div class="avatar" style="background:#16a34a;">PFS</div>
+                                <div><div class="author-name">Console Menu</div><div class="author-role">Routage Actif</div></div>
                             </div>
                         </div>
                     </div>
@@ -575,3 +557,5 @@
 
 </body>
 </html>
+
+```
