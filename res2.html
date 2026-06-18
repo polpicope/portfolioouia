@@ -1,169 +1,244 @@
+Voici le code complet réunissant le HTML et le CSS. Les informations fictives de votre template ont été entièrement remplacées par le contenu réel, les étapes techniques, l'adressage IP et le matériel décrits dans votre compte-rendu (`compte rendu1.pdf`).
+
+Vous pouvez copier-coller l'ensemble de ce bloc dans un seul fichier nommé **`res.html`** :
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronologie - Infrastructure Virtualisée pfSense</title>
+    <title>Compte Rendu - Réseau de Virtualisation pfSense</title>
     <style>
+        /* ───── Réinitialisation complète ───── */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        :root {
+            --bg-overlay: rgba(15, 23, 42, 0.85);
+            --card-bg: #ffffff;
+            --primary: #4f46e5;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        /* ───── Fond d'écran général ───── */
         body {
             min-height: 100vh;
             background: url("pp.jpg") no-repeat center center fixed;
             background-size: cover;
             position: relative;
+            color: var(--text-main);
         }
 
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.45);
+            background: var(--bg-overlay);
             z-index: -1;
         }
 
-        /* HEADER UNIQUE */
+        /* ───── Barre de navigation (Header) ───── */
         .header-page {
-            background: #223447;
+            background: #1e293b;
             padding: 18px 30px;
             position: sticky;
             top: 0;
             z-index: 100;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid #334155;
         }
 
         .header-page h1 {
-            color: white;
+            color: #f8fafc;
             font-size: 1.4rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            padding: 0 140px; 
+            font-weight: 600;
         }
 
-        .back-btn, .next-page-btn {
+        .back-btn, .next-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             text-decoration: none;
-            color: #e5e7eb;
-            border: 1px solid #e5e7eb;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: background 0.3s, color 0.3s, border-color 0.3s;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            background: #334155;
+            transition: all 0.2s ease;
         }
 
         .back-btn { left: 25px; }
-        .next-page-btn { right: 25px; }
+        .next-btn { right: 25px; }
 
-        .back-btn:hover, .next-page-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .back-btn:hover, .next-btn:hover {
+            background: var(--primary);
             color: white;
-            border-color: white;
+            border-color: var(--primary);
         }
 
-        /* CAROUSEL CONTENU */
+        /* ───── Conteneur central (Wrapper) ───── */
         .wrapper {
-            min-height: calc(100vh - 80px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 50px 40px;
-            gap: 24px;
+            padding: 40px 20px;
+            gap: 30px;
+            width: 100%;
         }
 
+        /* ───── Structure Carrousel ───── */
         .carousel-outer {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .carousel-viewport {
             flex: 1;
             overflow: hidden;
-            border-radius: 18px;
+            padding: 15px 5px;
         }
 
         .carousel-track {
             display: flex;
             gap: 20px;
-            transition: transform 0.5s cubic-bezier(.28, -.03, 0, .99);
+            transition: transform 0.5s cubic-bezier(.25, .8, .25, 1);
         }
 
+        /* ───── Cartes (Slides) ───── */
         .card-slide {
             flex: 0 0 calc(33.333% - 14px);
-            background: #ffffff;
-            border-radius: 18px;
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-slide:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
         }
 
         .card-img-wrap {
             position: relative;
             width: 100%;
             height: 190px;
-            overflow: hidden;
-            background: #1f2937;
+            background: #0f172a;
         }
 
         .card-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .card-tag {
             position: absolute;
             top: 12px;
             left: 12px;
-            background: rgba(255, 255, 255, 0.92);
-            color: #1e3a5f;
-            font-size: 11px;
+            background: rgba(15, 23, 42, 0.85);
+            color: #fff;
+            font-size: 10px;
             font-weight: 600;
-            padding: 4px 12px;
+            padding: 5px 12px;
             border-radius: 20px;
             text-transform: uppercase;
         }
 
         .card-body {
-            padding: 18px 18px 16px;
+            padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .card-title {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #111827;
             margin-bottom: 10px;
         }
 
         .card-desc {
-            font-size: 0.875rem;
-            color: #6b7280;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
             flex: 1;
+            margin-bottom: 15px;
         }
 
+        .card-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .author-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .author-role {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Boutons de navigation */
+        .nav-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Indicateurs (dots) */
         .dots {
             display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 8px;
         }
 
@@ -171,147 +246,84 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.35);
             border: none;
             cursor: pointer;
-            padding: 0;
+            transition: all 0.3s;
         }
 
         .dot.active {
-            background: white;
-            width: 22px;
+            background: var(--primary);
+            width: 24px;
             border-radius: 4px;
         }
 
-        /* BLOC TECHNIQUE EXPLICATIF AVEC IMAGES DIRECTES */
-        .analyse-document-bloc {
-            width: 100%;
-            max-width: 1100px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 18px;
-            padding: 30px;
-            margin-top: 10px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        /* ───── ZONE DU BOUTON PDF ───── */
+        .cr-action-zone {
+            margin-top: 15px;
+            text-align: center;
         }
 
-        .analyse-title {
-            font-size: 1.35rem;
-            color: #223447;
-            margin-bottom: 25px;
-            border-bottom: 3px solid #223447;
-            padding-bottom: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
+        .cr-view-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+            transition: all 0.3s ease;
         }
 
-        .problematique-box {
-            background: #f3f4f6;
-            border-left: 4px solid #1e3a8a;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            color: #374151;
-            line-height: 1.5;
+        .cr-view-btn:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
         }
 
-        .etape-item {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 35px;
-            padding-bottom: 30px;
-            border-bottom: 1px dashed #d1d5db;
-            align-items: flex-start;
-        }
-
-        .etape-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .etape-visuel {
-            width: 320px;
-            flex-shrink: 0;
-        }
-
-        .etape-visuel img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid #c9d1d9;
-        }
-
-        .etape-contenu {
-            flex: 1;
-        }
-
-        .etape-header-titre {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #1e3a8a;
-            margin-bottom: 10px;
-        }
-
-        .etape-description {
-            font-size: 0.95rem;
-            color: #374151;
-            line-height: 1.6;
-        }
-
-        /* PREVIEW PDF */
+        /* ───── CONSOLE D'AFFICHAGE DU PDF (IFRAME) ───── */
         .cr-preview-container {
             width: 100%;
-            max-width: 1100px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            max-width: 1000px;
             margin-top: 10px;
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
         .preview-title {
             font-size: 1.1rem;
-            color: #223447;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
+            color: var(--text-main);
             font-weight: 600;
         }
 
         .cr-iframe {
             width: 100%;
-            height: 600px;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
+            height: 700px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #f8fafc;
         }
 
-        .nav-btn {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 22px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
+        /* ───── Responsive design ───── */
         @media (max-width: 1100px) {
-            .card-slide { flex: 0 0 calc(50% - 10px); }
-            .etape-item { flex-direction: column; }
-            .etape-visuel { width: 100%; max-width: 450px; }
+            .card-slide {
+                flex: 0 0 calc(50% - 10px);
+            }
         }
 
         @media (max-width: 768px) {
-            .header-page { padding: 20px 10px 110px; }
-            .header-page h1 { font-size: 1rem; padding: 0; }
-            .back-btn, .next-page-btn { top: 75px; transform: none; }
-            .wrapper { padding: 30px 16px; }
+            .header-page { padding-bottom: 60px; }
+            .back-btn, .next-btn { top: auto; bottom: 10px; transform: none; }
+            .back-btn { left: 15px; }
+            .next-btn { right: 15px; }
             .card-slide { flex: 0 0 100%; }
-            .cr-iframe { height: 450px; }
+            .cr-iframe { height: 480px; }
         }
     </style>
 </head>
@@ -319,25 +331,200 @@
 <body>
 
 <header class="header-page">
-    <a href="res.html" class="back-btn">⬅ Retour</a>
-    <h1>Chronologie Spécifique - Installation pfSense</h1>
-    <a href="re3.html" class="next-page-btn">Suivant ➡</a>
+    <a href="index.html" class="back-btn">⬅ Retour</a>
+    <h1>Création d'un Réseau de Virtualisation avec pfSense</h1>
+    <a href="res2.html" class="next-btn">Suiv ➡</a>
 </header>
 
 <section class="wrapper">
 
     <div class="carousel-outer">
-        <button class="nav-btn" id="prev">&#8249;</button>
+        <button class="nav-btn nav-prev" id="prev">&#8249;</button>
+
         <div class="carousel-viewport">
             <div class="carousel-track" id="track">
 
                 <div class="card-slide">
                     <div class="card-img-wrap">
-                        <img src="Capture d’écran_10-6-2026_21205_.jpeg" class="card-img" alt="Câblage">
-                        <span class="card-tag">Étape 1</span>
+                        <img src="image_0.png" alt="Objectifs et Problématique" class="card-img">
+                        <span class="card-tag">Introduction</span>
                     </div>
                     <div class="card-body">
-                        <h2 class="card-title">Schéma & Interconnexions</h2>
-                        <p class="card-desc">Liaison physique ordonnée des équipements : du Mini-PC vers le commutateur réseau global.</p>
+                        <h2 class="card-title">1. Objectifs & Problématique</h2>
+                        <p class="card-desc">
+                            Le but de cette activité est de créer un réseau de virtualisation avec pfSense afin de répondre à la problématique : "Comment garantir un routage en virtualisation ?". Il s'agit de prévenir les risques d'accès non autorisés entre les réseaux et d'éviter les coupures de l'accès internet qui bloquent le travail des utilisateurs.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#4f46e5;">OBJ</div>
+                                <div>
+                                    <div class="author-name">Activité Réseau</div>
+                                    <div class="author-role">Cadrage & Sécurité</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="image_1.png" alt="Présentation du matériel" class="card-img">
+                        <span class="card-tag">Matériel & Logiciels</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">2. Présentation du matériel</h2>
+                        <p class="card-desc">
+                            L'architecture repose sur : 1 Mini-PC physique (dédié à pfSense), 1 Routeur, 1 Switch et 2 Machines de postes utilisateurs. Côté logiciels, Rufus permet de créer les clés USB bootables, pfSense virtualise le routeur, et Draw.io est utilisé pour concevoir la topologie informatique.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#0ea5e9;">HW</div>
+                                <div>
+                                    <div class="author-name">Équipements</div>
+                                    <div class="author-role">Physique & Logique</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="image_7.png" alt="Schéma de câblage Draw.io" class="card-img">
+                        <span class="card-tag">Câblage (Draw.io)</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">3. Schéma de connexion</h2>
+                        <p class="card-desc">
+                            Les étapes de branchement obligatoires : 1. Brancher le Mini PC au réseau général. 2. Raccorder le routeur physique au switch. 4. Interconnecter le switch directement à la structure pfSense. L'adressage réseau s'organise autour des segments 172.17.0.0/24, 172.17.1.0/24 et l'adresse passerelle 192.168.1.1.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#f59e0b; color:#1c1917;">TOP</div>
+                                <div>
+                                    <div class="author-name">Architecture</div>
+                                    <div class="author-role">Topologie des liens</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="image_6.png" alt="Configuration Proxmox" class="card-img">
+                        <span class="card-tag">Hyperviseur</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">4. Préparation du Mini-PC</h2>
+                        <p class="card-desc">
+                            Création d'un média d'installation bootable via Rufus pour flasher Proxmox. Après le démarrage du Mini-PC (en mitraillant la touche SUPP ou F7), l'adressage proxy initial en 192.168.X.X est configuré dans les paramètres. Commandes utiles de l'OS : 'ip add' (vérification réseau) et 'nano /etc/network/interfaces' (édition de la configuration).
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#16a34a;">SYS</div>
+                                <div>
+                                    <div class="author-name">Proxmox</div>
+                                    <div class="author-role">Système de base</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-slide">
+                    <div class="card-img-wrap">
+                        <img src="image_3.png" alt="Configuration pfSense" class="card-img">
+                        <span class="card-tag">Routage</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">5. Assignation IP & pfSense</h2>
+                        <p class="card-desc">
+                            Configuration de l'interface LAN via l'option console 2 (Set interface IP address). L'adresse IPv4 LAN fixe est définie sur 192.168.10.1/24 avec une plage DHCP se terminant à 192.168.10.108. Les interfaces associées sont igco (WAN), igc1 (LAN) et igc3.60 (OPT3 en VLAN 60). Pour finir, le pare-feu Windows Defender local des postes est désactivé et configuré en IP fixe pour valider les liaisons.
+                        </p>
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <div class="avatar" style="background:#7c3aed;">FW</div>
+                                <div>
+                                    <div class="author-name">pfSense 2.7.2</div>
+                                    <div class="author-role">Routage & Filtrage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="nav-btn nav-next" id="next">&#8250;</button>
+    </div>
+
+    <div class="dots" id="dots"></div>
+
+    <div class="cr-action-zone">
+        <a href="compte rendu1.pdf" target="_blank" class="cr-view-btn">
+            👁️ Ouvrir le Compte-Rendu PDF (pfSense) en plein écran 
+        </a>
+    </div>
+
+    <div class="cr-preview-container">
+        <h3 class="preview-title">Aperçu en ligne du Compte-Rendu :</h3>
+        <iframe class="cr-iframe" src="compte rendu1.pdf"></iframe>
+    </div>
+
+</section>
+
+<script>
+    const track = document.getElementById('track');
+    const cards = Array.from(track.querySelectorAll('.card-slide'));
+    const dotsEl = document.getElementById('dots');
+    const total = cards.length;
+    let perPage = getPerPage();
+    let pages = Math.ceil(total / perPage);
+    let current = 0;
+
+    function getPerPage() {
+        return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
+    }
+
+    function buildDots() {
+        dotsEl.innerHTML = '';
+        pages = Math.ceil(total / perPage);
+        for (let i = 0; i < pages; i++) {
+            const d = document.createElement('button');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Page ' + (i + 1));
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        }
+    }
+
+    function goTo(page) {
+        current = Math.max(0, Math.min(page, pages - 1));
+        const gap = 20;
+        const cardW = cards[0].offsetWidth + gap;
+        track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
+        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+    buildDots();
+
+    window.addEventListener('resize', () => {
+        const newPer = getPerPage();
+        if (newPer !== perPage) {
+            perPage = newPer;
+            current = 0;
+            track.style.transform = 'translateX(0)';
+            buildDots();
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
