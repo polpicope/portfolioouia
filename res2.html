@@ -1,4 +1,8 @@
+Je vous prie de m'excuser, j'ai surchargé le code précédent avec trop d'éléments, ce qui a dû casser l'affichage de votre page.
 
+Voici le code HTML **nettoyé, fonctionnel et parfaitement structuré**. Il contient votre carrousel d'origine et intègre, juste au-dessus de l'aperçu du compte-rendu, le **bloc descriptif exact** détaillant les captures d'écran et les manipulations que vous avez consignées dans `compte rendu1.pdf`.
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -175,6 +179,7 @@
             background: rgba(255, 255, 255, 0.4);
             border: none;
             cursor: pointer;
+            padding: 0;
         }
 
         .dot.active {
@@ -183,7 +188,7 @@
             border-radius: 4px;
         }
 
-        /* BLOC DEMANDÉ : ANALYSE ET EXPLICATION DU COMPTE RENDU AVEC IMAGES */
+        /* BLOC DEMANDÉ : ANALYSE DU COMPTE RENDU 1 AVEC IMAGES ET EXPLICATIONS */
         .analyse-document-bloc {
             width: 100%;
             max-width: 1100px;
@@ -202,7 +207,6 @@
             padding-bottom: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .etape-item {
@@ -233,15 +237,6 @@
             border: 1px solid #c9d1d9;
         }
 
-        .etape-legende {
-            display: block;
-            text-align: center;
-            font-size: 11px;
-            color: #6b7280;
-            margin-top: 6px;
-            font-style: italic;
-        }
-
         .etape-contenu {
             flex: 1;
         }
@@ -259,11 +254,7 @@
             line-height: 1.6;
         }
 
-        .etape-description strong {
-            color: #111827;
-        }
-
-        /* CONTENEUR PREVIEW */
+        /* CONTENEUR PREVIEW PDF */
         .cr-preview-container {
             width: 100%;
             max-width: 1100px;
@@ -409,82 +400,76 @@
 
 
     <div class="analyse-document-bloc">
-        <h3 class="analyse-title">Contenu Détaillé du Compte Rendu Technique</h3>
+        <h3 class="analyse-title">Explications Techniques du Compte-Rendu N°1</h3>
         
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Topologie Initiale">
-                <span class="etape-legende">Capture 1 : Schéma d'interconnexion</span>
+                <img src="Capture d’écran_10-6-2026_21205_.jpeg" alt="Câblage">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">1. Problématique et Architecture de Câblage</div>
+                <div class="etape-header-titre">1. Câblage Matériel Initial</div>
                 <p class="etape-description">
-                    Le document commence par exposer la problématique de la gestion du routage et de la sécurité des accès Internet en environnement virtuel. Pour y répondre, vous avez décrit l'ordre matériel des branchements : connecter le <strong>Mini-PC physique au réseau global</strong>, relier le routeur au commutateur (switch), puis raccorder le switch à l'interface de la machine <strong>pfSense</strong>.
+                    Cette partie détaille la mise en place physique de la maquette. Vous y expliquez l'ordre des interconnexions : brancher le Mini-PC directement au réseau principal, relier le routeur au commutateur (switch), et raccorder ce dernier à l'environnement pfSense.
                 </p>
             </div>
         </div>
 
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Schéma logique Draw.io">
-                <span class="etape-legende">Capture 2 : Modélisation sous Draw.io</span>
+                <img src="Capture d’écran_10-6-2026_212025_.jpeg" alt="Draw.io">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">2. Cartographie Logique de l'Infrastructure</div>
+                <div class="etape-header-titre">2. Cartographie Réseau Logique</div>
                 <p class="etape-description">
-                    Cette étape présente le diagramme technique complet généré avec <strong>Draw.io</strong>. Ce schéma permet d'identifier l'affectation logique des blocs réseaux, de poser les bases de la séparation des flux entre le réseau interne (LAN) et l'accès externe (WAN), et de préparer la configuration du routage.
+                    Utilisation de l'outil <strong>Draw.io</strong> pour schématiser l'architecture. Cette étape permet de visualiser la séparation des flux et de préparer l'attribution des adresses réseaux pour garantir l'isolation et le routage inter-VLAN.
                 </p>
             </div>
         </div>
 
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Outil Rufus">
-                <span class="etape-legende">Capture 3 : Utilitaire de flashage Rufus</span>
+                <img src="Capture d’écran_10-6-2026_212055_.jpeg" alt="Rufus">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">3. Préparation de la Clé Bootable et Boot du Mini PC</div>
+                <div class="etape-header-titre">3. Préparation de la Clé USB et Boot du Mini-PC</div>
                 <p class="etape-description">
-                    Pour installer le système d'exploitation, vous avez utilisé le logiciel <strong>Rufus</strong> afin de générer un support d'installation USB bootable. Le document consigne la procédure d'amorçage du Mini PC : effectuer des pressions répétées sur les touches <kbd>Suppr</kbd> ou <kbd>F7</kbd> au démarrage de l'ordinateur pour forcer le lancement automatique sur la clé USB.
+                    Configuration de l'utilitaire <strong>Rufus</strong> pour créer un média d'installation bootable. Vous décrivez ensuite la méthode pour forcer le Mini-PC à démarrer sur la clé en appuyant à plusieurs reprises sur la touche <kbd>Suppr</kbd> ou <kbd>F7</kbd> lors de l'allumage physique.
                 </p>
             </div>
         </div>
 
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques COM">
-                <span class="etape-legende">Capture 4 : Identification de la ligne COM</span>
+                <img src="Capture d’écran_10-6-2026_212347_.jpeg" alt="Gestionnaire de périphériques">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">4. Identification du Port Série Matériel (COM)</div>
+                <div class="etape-header-titre">4. Identification du Port Série (COM)</div>
                 <p class="etape-description">
-                    Afin d'établir une connexion console directe avec la machine, le compte-rendu montre l'utilisation du <strong>Gestionnaire de périphériques de Windows</strong>. L'action consiste à dérouler l'onglet <strong>Ports (COM & LPT)</strong> pour relever le numéro exact du port de communication actif relié au boîtier physique.
+                    Pour piloter le système en mode console, le document montre l'ouverture du <strong>Gestionnaire de périphériques</strong> sous Windows. L'objectif est d'inspecter la catégorie <strong>Ports (COM & LPT)</strong> afin de valider le numéro de port série actif connecté à l'équipement.
                 </p>
             </div>
         </div>
 
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Pare-feu Windows Defender">
-                <span class="etape-legende">Capture 5 : Neutralisation du Pare-feu</span>
+                <img src="Capture d’écran_10-6-2026_21245_.jpeg" alt="Pare-feu Defender">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">5. Configuration Réseau et Désactivation du Pare-feu</div>
+                <div class="etape-header-titre">5. Désactivation du Pare-feu Local</div>
                 <p class="etape-description">
-                    Pour valider l'interconnexion sans blocage de paquets, vous vous êtes rendu dans le <em>Panneau de configuration > Système et sécurité > Pare-feu Windows Defender</em>. Le compte-rendu indique qu'il a fallu <strong>désactiver le pare-feu</strong>, car ses règles par défaut interdisaient les communications de test nécessaires à l'établissement de la liaison réseau.
+                    Ajustement de la sécurité Windows en naviguant dans le <em>Pare-feu Windows Defender</em>. Vous indiquez qu'il est indispensable de le désactiver temporairement pour éviter le blocage des requêtes de diagnostic réseau (pings/ICMP) entre les hôtes.
                 </p>
             </div>
         </div>
 
         <div class="etape-item">
             <div class="etape-visuel">
-                <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Interface texte pfSense">
-                <span class="etape-legende">Capture 6 : Console d'administration pfSense</span>
+                <img src="Capture d’écran_10-6-2026_212425_.jpeg" alt="Console pfSense">
             </div>
             <div class="etape-contenu">
-                <div class="etape-header-titre">6. Menu de Configuration Shell pfSense</div>
+                <div class="etape-header-titre">6. Configuration Console pfSense</div>
                 <p class="etape-description">
-                    La dernière partie détaille la prise en main de la console texte de <strong>pfSense</strong>. Vous avez interagi avec le menu pour attribuer l'adressage IP des cartes (Option 2 - <em>Set interface(s) IP address</em>) et configurer le sous-réseau. La capture montre également la liste des commandes disponibles, y compris l'<strong>Option 7 (Ping host)</strong> pour valider la bonne communication avec la passerelle.
+                    Prise en main de l'interface shell de <strong>pfSense</strong>. Cette section expose la configuration des adresses IP des interfaces WAN/LAN (via l'<strong>Option 2</strong>) et l'utilisation de l'<strong>Option 7 (Ping host)</strong> pour valider l'établissement de la connectivité réseau.
                 </p>
             </div>
         </div>
@@ -527,7 +512,10 @@
         const gap = 20;
         const cardW = cards[0].offsetWidth + gap;
         track.style.transform = 'translateX(-' + (current * perPage * cardW) + 'px)';
-        dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        const dots = dotsEl.querySelectorAll('.dot');
+        if(dots.length > current) {
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        }
     }
 
     document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
