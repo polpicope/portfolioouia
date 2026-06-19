@@ -6,7 +6,6 @@
     <title>Portfolio Ouia Kouassi</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,32 +13,23 @@
 
 <header>
     <nav class="navbar">
-
         <a href="index.html">
             <img src="insta logo.png" class="logo" alt="Logo">
         </a>
-
         <a class="nav-item" href="bts_sio.html">BTS SIO</a>
         <a class="nav-item" href="profil.html">Profil</a>
         <a class="nav-item" href="certif.html">Certification</a>
         <a class="nav-item" href="res.html">Épreuve E5</a>
         <a class="nav-item" href="veille techno.html">Veille technologique</a>
-
     </nav>
 </header>
 
 <section id="hero">
-
     <div class="hero-overlay">
-
         <div class="hero-text">
-
             <h1>Bienvenue sur mon Portfolio</h1>
-
             <h2>Ouia Kouassi</h2>
-
             <h3>BTS SIO - SISR</h3>
-
             <p>
                 Découvrez mon parcours, mes compétences,
                 mes réalisations professionnelles, mes certifications
@@ -48,43 +38,48 @@
             </p>
 
             <div class="hero-buttons">
-
-                <a href="profil.html" class="bt1n">
-                    Mon Profil
-                </a>
-
-                <a href="bts_sio.html" class="bt2n">
-                    BTS SIO
-                </a>
-
+                <a href="profil.html" class="bt1n">Mon Profil</a>
+                <a href="bts_sio.html" class="bt2n">BTS SIO</a>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 <section class="container">
+    <div class="main-content-wrapper">
+        
+        <!-- Bloc Présentation -->
+        <div class="shadowbx1">
+            <h2>Présentation du Portfolio</h2>
+            <p>
+                Ce portfolio a été réalisé dans le cadre de mon BTS SIO option SISR
+                (Solutions d'Infrastructure, Systèmes et Réseaux).
+                <br><br>
+                Il présente mon parcours, les compétences acquises,
+                les projets réalisés durant ma formation,
+                les certifications obtenues ainsi que ma veille technologique.
+                <br><br>
+                Vous pouvez naviguer grâce au menu afin de découvrir
+                l'ensemble de mes travaux et réalisations.
+            </p>
+        </div>
 
-    <div class="shadowbx1">
-
-        <h2>Présentation du Portfolio</h2>
-
-        <p>
-            Ce portfolio a été réalisé dans le cadre de mon BTS SIO option SISR
-            (Solutions d'Infrastructure, Systèmes et Réseaux).
-
-            Il présente mon parcours, les compétences acquises,
-            les projets réalisés durant ma formation,
-            les certifications obtenues ainsi que ma veille technologique.
-
-            Vous pouvez naviguer grâce au menu afin de découvrir
-            l'ensemble de mes travaux et réalisations.
-        </p>
+        <!-- NOUVEAU BLOC : Bouton de téléchargement de la Fiche E6 -->
+        <div class="shadowbx1 e6-block">
+            <h2>Réalisation Professionnelle - Épreuve E6</h2>
+            <p>
+                Consultez la fiche descriptive complète de ma réalisation portant sur la segmentation réseau (VLAN 10 et 11), le routage inter-VLAN et le filtrage des flux par ACL pour un environnement scolaire.
+            </p>
+            <div class="e6-button-container">
+                <!-- Si ton fichier est un PDF, change l'extension en .pdf -->
+                <a href="fiche_de_description_ouia_prime.docx" class="btn-e6" download>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Télécharger la Fiche E6
+                </a>
+            </div>
+        </div>
 
     </div>
-
 </section>
 
 </body>
