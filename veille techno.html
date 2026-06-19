@@ -4,209 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veille Technologique - Les Pare-feux</title>
-    
-    <!-- Intégration de la police Poppins pour le style High-Tech -->
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ================= RESET & BASES ================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
         }
 
-        body {
-            /* Dégradé de fond immersif style Cloud/Cyber */
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #f8fafc;
-            line-height: 1.7;
-            min-height: 100vh;
+        body{
+            background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 100%);
+            color:#f8fafc;
+            line-height:1.7;
+            min-height:100vh;
         }
 
-        /* ================= HEADER ULTRA-MODERNE ================= */
-        header {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
+        header{
+            background:rgba(15,23,42,.6);
+            backdrop-filter:blur(12px);
+            border-bottom:1px solid rgba(255,255,255,.05);
+            padding:40px 30px;
+            text-align:center;
+            position:relative;
         }
 
-        /* BOUTON RETOUR STYLE PILULE */
-        .back-btn {
-            position: absolute;
-            left: 40px;
-            top: 50%;
-            transform: translateY(-50%);
-            text-decoration: none;
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            background: rgba(56, 189, 248, 0.05);
+        .back-btn{
+            position:absolute;
+            left:40px;
+            top:50%;
+            transform:translateY(-50%);
+            text-decoration:none;
+            color:#38bdf8;
+            border:1px solid rgba(56,189,248,.4);
+            padding:10px 20px;
+            border-radius:30px;
+            font-weight:500;
+            font-size:14px;
+            transition:.3s;
+            background:rgba(56,189,248,.05);
         }
 
-        .back-btn:hover {
-            background: #38bdf8;
-            color: #0f172a;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-            transform: translateY(-50%) scale(1.03);
+        .back-btn:hover{
+            background:#38bdf8;
+            color:#0f172a;
+            box-shadow:0 0 15px rgba(56,189,248,.4);
         }
 
-        header h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-            background: linear-gradient(to right, #ffffff, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        header h1{
+            font-size:2.5rem;
+            margin-bottom:10px;
+            background:linear-gradient(to right,#fff,#cbd5e1);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
-        header p {
-            color: #818cf8; /* Violet Réseau */
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+        header p{
+            color:#818cf8;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            font-size:.9rem;
         }
 
-        /* ================= ZONE DE CONTENU ================= */
-        section {
-            padding: 80px 10% 100px 10%;
-            max-width: 1400px;
-            margin: 0 auto;
+        section{
+            padding:80px 10%;
+            max-width:1400px;
+            margin:auto;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-            position: relative;
+        .section-title{
+            text-align:center;
+            font-size:2rem;
+            margin-bottom:60px;
+            position:relative;
         }
 
-        /* Petite barre décorative sous le titre de section */
-        .section-title::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #38bdf8;
-            border-radius: 2px;
-            margin: 15px auto 0 auto;
+        .section-title::after{
+            content:"";
+            display:block;
+            width:70px;
+            height:4px;
+            background:#38bdf8;
+            margin:15px auto 0;
+            border-radius:2px;
         }
 
-        /* ================= GRILLE & CARTES (GLASSMORPHISM) ================= */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:35px;
         }
 
-        .card {
-            background: rgba(30, 41, 59, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
+        .card{
+            background:rgba(30,41,59,.45);
+            border:1px solid rgba(255,255,255,.08);
+            backdrop-filter:blur(16px);
+            border-radius:20px;
+            overflow:hidden;
+            transition:.4s;
+            box-shadow:0 15px 35px rgba(0,0,0,.2);
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(56, 189, 248, 0.05);
+        .card:hover{
+            transform:translateY(-10px);
+            border-color:rgba(56,189,248,.3);
+            box-shadow:0 25px 50px rgba(0,0,0,.4);
         }
 
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            filter: brightness(0.85); /* Légèrement assombri pour s'intégrer au thème */
+        .card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
         }
 
-        .card:hover img {
-            transform: scale(1.05);
-            filter: brightness(1); /* S'illumine au survol */
+        .card-content{
+            padding:25px;
         }
 
-        .card-content {
-            padding: 30px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .card-content h3{
+            color:#38bdf8;
+            margin-bottom:15px;
+            font-size:1.3rem;
         }
 
-        .card-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #38bdf8; /* Cyan Sécurité */
-            transition: color 0.3s ease;
+        .card-content p{
+            color:#cbd5e1;
+            font-size:.95rem;
+            text-align:justify;
         }
 
-        .card:hover .card-content h3 {
-            color: #ffffff; /* Le titre blanchit au survol */
+        footer{
+            text-align:center;
+            padding:30px;
+            background:#020617;
+            color:#64748b;
+            margin-top:50px;
         }
 
-        .card-content p {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            line-height: 1.8;
-        }
+        @media(max-width:900px){
 
-        /* ================= FOOTER PRO ================= */
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: #020617;
-            color: #64748b;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 60px;
-        }
-        
-        /* ================= CODE RESPONSIVE SÉCURISÉ ================= */
-        @media(max-width: 900px){
-            header {
-                padding: 100px 20px 30px 20px;
+            header{
+                padding:90px 20px 30px;
             }
 
-            .back-btn {
-                top: 30px;
-                left: 50%;
-                transform: translateX(-50%);
+            .back-btn{
+                left:50%;
+                top:30px;
+                transform:translateX(-50%);
             }
 
-            .back-btn:hover {
-                transform: translateX(-50%) scale(1.03);
+            header h1{
+                font-size:1.8rem;
             }
 
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            section {
-                padding: 40px 5%;
-            }
-            
-            .grid {
-                gap: 25px;
+            section{
+                padding:50px 5%;
             }
         }
     </style>
@@ -231,7 +185,7 @@
             <div class="card-content">
                 <h3>Qu'est-ce qu'un pare-feu ?</h3>
                 <p>
-                    Un pare-feu est un système de sécurité qui contrôle les échanges entre un réseau interne et Internet afin de bloquer les accès non autorisés.
+                    Un pare-feu (Firewall) est un dispositif de sécurité informatique chargé de surveiller et de filtrer les communications entre un réseau interne et des réseaux externes tels qu'Internet. Son objectif principal est de protéger les systèmes contre les accès non autorisés et les cyberattaques.
                 </p>
             </div>
         </div>
@@ -241,7 +195,7 @@
             <div class="card-content">
                 <h3>Comment fonctionne-t-il ?</h3>
                 <p>
-                    Le pare-feu analyse les paquets réseau selon des règles définies par l'administrateur. Il peut autoriser ou refuser une connexion.
+                    Le pare-feu examine les paquets de données qui transitent sur le réseau et applique des règles de sécurité définies par l'administrateur. Selon ces règles, il peut autoriser, refuser ou enregistrer les connexions afin de contrôler précisément le trafic réseau.
                 </p>
             </div>
         </div>
@@ -249,9 +203,9 @@
         <div class="card">
             <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3" alt="Infrastructure système">
             <div class="card-content">
-                <h3>Types de pare-feux</h3>
+                <h3>Les différents types de pare-feux</h3>
                 <p>
-                    Il existe des pare-feux matériels installés sur le réseau et des pare-feux logiciels installés directement sur les ordinateurs ou serveurs.
+                    Les pare-feux matériels protègent un réseau complet à partir d'un équipement dédié, tandis que les pare-feux logiciels sont installés directement sur les ordinateurs ou serveurs. Les pare-feux de nouvelle génération (NGFW) ajoutent des fonctions avancées comme l'analyse des applications et la prévention des intrusions.
                 </p>
             </div>
         </div>
@@ -261,17 +215,27 @@
             <div class="card-content">
                 <h3>Les avantages</h3>
                 <p>
-                    Le pare-feu améliore la sécurité du réseau, contrôle le trafic et protège les équipements contre de nombreuses attaques informatiques.
+                    Le pare-feu constitue une première ligne de défense essentielle. Il permet de limiter les risques d'intrusion, de contrôler les flux de données, de protéger les informations sensibles et de renforcer la sécurité globale du système d'information.
                 </p>
             </div>
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="Technologie Open Source">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475" alt="pfSense">
             <div class="card-content">
                 <h3>Exemple : pfSense</h3>
                 <p>
-                    pfSense est une solution open source très utilisée pour sécuriser les réseaux. Elle permet le filtrage du trafic, le VPN et la gestion avancée du réseau.
+                    pfSense est une solution open source basée sur FreeBSD très populaire dans les entreprises et les laboratoires informatiques. Elle offre de nombreuses fonctionnalités telles que le filtrage avancé des paquets, les VPN, le routage, la surveillance du trafic et la gestion centralisée de la sécurité réseau.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c" alt="NGFW">
+            <div class="card-content">
+                <h3>Les pare-feux de nouvelle génération (NGFW)</h3>
+                <p>
+                    Les NGFW (Next Generation Firewalls) combinent le filtrage traditionnel avec des technologies avancées telles que l'inspection approfondie des paquets (DPI), les systèmes IDS/IPS, le contrôle applicatif et l'analyse du trafic chiffré. Ils répondent efficacement aux menaces modernes et aux cyberattaques sophistiquées.
                 </p>
             </div>
         </div>
@@ -280,9 +244,6 @@
 
 </section>
 
-<footer>
-    BTS SIO SISR - Veille Technologique sur les Pare-feux
-</footer>
 
 </body>
 </html>
